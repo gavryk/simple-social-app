@@ -10,8 +10,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import morgan from 'morgan';
-import { register, login } from './controllers/AuthController.js';
-import { verifyToken, handleValidationErrors } from './middleware/index.js';
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
+import { register } from './controllers/AuthController.js';
+import { handleValidationErrors } from './middleware/index.js';
 
 /* App Config */
 const __filename = fileURLToPath(import.meta.url);
@@ -41,12 +43,6 @@ const storage = multer.diskStorage({
 	},
 });
 const upload = multer({ storage });
-
-/*ROUTES*/
-//AUTH ROUTES
-app.post('/auth/register', upload.single('picture'), handleValidationErrors, register);
-app.post('/auth/login', handleValidationErrors, login);
-
 //Remove Image From Folder
 app.delete('/upload/:name', async (req, res) => {
 	const name = req.params.name;
@@ -61,6 +57,13 @@ app.delete('/upload/:name', async (req, res) => {
 		console.log(error);
 	}
 });
+
+/*ROUTES WITH FILES*/
+app.post('/auth/register', upload.single('picture'), handleValidationErrors, register);
+
+/*Routes*/
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 /*MONGOOSE SETUP*/
 const PORT = process.env.PORT || 4040;

@@ -15,3 +15,8 @@ export default async (req, res, next) => {
 		res.status(500).json({ error: err.message });
 	}
 };
+
+/* Get token like this instead replace(/Bearer\s?/, ''); */
+// if (token.startsWith('Bearer ')) {
+// 	token = token.slice(7, token.length).trimLeft();
+// }

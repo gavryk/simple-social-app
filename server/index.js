@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import morgan from 'morgan';
 import { register, login } from './controllers/AuthController.js';
-import { verifyToken, handleValidationErrors } from './utils/index.js';
+import { verifyToken, handleValidationErrors } from './middleware/index.js';
 
 /* App Config */
 const __filename = fileURLToPath(import.meta.url);

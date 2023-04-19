@@ -12,8 +12,10 @@ import * as fs from 'fs';
 import morgan from 'morgan';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
+import postRoutes from './routes/posts.js';
 import { register } from './controllers/AuthController.js';
-import { handleValidationErrors } from './middleware/index.js';
+import { createPost } from './controllers/PostsController.js';
+import { handleValidationErrors, verifyToken } from './middleware/index.js';
 
 /* App Config */
 const __filename = fileURLToPath(import.meta.url);
@@ -60,10 +62,12 @@ app.delete('/upload/:name', async (req, res) => {
 
 /*ROUTES WITH FILES*/
 app.post('/auth/register', upload.single('picture'), handleValidationErrors, register);
+app.post('/posts', verifyToken, upload.single('picture'), createPost);
 
 /*Routes*/
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+app.use('/posts', postRoutes);
 
 /*MONGOOSE SETUP*/
 const PORT = process.env.PORT || 4040;

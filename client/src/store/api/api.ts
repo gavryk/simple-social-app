@@ -5,6 +5,7 @@ export const api = createApi({
 	tagTypes: ['Auth'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: import.meta.env.VITE_BASE_URL,
+		credentials: 'include',
 	}),
 	endpoints: (builder) => ({}),
 });

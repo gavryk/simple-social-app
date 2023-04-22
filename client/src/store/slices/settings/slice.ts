@@ -8,9 +8,13 @@ const initialState: SettingsSliceTypes = {
 export const settingsSlice = createSlice({
 	name: 'settings',
 	initialState,
-	reducers: {},
+	reducers: {
+		setMode: (state) => {
+			state.mode = state.mode === 'light' ? 'dark' : 'light';
+		},
+	},
 	extraReducers: (builder) => {},
 });
 
-// export const { setLoading } = settingsSlice.actions;
+export const { setMode } = settingsSlice.actions;
 export default settingsSlice.reducer;

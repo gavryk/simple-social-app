@@ -45,6 +45,14 @@ const storage = multer.diskStorage({
 	},
 });
 const upload = multer({ storage });
+app.post('/upload', upload.single('image'), (req, res) => {
+	const { file } = req;
+	if (file) {
+		res.json({
+			url: `/uploads/${req.file.filename}`,
+		});
+	}
+});
 //Remove Image From Folder
 app.delete('/upload/:name', async (req, res) => {
 	const name = req.params.name;

@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import styles from './styles.module.scss';
+import { ImageUpload } from '../../common';
 
 type DropZoneType = {
 	setImage: (file: any) => void;
 	imageLoad: boolean;
+	file: ImageUpload;
 };
 
-export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad }) => {
-	const [files, setFiles] = useState<any[]>([]);
+export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad, file }) => {
 	const { getRootProps, getInputProps } = useDropzone({
 		accept: {
 			'image/jpeg': [],
@@ -18,38 +19,24 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad }) => {
 		minSize: 0,
 		maxSize: 2097152,
 		multiple: false,
-		onDrop: async (acceptedFiles) => {
-			setFiles(
-				acceptedFiles.map((file) =>
-					Object.assign(file, {
-						preview: URL.createObjectURL(file),
-					}),
-				),
-			);
+		onDrop: (acceptedFiles) => {
 			setImage({
 				file: acceptedFiles[0],
 				imagePreviewUrl: URL.createObjectURL(acceptedFiles[0]),
-				fileLoaded: true,
 			});
 		},
 	});
 
-	useEffect(() => {
-		return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
-	}, []);
-
 	const handleRemoveImage = () => {
-		setFiles([]);
 		setImage({
 			file: null,
 			imagePreviewUrl: '',
-			fileLoaded: false,
 		});
 	};
 
 	return (
 		<section className={styles.root}>
-			{files.length === 0 && (
+			{file.file === null && (
 				<div {...getRootProps({ className: styles.dropzone })}>
 					<input {...getInputProps()} />
 					<AiOutlinePlusCircle size="30" />
@@ -59,19 +46,19 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad }) => {
 				<div>Loading...</div>
 			) : (
 				<div>
-					{files.map((file) => (
-						<div key={file.name}>
+					{file.file && (
+						<div key={file.imagePreviewUrl}>
 							<div>
 								<img
-									src={file.preview}
+									src={file.imagePreviewUrl}
 									onLoad={() => {
-										URL.revokeObjectURL(file.preview);
+										URL.revokeObjectURL(file.imagePreviewUrl);
 									}}
 								/>
 							</div>
 							<button onClick={handleRemoveImage}>X</button>
 						</div>
-					))}
+					)}
 				</div>
 			)}
 		</section>

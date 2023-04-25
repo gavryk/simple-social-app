@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRegisterUserMutation } from '../../store/api/auth.api';
 import { Link, useNavigate } from 'react-router-dom';
 import { UIButton, UIDropzone, UIInput, UITypography } from '../../components';
@@ -6,16 +6,33 @@ import { IRegisterFormTypes, ImageUpload } from '../../common';
 import { useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import clsx from 'clsx';
+import { useUploadImageAPIMutation } from '../../store/api/upload.api';
 
 export const RegisterForm: React.FC = () => {
 	const navigate = useNavigate();
 	const [registerUser] = useRegisterUserMutation();
-	const [image, setImage] = useState('');
+	const [uploadImageAPI, { data: imageData }] = useUploadImageAPIMutation();
+	const [avatar, setAvatar] = useState('');
+	const [avatarLoaded, setAvatarLoaded] = useState(true);
 	const [file, setFile] = useState<ImageUpload>({
 		file: null,
 		imagePreviewUrl: '',
-		fileLoaded: false,
 	});
+
+	const setUserImage = async (imageFile: ImageUpload) => {
+		setFile(imageFile);
+		setAvatarLoaded(false);
+		if (imageFile.file) {
+			try {
+				const response = await uploadImageAPI(imageFile.file);
+				console.log(response);
+				setAvatarLoaded(true);
+			} catch (err) {
+				console.log(err);
+				setAvatarLoaded(true);
+			}
+		}
+	};
 
 	const {
 		register,
@@ -25,32 +42,19 @@ export const RegisterForm: React.FC = () => {
 	} = useForm<IRegisterFormTypes>();
 
 	const onSubmit = async (data: IRegisterFormTypes) => {
-		await registerUser({
-			...data,
-			picturePath: image,
-		});
-	};
-
-	useEffect(() => {
-		console.log(image);
-		// registerUser({
-		// 	firstName: 'Bepko',
-		// 	lastName: 'Bepko Test',
-		// 	email: 'bepko@gmail.com',
-		// 	password: '1456300emu',
-		// 	picturePath: '',
-		// 	friends: [],
-		// 	location: 'Pekin',
-		// 	occupation: '',
+		console.log(file);
+		// await registerUser({
+		// 	...data,
+		// 	picturePath: image,
 		// });
-	}, [image]);
+	};
 
 	return (
 		<div className={styles.registerForm}>
 			<UITypography variant="h2" fontWeight="bold" bottomSpace="sm" textAlign="center">
 				Register
 			</UITypography>
-			<UIDropzone setImage={setImage} imageLoad={true} />
+			<UIDropzone setImage={setUserImage} imageLoad={avatarLoaded} file={file} />
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={clsx(styles.fieldsWrapper, styles.cols2)}>
 					<UIInput

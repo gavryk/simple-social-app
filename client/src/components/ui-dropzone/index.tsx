@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
+import styles from './styles.module.scss';
 
 type DropZoneType = {
 	setImage: (file: any) => void;
@@ -46,12 +48,13 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad }) => {
 	};
 
 	return (
-		<section className="container">
-			<div {...getRootProps({ className: 'dropzone' })}>
-				<input {...getInputProps()} />
-				<p>Drag 'n' drop some files here, or click to select files</p>
-				<em>(Only *.jpeg and *.png images will be accepted)</em>
-			</div>
+		<section className={styles.root}>
+			{files.length === 0 && (
+				<div {...getRootProps({ className: styles.dropzone })}>
+					<input {...getInputProps()} />
+					<AiOutlinePlusCircle size="30" />
+				</div>
+			)}
 			{!imageLoad ? (
 				<div>Loading...</div>
 			) : (

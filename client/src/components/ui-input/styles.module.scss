@@ -1,0 +1,119 @@
+.UIInput {
+	position: relative;
+	svg {
+		position: absolute;
+		left: 10px;
+		top: 10px;
+		opacity: 0.3;
+	}
+	.input {
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		background-color: #fff;
+		min-height: 40px;
+		width: 100%;
+		max-width: 100%;
+		padding: var(--base--spaces--2);
+		outline: none;
+		border-radius: 7px;
+		font-size: var(--base--font--size);
+		transition: all 0.2s ease-in-out;
+		margin-bottom: var(--base--spaces--4);
+		&:focus {
+			border: 1px solid rgba(0, 0, 0, 0.3);
+		}
+		&[type='search'] {
+			&::-webkit-search-cancel-button {
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				-webkit-appearance: none;
+				cursor: pointer;
+				background: linear-gradient(
+						45deg,
+						rgba(0, 0, 0, 0) 0%,
+						rgba(0, 0, 0, 0) 43%,
+						rgba(0, 0, 0, 0.3) 45%,
+						rgba(0, 0, 0, 0.3) 55%,
+						rgba(0, 0, 0, 0) 57%,
+						rgba(0, 0, 0, 0) 100%
+					),
+					linear-gradient(
+						135deg,
+						transparent 0%,
+						transparent 43%,
+						rgba(0, 0, 0, 0.3) 45%,
+						rgba(0, 0, 0, 0.3) 55%,
+						transparent 57%,
+						transparent 100%
+					);
+			}
+		}
+	}
+
+	&.radio {
+		position: relative;
+		display: grid;
+		grid-template-columns: 20px auto;
+		align-items: center;
+		grid-gap: var(--base--spaces--2);
+		margin-bottom: var(--base--spaces--4);
+		cursor: pointer;
+		label {
+			margin-bottom: 0;
+			position: relative;
+			cursor: pointer;
+			&:before {
+				content: '';
+				position: absolute;
+				left: -30px;
+				top: 0;
+				width: 20px;
+				height: 20px;
+				border: 1px solid var(--base--color--grey-6);
+				background-color: var(--base--color--white);
+				border-radius: 50%;
+				cursor: pointer;
+			}
+			&:after {
+				content: '';
+				width: 14px;
+				height: 14px;
+				background: var(--base--color--green);
+				position: absolute;
+				top: 4px;
+				left: -26px;
+				border-radius: 100%;
+				-webkit-transition: all 0.2s ease;
+				transition: all 0.2s ease;
+				cursor: pointer;
+				opacity: 0;
+				-webkit-transform: scale(0);
+				transform: scale(0);
+			}
+		}
+		input {
+			min-height: 20px;
+			margin-bottom: 0;
+			opacity: 0;
+			order: -1;
+			&:checked {
+				~ label {
+					&:after {
+						opacity: 1;
+						-webkit-transform: scale(1);
+						transform: scale(1);
+					}
+				}
+			}
+		}
+	}
+}
+
+.errorTxt {
+	display: block;
+	color: var(--base--color--red);
+	font-size: var(--base--font--size);
+	line-height: 1;
+	margin-bottom: var(--base--spaces--3);
+	margin-top: -10px;
+}

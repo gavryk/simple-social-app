@@ -17,3 +17,5 @@ export interface ILoginTypes {
 }
 
 export interface IAuthTypes extends Omit<IRegisterTypes, 'password'> {}
+export interface IRegisterFormTypes
+	extends Omit<IRegisterTypes, 'friends' | 'viewedProfile' | 'impressions'> {}

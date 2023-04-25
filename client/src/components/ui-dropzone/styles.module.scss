@@ -1,0 +1,10 @@
+.root {
+	background-color: var(--base--color--light-grey);
+	display: inline-flex;
+}
+
+.dropzone {
+	color: var(--base--color--main);
+	padding: var(--base--spaces--4);
+	cursor: pointer;
+}

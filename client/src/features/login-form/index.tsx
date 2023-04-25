@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../store/api/auth.api';
+import { useLoginUserMutation } from '../../store/api/auth.api';
 
 export const LoginForm: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -9,7 +9,7 @@ export const LoginForm: React.FC = () => {
 	const [user, setUser] = useState({
 		firstName: '',
 	});
-	const [login, { isLoading, error }] = useLoginMutation();
+	const [login, { isLoading, error }] = useLoginUserMutation();
 
 	const fetchLogin = async () => {
 		try {

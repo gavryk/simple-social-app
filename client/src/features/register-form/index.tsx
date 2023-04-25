@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRegisterUserMutation } from '../../store/api/auth.api';
 import { Link, useNavigate } from 'react-router-dom';
-import { UIButton, UIDropzone, UIGrid, UIInput, UITypography } from '../../components';
+import { UIButton, UIDropzone, UIInput, UITypography } from '../../components';
 import { IRegisterFormTypes, ImageUpload } from '../../common';
 import { useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
@@ -51,7 +51,7 @@ export const RegisterForm: React.FC = () => {
 			</UITypography>
 			<UIDropzone setImage={setImage} imageLoad={true} />
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<UIGrid columns={2} gridGap={4}>
+				<div className={styles.fieldsWrapper}>
 					<UIInput
 						type="text"
 						id="userFirstNameField"
@@ -66,8 +66,8 @@ export const RegisterForm: React.FC = () => {
 						{...register('lastName', { required: 'Please enter your last name.' })}
 						error={errors.lastName && errors.lastName.message}
 					/>
-				</UIGrid>
-				<UIGrid columns={1} gridGap={4}>
+				</div>
+				<div className={styles.fieldsWrapper}>
 					<UIInput
 						type="text"
 						id="userLocationField"
@@ -96,7 +96,7 @@ export const RegisterForm: React.FC = () => {
 						{...register('password', { required: 'Please enter your password.' })}
 						error={errors.password && errors.password.message}
 					/>
-				</UIGrid>
+				</div>
 				<UIButton fluid type="submit">
 					Register
 				</UIButton>

@@ -5,6 +5,7 @@ import { UIButton, UIDropzone, UIInput, UITypography } from '../../components';
 import { IRegisterFormTypes, ImageUpload } from '../../common';
 import { useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
+import clsx from 'clsx';
 
 export const RegisterForm: React.FC = () => {
 	const navigate = useNavigate();
@@ -51,7 +52,7 @@ export const RegisterForm: React.FC = () => {
 			</UITypography>
 			<UIDropzone setImage={setImage} imageLoad={true} />
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<div className={styles.fieldsWrapper}>
+				<div className={clsx(styles.fieldsWrapper, styles.cols2)}>
 					<UIInput
 						type="text"
 						id="userFirstNameField"
@@ -67,7 +68,7 @@ export const RegisterForm: React.FC = () => {
 						error={errors.lastName && errors.lastName.message}
 					/>
 				</div>
-				<div className={styles.fieldsWrapper}>
+				<div className={clsx(styles.fieldsWrapper, styles.cols1)}>
 					<UIInput
 						type="text"
 						id="userLocationField"

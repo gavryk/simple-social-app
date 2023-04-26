@@ -1,10 +1,66 @@
 .root {
-	background-color: var(--base--color--light-grey);
-	display: inline-flex;
+	background-color: var(--base--color--white-6);
+	display: block;
+	&.fullWidth {
+		width: 100%;
+	}
+	&.active {
+		max-width: 450px;
+		margin: 0 auto;
+	}
+	&:hover {
+		.removeButton {
+			opacity: 1;
+		}
+	}
 }
 
 .dropzone {
 	color: var(--base--color--main);
 	padding: var(--base--spaces--4);
 	cursor: pointer;
+	width: 100%;
+	border: 1px dashed var(--base--color--main);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.preview {
+	width: 100%;
+	.image {
+		position: relative;
+		&:after {
+			content: '';
+			display: block;
+			padding-bottom: 77.7%;
+		}
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+.removeButton {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: var(--base--color--red);
+	outline: none;
+	border: none;
+	padding: 7px 10px;
+	border-radius: 50%;
+	color: var(--base--color--white);
+	cursor: pointer;
+	font-weight: 700;
+	font-size: 10px;
+	transition: all 0.4s ease-in-out;
+	opacity: 0;
 }

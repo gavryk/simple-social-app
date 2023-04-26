@@ -58,23 +58,23 @@ export const RegisterForm: React.FC = () => {
 
 	return (
 		<div className={styles.registerForm}>
-			<UITypography variant="h2" fontWeight="bold" bottomSpace="sm" textAlign="center">
+			<UITypography variant="h3" fontWeight="bold" bottomSpace="sm" textAlign="center">
 				Register
 			</UITypography>
-			<UIDropzone setImage={setUserImage} imageLoad={avatarLoaded} file={file} />
+			<UIDropzone setImage={setUserImage} imageLoad={avatarLoaded} file={file} fullWidth />
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={clsx(styles.fieldsWrapper, styles.cols2)}>
 					<UIInput
 						type="text"
 						id="userFirstNameField"
-						label="First Name"
+						placeholder="First Name"
 						{...register('firstName', { required: 'Please enter your first name.' })}
 						error={errors.firstName && errors.firstName.message}
 					/>
 					<UIInput
 						type="text"
 						id="userLastNameField"
-						label="Last Name"
+						placeholder="Last Name"
 						{...register('lastName', { required: 'Please enter your last name.' })}
 						error={errors.lastName && errors.lastName.message}
 					/>
@@ -83,28 +83,28 @@ export const RegisterForm: React.FC = () => {
 					<UIInput
 						type="text"
 						id="userLocationField"
-						label="Location"
+						placeholder="Location"
 						{...register('location', { required: 'Please enter your location.' })}
 						error={errors.location && errors.location.message}
 					/>
 					<UIInput
 						type="text"
 						id="userOccupationField"
-						label="Occupation"
+						placeholder="Occupation"
 						{...register('occupation', { required: 'Please enter your occupation.' })}
 						error={errors.occupation && errors.occupation.message}
 					/>
 					<UIInput
 						type="email"
 						id="emailField"
-						label="Email"
+						placeholder="Email"
 						{...register('email', { required: 'Please enter your email.' })}
 						error={errors.email && errors.email.message}
 					/>
 					<UIInput
 						type="password"
 						id="passwordField"
-						label="Password"
+						placeholder="Password"
 						{...register('password', { required: 'Please enter your password.' })}
 						error={errors.password && errors.password.message}
 					/>
@@ -114,7 +114,7 @@ export const RegisterForm: React.FC = () => {
 				</UIButton>
 				{/* <span className={styles.errorDB}>{errorString as React.ReactNode}</span> */}
 				<span className={styles.notice}>
-					Do you have an account? <Link to="/login">Login</Link>
+					Already have an account? <Link to="/login">Login here.</Link>
 				</span>
 			</form>
 		</div>

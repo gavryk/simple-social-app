@@ -4,7 +4,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import styles from './styles.module.scss';
 import { ImageUpload } from '../../common';
 import clsx from 'clsx';
-import { UIAvatarLoader } from '../ui-avatar-loader';
+import { UILoader } from '../ui-loader';
 
 type DropZoneType = {
 	setImage: (file: any) => void;
@@ -39,7 +39,7 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad, file, 
 		});
 	};
 
-	if (!imageLoad) return <UIAvatarLoader />;
+	if (!imageLoad) return <UILoader />;
 
 	return (
 		<section

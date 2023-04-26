@@ -6,12 +6,13 @@ import { IRegisterFormTypes, ImageUpload } from '../../common';
 import { useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import clsx from 'clsx';
-import { useUploadImageAPIMutation } from '../../store/api/upload.api';
+import { useRemoveImageAPIMutation, useUploadImageAPIMutation } from '../../store/api/upload.api';
 
 export const RegisterForm: React.FC = () => {
 	const navigate = useNavigate();
 	const [registerUser] = useRegisterUserMutation();
-	const [uploadImageAPI, { data: imageData }] = useUploadImageAPIMutation();
+	const [uploadImageAPI] = useUploadImageAPIMutation();
+	const [removeImageAPI] = useRemoveImageAPIMutation();
 	const [avatar, setAvatar] = useState('');
 	const [avatarLoaded, setAvatarLoaded] = useState(true);
 	const [file, setFile] = useState<ImageUpload>({
@@ -24,13 +25,19 @@ export const RegisterForm: React.FC = () => {
 		setAvatarLoaded(false);
 		if (imageFile.file) {
 			try {
-				const response = await uploadImageAPI(imageFile.file);
-				console.log(response);
+				const res = await uploadImageAPI(imageFile.file).unwrap();
+				setAvatar(res.url);
 				setAvatarLoaded(true);
 			} catch (err) {
 				console.log(err);
 				setAvatarLoaded(true);
 			}
+		} else {
+			setAvatar('');
+			const fileUrl = avatar.replace('/uploads/', '');
+			await removeImageAPI(fileUrl).then(() => {
+				setAvatarLoaded(true);
+			});
 		}
 	};
 

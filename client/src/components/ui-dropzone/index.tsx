@@ -20,8 +20,10 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad, file }
 		maxSize: 2097152,
 		multiple: false,
 		onDrop: (acceptedFiles) => {
+			let formData = new FormData();
+			formData.append('image', acceptedFiles[0]);
 			setImage({
-				file: acceptedFiles[0],
+				file: formData,
 				imagePreviewUrl: URL.createObjectURL(acceptedFiles[0]),
 			});
 		},

@@ -64,10 +64,7 @@ export const RegisterForm: React.FC = () => {
 					occupation: '',
 					email: '',
 				});
-				setFile({
-					file: null,
-					imagePreviewUrl: '',
-				});
+				setFile({ file: null, imagePreviewUrl: '' });
 				setErrorSubmit(null);
 				navigate('/login');
 			})

@@ -65,3 +65,23 @@ export const login = async (req, res) => {
 		});
 	}
 };
+
+export const getProfile = async (req, res) => {
+	try {
+		const user = await User.findById(req.user.id);
+		if (!user) {
+			return res.status(404).json({
+				message: 'User not found!',
+			});
+		}
+		//Get all data without hash
+		const { password, ...userData } = user._doc;
+		//Return information
+		res.json({ ...userData });
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({
+			message: 'No Access!',
+		});
+	}
+};

@@ -49,7 +49,7 @@ export const RegisterForm: React.FC = () => {
 	} = useForm<IRegisterFormTypes>();
 
 	const onSubmit = async (data: IRegisterFormTypes) => {
-		console.log(file);
+		console.log({ ...data, picturePath: avatar });
 		// await registerUser({
 		// 	...data,
 		// 	picturePath: image,

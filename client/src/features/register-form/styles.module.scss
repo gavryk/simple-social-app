@@ -1,3 +1,10 @@
+.registerForm {
+	max-width: 700px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: var(--base--spaces--8) var(--base--spaces--6);
+	border-radius: var(--base--border-radius-2);
+}
 .fieldsWrapper {
 	display: grid;
 	grid-gap: 20px;

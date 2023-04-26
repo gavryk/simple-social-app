@@ -16,6 +16,11 @@
 		--base--box-shadow-#{"" + $name}: #{$val};
 	}
 
+	//border radius
+	@each $name, $val in $borderRadius {
+		--base--border-radius-#{"" + $name}: #{$val};
+	}
+
 	//font sizes
 	--base--font--size-sm: 12px;
 	--base--font--size: 14px;
@@ -39,4 +44,11 @@
 	--base--logo-size-sm: 80px;
 	--base--logo-size-md: 100px;
 	--base--logo-size-lg: 130px;
+}
+
+@mixin container($width) {
+	max-width: #{$width};
+	width: 96%;
+	margin: 0 auto;
+	position: relative;
 }

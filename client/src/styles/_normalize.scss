@@ -24,6 +24,26 @@ body {
 	background-color: var(--base--color--white-6);
 }
 
+.container-md {
+	@include container('1024px');
+	&.space {
+		padding: 40px 0;
+	}
+}
+.container {
+	@include container('1280px');
+	&.space {
+		padding: 40px 0;
+	}
+}
+
+.container-lg {
+	@include container('1920px');
+	&.space {
+		padding: 40px 0;
+	}
+}
+
 h1,
 h2,
 h3,

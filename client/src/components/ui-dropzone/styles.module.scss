@@ -8,7 +8,26 @@
 		max-width: 450px;
 		margin: 0 auto;
 	}
+	&.acceptDrop {
+		position: relative;
+		svg {
+			fill: var(--base--color--green);
+		}
+		.dropzone {
+			border: 2px dashed var(--base--color--green);
+		}
+	}
+	&.rejectDrop {
+		position: relative;
+		svg {
+			fill: var(--base--color--red);
+		}
+		.dropzone {
+			border: 2px dashed var(--base--color--red);
+		}
+	}
 	&:hover {
+		opacity: 0.8;
 		.removeButton {
 			opacity: 1;
 		}
@@ -20,7 +39,7 @@
 	padding: var(--base--spaces--4);
 	cursor: pointer;
 	width: 100%;
-	border: 1px dashed var(--base--color--main);
+	border: 2px dashed var(--base--color--main);
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;

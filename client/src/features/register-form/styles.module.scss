@@ -13,7 +13,6 @@
 .fieldsWrapper {
 	display: grid;
 	column-gap: 20px;
-	row-gap: 10px;
 	&.cols1 {
 		grid-template-columns: repeat(1, 1fr);
 	}
@@ -43,5 +42,13 @@
 		@media screen and (max-width: 576px) {
 			grid-template-columns: repeat(1, 1fr);
 		}
+	}
+}
+
+.notice {
+	display: block;
+	padding: 15px 0 0;
+	a {
+		color: var(--base--color--main);
 	}
 }

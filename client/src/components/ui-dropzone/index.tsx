@@ -14,7 +14,7 @@ type DropZoneType = {
 };
 
 export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad, file, fullWidth }) => {
-	const { getRootProps, getInputProps } = useDropzone({
+	const { getRootProps, getInputProps, isDragAccept, isDragReject } = useDropzone({
 		accept: {
 			'image/jpeg': [],
 			'image/png': [],
@@ -46,6 +46,8 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad, file, 
 			className={clsx(styles.root, {
 				[styles.fullWidth]: fullWidth,
 				[styles.active]: file.file,
+				[styles.acceptDrop]: isDragAccept,
+				[styles.rejectDrop]: isDragReject,
 			})}>
 			{file.file === null && (
 				<div {...getRootProps({ className: styles.dropzone })}>

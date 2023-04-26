@@ -12,9 +12,9 @@
 		min-height: 40px;
 		width: 100%;
 		max-width: 100%;
-		padding: var(--base--spaces--2);
+		padding: var(--base--spaces--3);
 		outline: none;
-		border-radius: 7px;
+		border-radius: var(--base--border-radius-1);
 		font-size: var(--base--font--size);
 		transition: all 0.2s ease-in-out;
 		margin-bottom: var(--base--spaces--4);

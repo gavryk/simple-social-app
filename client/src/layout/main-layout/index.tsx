@@ -7,7 +7,7 @@ export const MainLayout: React.FC = () => {
 	return (
 		<div className={clsx(styles.layout)}>
 			<Header />
-			<div className="container space">
+			<div className="container-md space">
 				<Outlet />
 			</div>
 		</div>

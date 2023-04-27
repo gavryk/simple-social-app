@@ -5,13 +5,13 @@ import { IAuthTypes } from '../../common';
 import { authSelector } from '../../store/slices/auth/selector';
 
 export const PrivateRoute: React.FC = () => {
-	const [user, setUser] = useState<IAuthTypes>({} as IAuthTypes);
-	const { auth } = useSelector(authSelector);
+	const [userState, setUserState] = useState<IAuthTypes>({} as IAuthTypes);
+	const { user } = useSelector(authSelector);
 	const location = useLocation();
 
 	useEffect(() => {
-		setUser(auth as IAuthTypes);
-	}, [auth]);
+		setUserState(user as IAuthTypes);
+	}, [user]);
 
-	return user ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace />;
+	return userState ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace />;
 };

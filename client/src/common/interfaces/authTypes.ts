@@ -21,5 +21,5 @@ export interface IRegisterFormTypes
 	extends Omit<IRegisterTypes, 'friends' | 'viewedProfile' | 'impressions'> {}
 
 export interface IAuthSliceTypes {
-	auth: IAuthTypes | null;
+	user: IAuthTypes | null;
 }

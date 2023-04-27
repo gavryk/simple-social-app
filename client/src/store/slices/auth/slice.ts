@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IAuthSliceTypes } from '../../../common';
 
 const initialState: IAuthSliceTypes = {
-	auth: null,
+	user: null,
 };
 
 export const authSlice = createSlice({
@@ -10,7 +10,7 @@ export const authSlice = createSlice({
 	initialState,
 	reducers: {
 		setAuth: (state, action) => {
-			state.auth = action.payload;
+			state.user = action.payload;
 		},
 	},
 });

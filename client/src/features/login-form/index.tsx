@@ -1,38 +1,82 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch } from '../../store/store';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginUserMutation } from '../../store/api/auth.api';
+import { ILoginTypes } from '../../common';
+import { useForm } from 'react-hook-form';
+import { UIButton, UIInput, UILoader, UITypography } from '../../components';
+import styles from './styles.module.scss';
+import clsx from 'clsx';
 
 export const LoginForm: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const [user, setUser] = useState({
-		firstName: '',
-	});
-	const [login, { isLoading, error }] = useLoginUserMutation();
+	const [errorSubmit, setErrorSubmit] = useState<string | null>(null);
+	const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation();
 
-	const fetchLogin = async () => {
-		try {
-			const userData = await login({
-				email: 'bepko@gmail.com',
-				password: '1456300emu',
-			}).unwrap();
-			setUser({ ...userData });
-		} catch (error) {
-			console.log(error);
-		}
+	const {
+		register,
+		reset,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<ILoginTypes>();
+
+	const onSubmit = async (data: ILoginTypes) => {
+		await loginUser(data)
+			.unwrap()
+			.then((data) => {
+				reset({
+					email: '',
+					password: '',
+				});
+				navigate('/');
+			})
+			.catch((err) => {
+				setErrorSubmit(err.data.msg);
+				console.log(errorSubmit);
+			});
 	};
-
-	useEffect(() => {
-		fetchLogin();
-	}, []);
-
-	if (error) return <h1>{(error as any)?.data.msg}</h1>;
 
 	return (
 		<div>
-			<h1>Login</h1>
-			{user?.firstName}
+			<div className={styles.loginForm}>
+				<UITypography variant="h3" fontWeight="bold" bottomSpace="sm" textAlign="center">
+					Login
+				</UITypography>
+				{!loginLoading ? (
+					<>
+						<form onSubmit={handleSubmit(onSubmit)}>
+							<div className={clsx(styles.fieldsWrapper, styles.cols1)}>
+								<UIInput
+									type="email"
+									id="emailField"
+									placeholder="Email"
+									{...register('email', { required: 'Please enter your email.' })}
+									error={errors.email && errors.email.message}
+								/>
+								<UIInput
+									type="password"
+									id="passwordField"
+									placeholder="Password"
+									{...register('password', { required: 'Please enter your password.' })}
+									error={errors.password && errors.password.message}
+								/>
+							</div>
+							<UIButton fluid type="submit">
+								Login
+							</UIButton>
+							{errorSubmit && (
+								<span className={styles.errorDB}>{errorSubmit as React.ReactNode}</span>
+							)}
+							<span className={styles.notice}>
+								Dont have an account? <Link to="/register">Register.</Link>
+							</span>
+						</form>
+					</>
+				) : (
+					<UILoader />
+				)}
+			</div>
 		</div>
 	);
 };

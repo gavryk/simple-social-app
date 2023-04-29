@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { UIButton, UIInput, UILoader, UITypography } from '../../components';
 import styles from './styles.module.scss';
 import clsx from 'clsx';
+import { setAuth } from '../../store/slices/auth/slice';
 
 export const LoginForm: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -25,15 +26,12 @@ export const LoginForm: React.FC = () => {
 		await loginUser(data)
 			.unwrap()
 			.then((data) => {
-				reset({
-					email: '',
-					password: '',
-				});
+				reset({ email: '', password: '' });
+				dispatch(setAuth(data));
 				navigate('/');
 			})
 			.catch((err) => {
-				setErrorSubmit(err.data.msg);
-				console.log(errorSubmit);
+				setErrorSubmit(err.data.msg || err.data[0].msg);
 			});
 	};
 

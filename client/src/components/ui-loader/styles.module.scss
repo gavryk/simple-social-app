@@ -1,8 +1,16 @@
 .loader {
-	position: relative;
 	margin: auto;
 	width: 50px;
 	height: 50px;
+	&.absolute {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	&.relative {
+		position: relative;
+	}
 }
 
 .loaderEl {

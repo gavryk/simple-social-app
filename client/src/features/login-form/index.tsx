@@ -36,45 +36,39 @@ export const LoginForm: React.FC = () => {
 	};
 
 	return (
-		<div>
-			<div className={styles.loginForm}>
-				<UITypography variant="h3" fontWeight="bold" bottomSpace="sm" textAlign="center">
-					Login
-				</UITypography>
-				{!loginLoading ? (
-					<>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<div className={clsx(styles.fieldsWrapper, styles.cols1)}>
-								<UIInput
-									type="email"
-									id="emailField"
-									placeholder="Email"
-									{...register('email', { required: 'Please enter your email.' })}
-									error={errors.email && errors.email.message}
-								/>
-								<UIInput
-									type="password"
-									id="passwordField"
-									placeholder="Password"
-									{...register('password', { required: 'Please enter your password.' })}
-									error={errors.password && errors.password.message}
-								/>
-							</div>
-							<UIButton fluid type="submit">
-								Login
-							</UIButton>
-							{errorSubmit && (
-								<span className={styles.errorDB}>{errorSubmit as React.ReactNode}</span>
-							)}
-							<span className={styles.notice}>
-								Dont have an account? <Link to="/register">Register.</Link>
-							</span>
-						</form>
-					</>
-				) : (
-					<UILoader />
-				)}
-			</div>
+		<div className={styles.loginForm}>
+			<UITypography variant="h3" fontWeight="bold" bottomSpace="sm" textAlign="center">
+				Login
+			</UITypography>
+			{!loginLoading ? (
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<div className={clsx(styles.fieldsWrapper, styles.cols1)}>
+						<UIInput
+							type="email"
+							id="emailField"
+							placeholder="Email"
+							{...register('email', { required: 'Please enter your email.' })}
+							error={errors.email && errors.email.message}
+						/>
+						<UIInput
+							type="password"
+							id="passwordField"
+							placeholder="Password"
+							{...register('password', { required: 'Please enter your password.' })}
+							error={errors.password && errors.password.message}
+						/>
+					</div>
+					<UIButton fluid type="submit">
+						Login
+					</UIButton>
+					{errorSubmit && <span className={styles.errorDB}>{errorSubmit as React.ReactNode}</span>}
+					<span className={styles.notice}>
+						Dont have an account? <Link to="/register">Register.</Link>
+					</span>
+				</form>
+			) : (
+				<UILoader />
+			)}
 		</div>
 	);
 };

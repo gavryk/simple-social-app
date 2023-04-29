@@ -11,15 +11,12 @@ import { useRemoveImageAPIMutation, useUploadImageAPIMutation } from '../../stor
 export const RegisterForm: React.FC = () => {
 	const navigate = useNavigate();
 	const [registerUser, { isLoading: registerLoading }] = useRegisterUserMutation();
-	const [uploadImageAPI] = useUploadImageAPIMutation();
-	const [removeImageAPI] = useRemoveImageAPIMutation();
+	const [uploadImageAPI, { isLoading: uploadLoading }] = useUploadImageAPIMutation();
+	const [removeImageAPI, { isLoading: removeLoading }] = useRemoveImageAPIMutation();
 	const [avatar, setAvatar] = useState('');
 	const [avatarLoaded, setAvatarLoaded] = useState(true);
 	const [errorSubmit, setErrorSubmit] = useState<string | null>(null);
-	const [file, setFile] = useState<ImageUpload>({
-		file: null,
-		imagePreviewUrl: '',
-	});
+	const [file, setFile] = useState<ImageUpload>({ file: null, imagePreviewUrl: '' });
 
 	const setUserImage = async (imageFile: ImageUpload) => {
 		setFile(imageFile);
@@ -125,7 +122,7 @@ export const RegisterForm: React.FC = () => {
 								error={errors.password && errors.password.message}
 							/>
 						</div>
-						<UIButton fluid type="submit">
+						<UIButton fluid type="submit" disabled={(uploadLoading || removeLoading) && true}>
 							Register
 						</UIButton>
 						{errorSubmit && (

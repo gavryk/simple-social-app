@@ -1,6 +1,7 @@
 .root {
 	background-color: var(--base--color--white-6);
 	display: block;
+	position: relative;
 	&.fullWidth {
 		width: 100%;
 	}
@@ -38,6 +39,7 @@
 	color: var(--base--color--main);
 	padding: var(--base--spaces--4);
 	cursor: pointer;
+	position: relative;
 	width: 100%;
 	border: 2px dashed var(--base--color--main);
 	display: inline-flex;

@@ -39,7 +39,7 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad, file, 
 		});
 	};
 
-	if (!imageLoad) return <UILoader />;
+	if (!imageLoad) return <UILoader position="relative" />;
 
 	return (
 		<section

@@ -50,10 +50,7 @@ export const RegisterForm: React.FC = () => {
 	} = useForm<IRegisterFormTypes>();
 
 	const onSubmit = async (data: IRegisterFormTypes) => {
-		await registerUser({
-			...data,
-			picturePath: avatar,
-		})
+		await registerUser({ ...data, picturePath: avatar })
 			.unwrap()
 			.then((data) => {
 				reset({
@@ -69,7 +66,7 @@ export const RegisterForm: React.FC = () => {
 				navigate('/login');
 			})
 			.catch((err) => {
-				setErrorSubmit(err.data.message);
+				setErrorSubmit(err.data.message || err.data[0].msg);
 			});
 	};
 

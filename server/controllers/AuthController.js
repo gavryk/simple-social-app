@@ -85,3 +85,7 @@ export const getProfile = async (req, res) => {
 		});
 	}
 };
+
+export const logout = (req, res) => {
+	res.cookie('access_token', '', { sameSite: 'none', secure: true }).json('ok');
+};

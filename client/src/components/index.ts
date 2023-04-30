@@ -4,3 +4,4 @@ export * from './ui-label';
 export * from './ui-input';
 export * from './ui-button';
 export * from './ui-loader';
+export * from './logo';

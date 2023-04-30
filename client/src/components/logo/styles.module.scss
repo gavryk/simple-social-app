@@ -1,0 +1,51 @@
+.logo {
+	a {
+		display: grid;
+		align-items: center;
+		grid-gap: var(--base--spaces--3);
+		transition: all 0.3s ease-in-out;
+		img,
+		svg {
+			width: 100%;
+			height: auto;
+		}
+	}
+	&.lg {
+		a {
+			grid-template-columns: var(--base--logo-size-lg) 1fr;
+			@media (max-width: 768px) {
+				grid-template-columns: var(--base--logo-size-md) 1fr;
+			}
+			@media (max-width: 768px) {
+				grid-template-columns: var(--base--logo-size-sm) 1fr;
+			}
+		}
+	}
+	&.md {
+		a {
+			grid-template-columns: var(--base--logo-size-md) 1fr;
+			@media (max-width: 768px) {
+				grid-template-columns: var(--base--logo-size-sm) 1fr;
+			}
+		}
+	}
+	&.sm {
+		a {
+			grid-template-columns: var(--base--logo-size-sm) 1fr;
+			@media (max-width: 768px) {
+				grid-template-columns: 60px 1fr;
+			}
+		}
+	}
+	&:hover {
+		a {
+			opacity: 0.7;
+		}
+	}
+}
+
+.logoText {
+	font-size: var(--base--font--size--h5);
+	font-weight: 800;
+	padding-bottom: 0;
+}

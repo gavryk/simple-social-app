@@ -6,14 +6,11 @@ import clsx from 'clsx';
 import { useUserLogOutMutation } from '../../../../store/api/auth.api';
 import { useAppDispatch } from '../../../../store/store';
 import { setLogout } from '../../../../store/slices/auth/slice';
+import useClickOutside from '../../../../hooks/useClickOutside';
 
 interface AuthInfoProp {
 	user: IAuthTypes | null;
 }
-
-type PopupClick = MouseEvent & {
-	path: Node[];
-};
 
 export const AuthInfo: React.FC<AuthInfoProp> = React.memo(({ user }) => {
 	const dispatch = useAppDispatch();
@@ -21,18 +18,11 @@ export const AuthInfo: React.FC<AuthInfoProp> = React.memo(({ user }) => {
 	const [visibleSetting, setVisibleSetting] = useState(false);
 	const [userLogOut] = useUserLogOutMutation();
 
-	useEffect(() => {
-		const clickOffSetPopup = (event: MouseEvent) => {
-			const _event = event as PopupClick;
-			if (authRef.current && !authRef.current.contains(_event.target as Node)) {
-				setVisibleSetting(false);
-			}
-		};
+	const handleClickOutside = () => {
+		setVisibleSetting(false);
+	};
 
-		document.body.addEventListener('click', clickOffSetPopup);
-
-		return () => document.body.removeEventListener('click', clickOffSetPopup);
-	}, []);
+	useClickOutside(authRef, handleClickOutside);
 
 	const logOut = async () => {
 		if (window.confirm('Are you sure you want to log out?')) {

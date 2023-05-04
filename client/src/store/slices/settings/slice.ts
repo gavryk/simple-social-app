@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { SettingsSliceTypes } from '../../../common';
+import { getTheme } from '../../../utils/getTheme';
 
 const initialState: SettingsSliceTypes = {
-	mode: 'light',
+	mode: getTheme(),
 };
 
 export const settingsSlice = createSlice({

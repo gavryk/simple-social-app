@@ -16,7 +16,9 @@ export interface ILoginTypes {
 	password: string;
 }
 
-export interface IAuthTypes extends Omit<IRegisterTypes, 'password'> {}
+export interface IAuthTypes extends Omit<IRegisterTypes, 'password'> {
+	_id: string;
+}
 export interface IRegisterFormTypes
 	extends Omit<IRegisterTypes, 'friends' | 'viewedProfile' | 'impressions'> {}
 

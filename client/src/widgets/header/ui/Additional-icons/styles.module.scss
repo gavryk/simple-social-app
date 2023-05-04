@@ -1,0 +1,26 @@
+.root {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	flex-direction: row;
+	grid-gap: var(--base--spaces--5);
+}
+
+.icon {
+	background-color: transparent;
+	border-radius: var(--base--border-radius-circle);
+	width: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	svg {
+		height: auto;
+	}
+	&:hover {
+		background-color: var(--base--color--white-6);
+	}
+}

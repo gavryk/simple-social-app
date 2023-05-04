@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import React from 'react';
 import styles from './styles.module.scss';
-import { Logo, UITypography } from '../../components';
-import { Link } from 'react-router-dom';
+import { Logo } from '../../components';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../../store/slices/auth/selector';
-import { AuthInfo } from './ui';
+import { AdditionalIcons, AuthInfo } from './ui';
 
 export const Header: React.FC = () => {
 	const { user } = useSelector(authSelector);
@@ -13,7 +12,8 @@ export const Header: React.FC = () => {
 		<header className={clsx(styles.root)}>
 			<div className={`container-md ${styles.headerWrapper}`}>
 				<Logo link="/" size="lg" />
-				<div className={styles.rightHeader}>{user && <AuthInfo user={user} />}</div>
+				<AdditionalIcons />
+				{user && <AuthInfo user={user} />}
 			</div>
 		</header>
 	);

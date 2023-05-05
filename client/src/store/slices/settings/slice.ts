@@ -11,7 +11,9 @@ export const settingsSlice = createSlice({
 	initialState,
 	reducers: {
 		setMode: (state) => {
-			state.mode = state.mode === 'light' ? 'dark' : 'light';
+			const newMode = state.mode === 'light' ? 'dark' : 'light';
+			state.mode = newMode;
+			localStorage.setItem('mode', newMode);
 		},
 	},
 	extraReducers: (builder) => {},

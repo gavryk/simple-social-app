@@ -12,8 +12,12 @@ export const Header: React.FC = () => {
 		<header className={clsx(styles.root)}>
 			<div className={`container-md ${styles.headerWrapper}`}>
 				<Logo link="/" size="lg" />
-				<AdditionalIcons />
-				{user && <AuthInfo user={user} />}
+				{user && (
+					<>
+						<AdditionalIcons />
+						<AuthInfo user={user} />
+					</>
+				)}
 			</div>
 		</header>
 	);

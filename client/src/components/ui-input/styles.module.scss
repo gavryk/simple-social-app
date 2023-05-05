@@ -7,8 +7,8 @@
 		opacity: 0.3;
 	}
 	.input {
-		border: 1px solid rgba(0, 0, 0, 0.1);
-		background-color: #fff;
+		border: 1px solid var(--base--color--text);
+		background-color: transparent;
 		min-height: 50px;
 		width: 100%;
 		max-width: 100%;
@@ -18,8 +18,9 @@
 		font-size: var(--base--font--size);
 		transition: all 0.2s ease-in-out;
 		margin-bottom: var(--base--spaces--4);
+		color: var(--base--color--text);
 		&:focus {
-			border: 1px solid rgba(0, 0, 0, 0.3);
+			border: 1px solid var(--base--color--text);
 		}
 		&[type='search'] {
 			&::-webkit-search-cancel-button {

@@ -26,8 +26,15 @@ body {
 	height: 100vh;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
-	color: var(--base--color--black);
-	background-color: var(--base--color--white-6);
+	color: var(--base--color--text);
+	background-color: var(--base--color--main-bg);
+	transition: all 0.2s ease-in-out;
+}
+
+[data-theme='dark'] {
+	--base--color--main-bg: var(--base--color--black);
+	--base--color--second-main-bg: var(--base--color--darkgrey);
+	--base--color--text: var(--base--color--light-grey);
 }
 
 .container-sm {
@@ -84,7 +91,7 @@ h2,
 h3,
 h4,
 h5 {
-	color: var(--base--color--black);
+	color: var(--base--color--text);
 }
 
 a {

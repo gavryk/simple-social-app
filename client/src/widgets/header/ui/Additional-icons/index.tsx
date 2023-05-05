@@ -5,19 +5,18 @@ import { useSelector } from 'react-redux';
 import { settingsSelector } from '../../../../store/slices/settings/selector';
 import { useAppDispatch } from '../../../../store/store';
 import { setMode } from '../../../../store/slices/settings/slice';
-import { useLocalStorage } from '../../../../hooks';
 
 export const AdditionalIcons: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { mode } = useSelector(settingsSelector);
 
-	useEffect(() => {
-		localStorage.setItem('mode', mode);
-	}, [mode]);
-
 	const handleMode = () => {
 		dispatch(setMode());
 	};
+
+	useEffect(() => {
+		document.documentElement.setAttribute('data-theme', mode);
+	}, [mode]);
 
 	return (
 		<div className={styles.root}>

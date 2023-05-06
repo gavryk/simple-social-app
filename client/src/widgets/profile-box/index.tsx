@@ -2,6 +2,7 @@ import React from 'react';
 import { UIBox } from '../../components/ui-box';
 import { IAuthTypes } from '../../common';
 import styles from './styles.module.scss';
+import { ProfileBoxTop } from './ui';
 
 interface UserBox {
 	user: IAuthTypes | null;
@@ -10,15 +11,12 @@ interface UserBox {
 export const ProfileBox: React.FC<UserBox> = ({ user }) => {
 	return (
 		<UIBox>
-			<div className={styles.rootTop}>
-				<div className={styles.userInfo}>
-					<div className={styles.userPhoto}>
-						<img
-							src={`${import.meta.env.VITE_BASE_URL}${user?.picturePath}`}
-							alt={user?.firstName}
-						/>
-					</div>
-				</div>
+			<div className={styles.profileRow}>
+				<ProfileBoxTop
+					photo={user?.picturePath}
+					name={`${user?.firstName} ${user?.lastName}`}
+					friendsCount={user?.friends.length}
+				/>
 			</div>
 		</UIBox>
 	);

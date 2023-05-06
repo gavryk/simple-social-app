@@ -12,12 +12,6 @@ export const Home: React.FC = () => {
 			<div className="col">
 				<ProfileBox user={user} />
 			</div>
-			<div className="col">
-				<ProfileBox user={user} />
-			</div>
-			<div className="col">
-				<ProfileBox user={user} />
-			</div>
 		</UIGrid>
 	);
 };

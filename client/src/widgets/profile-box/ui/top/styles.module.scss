@@ -1,0 +1,32 @@
+.rootTop {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	flex-direction: row;
+	.userInfo {
+		display: grid;
+		grid-template-columns: 50px 1fr;
+		align-items: center;
+		grid-gap: 15px;
+		.userPhoto {
+			overflow: hidden;
+			border-radius: var(--base--border-radius-circle);
+			position: relative;
+			aspect-ratio: 1;
+			background-color: var(--base--color--light-grey);
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+		.userName {
+			span {
+				display: block;
+				font-size: var(--base--font--size);
+			}
+		}
+	}
+}

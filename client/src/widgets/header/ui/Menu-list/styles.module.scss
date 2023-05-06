@@ -1,0 +1,22 @@
+.mobileMenu {
+	position: fixed;
+	top: 65px;
+	right: 0;
+	background-color: var(--base--color--second-main-bg);
+	width: 40%;
+	height: 100vh;
+	z-index: 100;
+	padding: var(--base--spaces--4) var(--base--spaces--6) var(--base--spaces--6);
+	box-shadow: 7px 18px 20px 2px rgba(0, 0, 0, 0.2);
+	transform: translateX(100%);
+	transition: all 0.3s ease-in-out;
+	&.active {
+		transform: translateX(0);
+	}
+	li {
+		margin: var(--base--spaces--3) 0;
+	}
+	@media screen and (max-width: 576px) {
+		width: 75%;
+	}
+}

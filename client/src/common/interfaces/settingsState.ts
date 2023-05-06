@@ -1,6 +1,7 @@
 export interface SettingsSliceTypes {
 	mode: 'light' | 'dark';
 	menu: MenuItem[];
+	mobileMenuActive: boolean;
 }
 
 export type MenuItem = {

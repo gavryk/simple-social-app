@@ -1,6 +1,5 @@
-import { authSelector } from './../auth/selector';
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { IAuthSliceTypes, SettingsSliceTypes } from '../../../common';
+import { createSlice } from '@reduxjs/toolkit';
+import { SettingsSliceTypes } from '../../../common';
 import { getTheme } from '../../../utils/getTheme';
 import { authSlice } from '../auth/slice';
 
@@ -25,6 +24,7 @@ const initialState: SettingsSliceTypes = {
 			icon: 'FiLogOut',
 		},
 	],
+	mobileMenuActive: false,
 };
 
 export const settingsSlice = createSlice({
@@ -36,6 +36,9 @@ export const settingsSlice = createSlice({
 			state.mode = newMode;
 			localStorage.setItem('mode', newMode);
 		},
+		setMenuActive: (state, action) => {
+			state.mobileMenuActive = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(authSlice.actions.setAuth, (state, action) => {
@@ -45,5 +48,5 @@ export const settingsSlice = createSlice({
 	},
 });
 
-export const { setMode } = settingsSlice.actions;
+export const { setMode, setMenuActive } = settingsSlice.actions;
 export default settingsSlice.reducer;

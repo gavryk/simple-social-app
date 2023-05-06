@@ -1,11 +1,10 @@
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 import { useAppDispatch } from '../../store/store';
 import { settingsSelector } from '../../store/slices/settings/selector';
 import { setMenuActive } from '../../store/slices/settings/slice';
-import useMediaQuery from '../../hooks/useMediaQuery';
 
 export const UIBurger: React.FC = () => {
 	const dispatch = useAppDispatch();

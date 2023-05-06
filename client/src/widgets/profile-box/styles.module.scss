@@ -1,0 +1,19 @@
+.rootTop {
+	position: relative;
+	.userInfo {
+		display: grid;
+		grid-template-columns: 70px 1fr;
+		grid-gap: 15px;
+		.userPhoto {
+			overflow: hidden;
+			border-radius: var(--base--border-radius-circle);
+			position: relative;
+			aspect-ratio: 1;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+	}
+}

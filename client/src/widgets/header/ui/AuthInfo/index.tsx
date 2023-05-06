@@ -3,14 +3,9 @@ import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import styles from './styles.module.scss';
 import { IAuthTypes } from '../../../../common';
 import clsx from 'clsx';
-import { useUserLogOutMutation } from '../../../../store/api/auth.api';
-import { useAppDispatch } from '../../../../store/store';
-import { setLogout } from '../../../../store/slices/auth/slice';
 import useClickOutside from '../../../../hooks/useClickOutside';
 import { useSelector } from 'react-redux';
 import { settingsSelector } from '../../../../store/slices/settings/selector';
-import { UIIcon } from '../../../../components';
-import { Link } from 'react-router-dom';
 import { MenuList } from '../Menu-list';
 
 interface AuthInfoProp {

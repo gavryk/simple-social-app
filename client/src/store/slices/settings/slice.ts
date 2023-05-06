@@ -1,9 +1,30 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { SettingsSliceTypes } from '../../../common';
+import { authSelector } from './../auth/selector';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { IAuthSliceTypes, SettingsSliceTypes } from '../../../common';
 import { getTheme } from '../../../utils/getTheme';
+import { authSlice } from '../auth/slice';
 
 const initialState: SettingsSliceTypes = {
 	mode: getTheme(),
+	menu: [
+		{
+			id: 1,
+			title: 'Profile Page',
+			icon: 'FiUser',
+			link: ``,
+		},
+		{
+			id: 2,
+			title: 'Settings',
+			icon: 'FiSettings',
+			link: `/settings`,
+		},
+		{
+			id: 3,
+			title: 'Logout',
+			icon: 'FiLogOut',
+		},
+	],
 };
 
 export const settingsSlice = createSlice({
@@ -16,7 +37,12 @@ export const settingsSlice = createSlice({
 			localStorage.setItem('mode', newMode);
 		},
 	},
-	extraReducers: (builder) => {},
+	extraReducers: (builder) => {
+		builder.addCase(authSlice.actions.setAuth, (state, action) => {
+			const user = action.payload;
+			state.menu[0].link = `/profile/${user._id}`;
+		});
+	},
 });
 
 export const { setMode } = settingsSlice.actions;

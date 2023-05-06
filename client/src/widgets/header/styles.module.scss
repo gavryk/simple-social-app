@@ -3,6 +3,9 @@
 	box-shadow: var(--base--box-shadow-1);
 	background-color: var(--base--color--second-main-bg);
 	padding: var(--base--spaces--5) 0;
+	@media screen and (max-width: 768px) {
+		padding: var(--base--spaces--4) 0;
+	}
 }
 
 .headerWrapper {

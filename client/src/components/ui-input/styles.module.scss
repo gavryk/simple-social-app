@@ -7,7 +7,7 @@
 		opacity: 0.3;
 	}
 	.input {
-		border: 1px solid var(--base--color--text);
+		border: 1px solid var(--base--color--border);
 		background-color: transparent;
 		min-height: 50px;
 		width: 100%;
@@ -20,7 +20,10 @@
 		margin-bottom: var(--base--spaces--4);
 		color: var(--base--color--text);
 		&:focus {
-			border: 1px solid var(--base--color--text);
+			border: 1px solid var(--base--color--main);
+		}
+		&::placeholder {
+			color: var(--base--color--text);
 		}
 		&[type='search'] {
 			&::-webkit-search-cancel-button {

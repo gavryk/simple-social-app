@@ -8,3 +8,5 @@ export const usersApi = api.injectEndpoints({
 		}),
 	}),
 });
+
+const { useGetAllUserQuery } = usersApi;

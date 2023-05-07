@@ -12,7 +12,7 @@ export const Users: React.FC = () => {
 	return (
 		<UIGrid columns={4} gridGap={4}>
 			{data?.map((user: IAuthTypes) => (
-				<UIUserCard {...user} />
+				<UIUserCard {...user} key={user._id} />
 			))}
 		</UIGrid>
 	);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IAuthTypes } from '../../../../common';
+import { IAuthTypes } from '@/common';
 import styles from './styles.module.scss';
 import { MdEmail, MdWork } from 'react-icons/md';
 import { ImLocation2 } from 'react-icons/im';

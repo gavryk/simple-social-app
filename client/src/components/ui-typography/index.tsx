@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 interface TypoProps {
 	variant: string;
 	fontWeight?: string;
-	bottomSpace?: 'sm' | 'md' | 'lg' | 'none';
+	bottomSpace?: 'xsm' | 'sm' | 'md' | 'lg' | 'none';
 	textAlign?: 'left' | 'center' | 'right';
 	children: ReactNode;
 }

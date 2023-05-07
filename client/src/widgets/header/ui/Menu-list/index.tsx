@@ -56,6 +56,9 @@ export const MenuList: React.FC<MenuList> = ({ menu, mobile = false }) => {
 	} else {
 		return (
 			<ul className={clsx(styles.mobileMenu, { [styles.active]: mobileMenuActive })}>
+				<li>
+					<Link to="/users">Users</Link>
+				</li>
 				{menu.map((item, index) => (
 					<React.Fragment key={item.id}>
 						{item.title !== 'Logout' ? (

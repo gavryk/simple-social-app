@@ -1,7 +1,8 @@
 import React from 'react';
 import { RiUserSettingsFill } from 'react-icons/ri';
-import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
+import styles from './styles.module.scss';
+import { UIAvatar } from '@/components';
 
 interface ProfileTopType {
 	admin: boolean;
@@ -19,9 +20,7 @@ export const ProfileBoxTop: React.FC<ProfileTopType> = ({
 	return (
 		<div className={styles.rootTop}>
 			<div className={styles.userInfo}>
-				<div className={styles.userPhoto}>
-					{photo && <img src={`${import.meta.env.VITE_BASE_URL}${photo}`} alt={name} />}
-				</div>
+				<UIAvatar src={photo} alt={name} />
 				<div className={styles.userName}>
 					<span className={styles.name}>{name}</span>
 					<span className={styles.friends}>{friendsCount} Friends</span>

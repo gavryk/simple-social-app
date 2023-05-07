@@ -10,18 +10,6 @@
 		grid-template-columns: 50px 1fr;
 		align-items: center;
 		grid-gap: var(--base--spaces--4);
-		.userPhoto {
-			overflow: hidden;
-			border-radius: var(--base--border-radius-circle);
-			position: relative;
-			aspect-ratio: 1;
-			background-color: var(--base--color--light-grey);
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-		}
 		.userName {
 			span {
 				display: block;

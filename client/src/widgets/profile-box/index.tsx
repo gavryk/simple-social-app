@@ -1,10 +1,10 @@
 import React from 'react';
-import { UIBox } from '../../components/ui-box';
-import { IAuthTypes } from '../../common';
+import { UIBox } from '@/components/ui-box';
+import { IAuthTypes } from '@/common';
 import styles from './styles.module.scss';
 import { ProfileBoxTop, ProfileInfo, ProfileSocial, ProfileViews } from './ui';
 import { useSelector } from 'react-redux';
-import { authSelector } from '../../store/slices/auth/selector';
+import { authSelector } from '@/store/slices/auth/selector';
 
 interface UserBox {
 	user: IAuthTypes | null;

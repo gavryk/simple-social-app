@@ -15,6 +15,15 @@
 	grid-template-columns: repeat(3, 1fr);
 	&.centerBig {
 		grid-template-columns: 25% 1fr 25%;
+		@media screen and (max-width: 1480px) {
+			grid-template-columns: 35% 1fr 35%;
+		}
+		@media screen and (max-width: 1024px) {
+			grid-template-columns: 40% 1fr;
+		}
+		@media screen and (max-width: 768px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
 	}
 }
 

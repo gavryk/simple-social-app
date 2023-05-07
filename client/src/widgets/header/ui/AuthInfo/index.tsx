@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
-import avatarHolder from '@/assets/img/avatar-holder.jpg';
-import { IAuthTypes } from '../../../../common';
+import { IAuthTypes } from '@/common';
 import clsx from 'clsx';
-import useClickOutside from '../../../../hooks/useClickOutside';
+import useClickOutside from '@/hooks/useClickOutside';
 import { useSelector } from 'react-redux';
-import { settingsSelector } from '../../../../store/slices/settings/selector';
+import { settingsSelector } from '@/store/slices/settings/selector';
 import { MenuList } from '../Menu-list';
+import { UIAvatar } from '@/components';
 import styles from './styles.module.scss';
 
 interface AuthInfoProp {
@@ -29,16 +29,7 @@ export const AuthInfo: React.FC<AuthInfoProp> = React.memo(({ user }) => {
 			ref={authRef}
 			className={clsx(styles.root, { [styles.active]: visibleSetting })}
 			onClick={() => setVisibleSetting(!visibleSetting)}>
-			<div className={styles.userPhoto}>
-				<img
-					src={
-						user?.picturePath
-							? `${import.meta.env.VITE_BASE_URL}${user?.picturePath}`
-							: avatarHolder
-					}
-					alt={`${user?.firstName}_${user?.lastName}`}
-				/>
-			</div>
+			<UIAvatar src={user?.picturePath} alt={`${user?.firstName}_${user?.lastName}`} />
 			<div className={styles.userName}>
 				<span>
 					{user?.firstName} {user?.lastName}

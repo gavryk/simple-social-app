@@ -8,3 +8,6 @@ export * from './logo';
 export * from './ui-grid';
 export * from './ui-burger';
 export * from './ui-icon';
+export * from './ui-box';
+export * from './ui-avatar';
+export * from './ui-user-card';

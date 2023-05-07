@@ -1,7 +1,7 @@
 import React from 'react';
-import { UILoader } from '../components';
-import { useGetAllUserQuery } from '../store/api/users.api';
-import { IAuthTypes } from '../common';
+import { UIBox, UIGrid, UILoader, UIUserCard } from '@/components';
+import { useGetAllUserQuery } from '@/store/api/users.api';
+import { IAuthTypes } from '@/common';
 
 export const Users: React.FC = () => {
 	const { data, isLoading, isError } = useGetAllUserQuery();
@@ -10,10 +10,10 @@ export const Users: React.FC = () => {
 	if (isError) return <h2>Something went wrong, please try again later</h2>;
 
 	return (
-		<div>
+		<UIGrid columns={4} gridGap={4}>
 			{data?.map((user: IAuthTypes) => (
-				<div>{user.firstName}</div>
+				<UIUserCard {...user} />
 			))}
-		</div>
+		</UIGrid>
 	);
 };

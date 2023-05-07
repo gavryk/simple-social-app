@@ -1,0 +1,13 @@
+.root {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: var(--base--spaces--3);
+	.socialRow {
+		display: grid;
+		grid-template-columns: 20px 1fr;
+		align-items: center;
+		grid-gap: var(--base--spaces--1);
+		font-size: var(--base--font--size-md);
+		transition: all 0.4s ease-in-out;
+	}
+}

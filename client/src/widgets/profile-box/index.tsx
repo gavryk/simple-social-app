@@ -2,7 +2,7 @@ import React from 'react';
 import { UIBox } from '../../components/ui-box';
 import { IAuthTypes } from '../../common';
 import styles from './styles.module.scss';
-import { ProfileBoxTop, ProfileInfo, ProfileViews } from './ui';
+import { ProfileBoxTop, ProfileInfo, ProfileSocial, ProfileViews } from './ui';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../../store/slices/auth/selector';
 
@@ -38,6 +38,7 @@ export const ProfileBox: React.FC<UserBox> = ({ user }) => {
 					)}
 				</div>
 			)}
+			<ProfileSocial social={user?.social} />
 		</UIBox>
 	);
 };

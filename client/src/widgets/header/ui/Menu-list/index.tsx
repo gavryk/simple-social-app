@@ -31,9 +31,9 @@ export const MenuList: React.FC<MenuList> = ({ menu, mobile = false }) => {
 		return (
 			<>
 				{menu.map((item) => (
-					<>
+					<React.Fragment key={item.id}>
 						{item.title !== 'Logout' ? (
-							<li key={item.id}>
+							<li>
 								{item.link ? (
 									<Link to={item.link}>
 										{item.title} {item.icon && <UIIcon name={item.icon} />}
@@ -45,29 +45,25 @@ export const MenuList: React.FC<MenuList> = ({ menu, mobile = false }) => {
 								)}
 							</li>
 						) : (
-							<li key={item.id} onClick={logOut}>
+							<li onClick={logOut}>
 								{item.title} {item.icon && <UIIcon name={item.icon} />}
 							</li>
 						)}
-					</>
+					</React.Fragment>
 				))}
 			</>
 		);
 	} else {
 		return (
 			<ul className={clsx(styles.mobileMenu, { [styles.active]: mobileMenuActive })}>
-				{menu.map((item) => (
-					<>
+				{menu.map((item, index) => (
+					<React.Fragment key={item.id}>
 						{item.title !== 'Logout' ? (
-							<li key={item.id}>
-								{item.link ? <Link to={item.link}>{item.title}</Link> : <>{item.title}</>}
-							</li>
+							<li>{item.link ? <Link to={item.link}>{item.title}</Link> : <>{item.title}</>}</li>
 						) : (
-							<li key={item.id} onClick={logOut}>
-								{item.title}
-							</li>
+							<li onClick={logOut}>{item.title}</li>
 						)}
-					</>
+					</React.Fragment>
 				))}
 			</ul>
 		);

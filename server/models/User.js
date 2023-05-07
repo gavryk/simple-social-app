@@ -38,7 +38,7 @@ const UserShema = new mongoose.Schema(
 				name: {
 					type: String,
 					required: true,
-					enum: ['Facebook', 'Twitter', 'Instagram', 'LinkedIn', 'GitHub'],
+					enum: ['Facebook', 'Twitter', 'Instagram', 'Linkedin', 'Github'],
 				},
 				link: {
 					type: String,

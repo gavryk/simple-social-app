@@ -20,22 +20,14 @@ export const authApi = api.injectEndpoints({
 				method: 'POST',
 				credentials: 'include',
 			}),
-			invalidatesTags: () => [
-				{
-					type: 'Auth',
-				},
-			],
+			invalidatesTags: () => ['Auth', 'Users'],
 		}),
 		userLogOut: builder.mutation<void, void>({
 			query: () => ({
 				url: '/auth/logout',
 				method: 'POST',
 			}),
-			invalidatesTags: () => [
-				{
-					type: 'Auth',
-				},
-			],
+			invalidatesTags: () => ['Auth', 'Users'],
 		}),
 	}),
 });

@@ -2,7 +2,7 @@ import User from '../models/User.js';
 
 export const getAllUsers = async (req, res) => {
 	try {
-		const users = await User.find({});
+		const users = await User.find({ _id: { $ne: req.user.id } });
 		if (!users || users.length === 0) {
 			return res.status(404).json({
 				message: 'No users found!',
@@ -12,6 +12,7 @@ export const getAllUsers = async (req, res) => {
 			const { password, ...data } = user._doc;
 			return data;
 		});
+
 		res.status(200).json(userData);
 	} catch (err) {
 		res.status(404).json({ message: err.message });

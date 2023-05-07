@@ -7,6 +7,7 @@ export const Users: React.FC = () => {
 	const { data, isLoading, isError } = useGetAllUserQuery();
 
 	if (isLoading) return <UILoader />;
+	if (isError) return <h2>Something went wrong, please try again later</h2>;
 
 	return (
 		<div>

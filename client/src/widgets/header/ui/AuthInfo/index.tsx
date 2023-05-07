@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
-import styles from './styles.module.scss';
+import avatarHolder from '@/assets/img/avatar-holder.jpg';
 import { IAuthTypes } from '../../../../common';
 import clsx from 'clsx';
 import useClickOutside from '../../../../hooks/useClickOutside';
 import { useSelector } from 'react-redux';
 import { settingsSelector } from '../../../../store/slices/settings/selector';
 import { MenuList } from '../Menu-list';
+import styles from './styles.module.scss';
 
 interface AuthInfoProp {
 	user: IAuthTypes | null;
@@ -30,7 +31,11 @@ export const AuthInfo: React.FC<AuthInfoProp> = React.memo(({ user }) => {
 			onClick={() => setVisibleSetting(!visibleSetting)}>
 			<div className={styles.userPhoto}>
 				<img
-					src={`${import.meta.env.VITE_BASE_URL}${user?.picturePath}`}
+					src={
+						user?.picturePath
+							? `${import.meta.env.VITE_BASE_URL}${user?.picturePath}`
+							: avatarHolder
+					}
 					alt={`${user?.firstName}_${user?.lastName}`}
 				/>
 			</div>

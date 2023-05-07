@@ -1,5 +1,23 @@
 import User from '../models/User.js';
 
+export const getAllUsers = async (req, res) => {
+	try {
+		const users = await User.find({});
+		if (!users || users.length === 0) {
+			return res.status(404).json({
+				message: 'No users found!',
+			});
+		}
+		const userData = users.map((user) => {
+			const { password, ...data } = user._doc;
+			return data;
+		});
+		res.status(200).json(userData);
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
+};
+
 export const getUser = async (req, res) => {
 	try {
 		const { id } = req.params;
@@ -11,7 +29,7 @@ export const getUser = async (req, res) => {
 		}
 		const { password, ...userData } = user._doc;
 		res.status(200).json({ ...userData });
-	} catch (error) {
+	} catch (err) {
 		res.status(404).json({ message: err.message });
 	}
 };

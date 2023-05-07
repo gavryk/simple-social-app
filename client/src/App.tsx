@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from './store/store';
 import { setAuth } from './store/slices/auth/slice';
 import { UILoader } from './components';
+import { Users } from './pages/Users';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ const App = () => {
 				<Route element={<PrivateRoute />}>
 					<Route path="" element={<Home />} />
 					<Route path="/profile/:userId" element={<Profile />} />
+					<Route path="/users" element={<Users />} />
 				</Route>
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />

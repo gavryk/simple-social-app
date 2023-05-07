@@ -33,6 +33,20 @@ const UserShema = new mongoose.Schema(
 			type: Array,
 			default: [],
 		},
+		social: [
+			{
+				name: {
+					type: String,
+					required: true,
+					enum: ['Facebook', 'Twitter', 'Instagram', 'LinkedIn', 'GitHub'],
+				},
+				link: {
+					type: String,
+					required: true,
+					max: 100,
+				},
+			},
+		],
 		location: String,
 		occupation: String,
 		viewedProfile: Number,

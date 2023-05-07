@@ -1,0 +1,17 @@
+.root {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-gap: 10px;
+	.row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		flex-direction: row;
+		span {
+			font-size: var(--base--font--size);
+			color: var(--base--color--text);
+		}
+	}
+}

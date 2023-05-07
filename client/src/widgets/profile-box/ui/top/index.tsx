@@ -4,12 +4,18 @@ import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 
 interface ProfileTopType {
+	admin: boolean;
 	photo?: string;
 	name: string;
 	friendsCount?: number;
 }
 
-export const ProfileBoxTop: React.FC<ProfileTopType> = ({ photo, name, friendsCount = 0 }) => {
+export const ProfileBoxTop: React.FC<ProfileTopType> = ({
+	admin,
+	photo,
+	name,
+	friendsCount = 0,
+}) => {
 	return (
 		<div className={styles.rootTop}>
 			<div className={styles.userInfo}>
@@ -21,11 +27,13 @@ export const ProfileBoxTop: React.FC<ProfileTopType> = ({ photo, name, friendsCo
 					<span className={styles.friends}>{friendsCount} Friends</span>
 				</div>
 			</div>
-			<div className={styles.userSettings}>
-				<Link to="/settings">
-					<RiUserSettingsFill size="20" />
-				</Link>
-			</div>
+			{admin && (
+				<div className={styles.userSettings}>
+					<Link to="/settings">
+						<RiUserSettingsFill size="20" />
+					</Link>
+				</div>
+			)}
 		</div>
 	);
 };

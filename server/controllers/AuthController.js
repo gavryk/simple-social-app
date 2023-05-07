@@ -5,8 +5,17 @@ import User from '../models/User.js';
 //Register SetUp
 export const register = async (req, res) => {
 	try {
-		const { firstName, lastName, email, password, picturePath, friends, location, occupation } =
-			req.body;
+		const {
+			firstName,
+			lastName,
+			email,
+			password,
+			picturePath,
+			friends,
+			location,
+			occupation,
+			social,
+		} = req.body;
 		const oldUserEmail = await User.findOne({ email });
 
 		if (oldUserEmail) {
@@ -25,6 +34,7 @@ export const register = async (req, res) => {
 			friends,
 			location,
 			occupation,
+			social,
 			viewedProfile: Math.floor(Math.random() * 10000),
 			impressions: Math.floor(Math.random() * 10000),
 		});

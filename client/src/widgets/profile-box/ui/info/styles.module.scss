@@ -1,0 +1,15 @@
+.profileInfoList {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-gap: var(--base--spaces--2);
+	.info {
+		display: grid;
+		grid-template-columns: 20px auto;
+		align-items: center;
+		grid-gap: var(--base--spaces--3);
+		span {
+			color: var(--base--color--text);
+			font-size: var(--base--font--size);
+		}
+	}
+}

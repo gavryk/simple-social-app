@@ -1,0 +1,23 @@
+.tabNavigation {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	align-items: center;
+	justify-content: flex-start;
+	grid-gap: 0;
+}
+
+.tab {
+	cursor: pointer;
+	padding: var(--base--spaces--4) var(--base--spaces--2);
+	transition: all 0.3s ease-in-out;
+	border-radius: var(--base--border-radius-2);
+	span {
+		font-size: var(--base--font--size-lg);
+	}
+	&:hover,
+	&.active {
+		background-color: var(--base--color--main);
+		color: var(--base--color--white);
+	}
+}

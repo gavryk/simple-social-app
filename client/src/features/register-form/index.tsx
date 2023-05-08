@@ -2,42 +2,18 @@ import React, { useState } from 'react';
 import { useRegisterUserMutation } from '../../store/api/auth.api';
 import { Link, useNavigate } from 'react-router-dom';
 import { UILoader, UIButton, UIDropzone, UIInput, UITypography } from '../../components';
-import { IRegisterFormTypes, ImageUpload } from '../../common';
+import { IRegisterFormTypes } from '../../common';
 import { useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import clsx from 'clsx';
-import { useRemoveImageAPIMutation, useUploadImageAPIMutation } from '../../store/api/upload.api';
+import { useUploadUserPhoto } from '@/hooks';
 
 export const RegisterForm: React.FC = () => {
 	const navigate = useNavigate();
 	const [registerUser, { isLoading: registerLoading }] = useRegisterUserMutation();
-	const [uploadImageAPI, { isLoading: uploadLoading }] = useUploadImageAPIMutation();
-	const [removeImageAPI, { isLoading: removeLoading }] = useRemoveImageAPIMutation();
-	const [avatar, setAvatar] = useState('');
-	const [avatarLoaded, setAvatarLoaded] = useState(true);
 	const [errorSubmit, setErrorSubmit] = useState<string | null>(null);
-	const [file, setFile] = useState<ImageUpload>({ file: null, imagePreviewUrl: '' });
-
-	const setUserImage = async (imageFile: ImageUpload) => {
-		setFile(imageFile);
-		setAvatarLoaded(false);
-		if (imageFile.file) {
-			try {
-				const res = await uploadImageAPI(imageFile.file).unwrap();
-				setAvatar(res.url);
-				setAvatarLoaded(true);
-			} catch (err) {
-				console.log(err);
-				setAvatarLoaded(true);
-			}
-		} else {
-			setAvatar('');
-			const fileUrl = avatar.replace('/uploads/', '');
-			await removeImageAPI(fileUrl).then(() => {
-				setAvatarLoaded(true);
-			});
-		}
-	};
+	const { uploadLoading, removeLoading, avatar, file, setFile, setUserImage, avatarLoaded } =
+		useUploadUserPhoto();
 
 	const {
 		register,

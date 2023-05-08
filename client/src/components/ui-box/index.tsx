@@ -4,11 +4,9 @@ import clsx from 'clsx';
 
 interface BoxType {
 	children: React.ReactNode;
-	verticalSpaceNone?: boolean;
+	spaceNone?: boolean;
 }
 
-export const UIBox: React.FC<BoxType> = ({ children, verticalSpaceNone = false }) => {
-	return (
-		<div className={clsx(styles.root, { [styles.vSpaceOff]: verticalSpaceNone })}>{children}</div>
-	);
+export const UIBox: React.FC<BoxType> = ({ children, spaceNone = false }) => {
+	return <div className={clsx(styles.root, { [styles.spaceOff]: spaceNone })}>{children}</div>;
 };

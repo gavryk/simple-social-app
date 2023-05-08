@@ -2,6 +2,15 @@
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	grid-gap: var(--grid--gap);
+	&.flxCenter {
+		align-items: center;
+	}
+	&.flxStart {
+		align-items: flex-start;
+	}
+	&.flxEnd {
+		align-items: flex-end;
+	}
 }
 .gridColumns1 {
 	grid-template-columns: repeat(1, 1fr);
@@ -10,7 +19,7 @@
 .gridColumns2 {
 	grid-template-columns: repeat(2, 1fr);
 	&.centerBig {
-		grid-template-columns: 30% 1fr;
+		grid-template-columns: 25% 1fr;
 		@media screen and (max-width: 1480px) {
 			grid-template-columns: 35% 1fr;
 		}

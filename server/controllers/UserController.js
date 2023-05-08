@@ -79,3 +79,16 @@ export const updateFriends = async (req, res) => {
 		res.status(404).json({ message: err.message });
 	}
 };
+
+export const updatePhoto = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { picturePath } = req.body;
+		const user = await User.findById(id);
+		user.picturePath = picturePath;
+		await user.save();
+		res.status(200).json(user);
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
+};

@@ -16,5 +16,6 @@ router.get('/', verifyToken, getAllUsers);
 
 //Update
 router.patch('/:id/:friendId', verifyToken, updateFriends);
+router.patch('/:id', verifyToken, updatePhoto);
 
 export default router;

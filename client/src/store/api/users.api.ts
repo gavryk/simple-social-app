@@ -10,7 +10,14 @@ export const usersApi = api.injectEndpoints({
 		getUser: builder.query({
 			query: (id) => `/users/${id}`,
 		}),
+		updateUserPhoto: builder.mutation({
+			query: ({ id, url }) => ({
+				url: `/users/${id}`,
+				method: 'PATCH',
+				body: url,
+			}),
+		}),
 	}),
 });
 
-export const { useGetAllUserQuery, useGetUserQuery } = usersApi;
+export const { useGetAllUserQuery, useGetUserQuery, useUpdateUserPhotoMutation } = usersApi;

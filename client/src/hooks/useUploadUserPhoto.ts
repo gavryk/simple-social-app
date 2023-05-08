@@ -30,5 +30,14 @@ export const useUploadUserPhoto = () => {
 		}
 	};
 
-	return { uploadLoading, removeLoading, avatar, file, setFile, setUserImage, avatarLoaded };
+	return {
+		uploadLoading,
+		removeLoading,
+		avatar,
+		file,
+		setFile,
+		setUserImage,
+		avatarLoaded,
+		setAvatar,
+	};
 };

@@ -4,6 +4,7 @@ import {
 	getUserFriends,
 	updateFriends,
 	getAllUsers,
+	updatePhoto,
 } from '../controllers/UserController.js';
 import { verifyToken } from '../middleware/index.js';
 

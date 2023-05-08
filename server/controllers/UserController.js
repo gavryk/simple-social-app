@@ -85,7 +85,7 @@ export const updatePhoto = async (req, res) => {
 		const { id } = req.params;
 		const { picturePath } = req.body;
 		const user = await User.findById(id);
-		user.picturePath = picturePath;
+		user.picturePath = picturePath || '';
 		await user.save();
 		res.status(200).json(user);
 	} catch (err) {

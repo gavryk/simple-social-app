@@ -5,6 +5,7 @@ export const authApi = api.injectEndpoints({
 	endpoints: (builder) => ({
 		getAuthUser: builder.query<IAuthTypes, void>({
 			query: () => `/auth/profile`,
+			providesTags: ['Auth'],
 		}),
 		registerUser: builder.mutation<void, IRegisterFormTypes>({
 			query: (user) => ({

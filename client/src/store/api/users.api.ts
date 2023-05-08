@@ -11,11 +11,12 @@ export const usersApi = api.injectEndpoints({
 			query: (id) => `/users/${id}`,
 		}),
 		updateUserPhoto: builder.mutation({
-			query: ({ id, url }) => ({
+			query: ({ id, ...body }) => ({
 				url: `/users/${id}`,
 				method: 'PATCH',
-				body: url,
+				body,
 			}),
+			invalidatesTags: ['Auth', 'Users'],
 		}),
 	}),
 });

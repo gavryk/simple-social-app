@@ -11,6 +11,7 @@ import { useAppDispatch } from './store/store';
 import { setAuth } from './store/slices/auth/slice';
 import { UILoader } from './components';
 import { Users } from './pages/Users';
+import { Settings } from './pages/Settings';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -30,6 +31,7 @@ const App = () => {
 					<Route path="" element={<Home />} />
 					<Route path="/profile/:userId" element={<Profile />} />
 					<Route path="/users" element={<Users />} />
+					<Route path="/settings" element={<Settings />} />
 				</Route>
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />

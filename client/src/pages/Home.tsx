@@ -1,8 +1,8 @@
 import React from 'react';
-import { UIGrid } from '../components';
-import { ProfileBox } from '../widgets/profile-box';
+import { UIGrid } from '@/components';
+import { ProfileBox } from '@/widgets';
 import { useSelector } from 'react-redux';
-import { authSelector } from '../store/slices/auth/selector';
+import { authSelector } from '@/store/slices/auth/selector';
 
 export const Home: React.FC = () => {
 	const { user } = useSelector(authSelector);

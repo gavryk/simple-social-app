@@ -1,4 +1,4 @@
-import { IAuthTypes, IRegisterFormTypes } from '../../common';
+import { IAuthTypes, IRegisterFormTypes } from '@/common';
 import { api } from './api';
 
 export const authApi = api.injectEndpoints({

@@ -21,11 +21,7 @@ export const UpdateUserPhoto: React.FC = () => {
 	const [updateUserPhoto] = useUpdateUserPhotoMutation();
 	const [uploadMode, setUploadMode] = useState(false);
 
-	const handleRemovePhoto = async () => {
-		await updateUserPhoto({ id: user?._id, picturePath: '' });
-	};
-
-	const handleSavePhoto = async () => {
+	const handlePhoto = async () => {
 		await updateUserPhoto({ id: user?._id, picturePath: avatar })
 			.unwrap()
 			.then((data) => {
@@ -34,22 +30,33 @@ export const UpdateUserPhoto: React.FC = () => {
 	};
 
 	return (
-		<div>
+		<div className={styles.root}>
 			<UITypography variant="h3" fontWeight="medium">
 				User Photo
 			</UITypography>
 			{user?.picturePath !== '' && (
 				<div className={styles.currentPhoto}>
 					<img src={`${import.meta.env.VITE_BASE_URL}${user?.picturePath}`} alt="" />
+					<button className={styles.removeButton} onClick={handlePhoto}>
+						X
+					</button>
 				</div>
 			)}
-			<div className={styles.uploadZone}>
-				<UIDropzone setImage={setUserImage} imageLoad={avatarLoaded} file={file} fullWidth />
+			{uploadMode && (
+				<div className={styles.uploadZone}>
+					<UIDropzone setImage={setUserImage} imageLoad={avatarLoaded} file={file} fullWidth />
+				</div>
+			)}
+			<div className={styles.buttonsWrapper}>
+				{uploadMode && (
+					<UIButton onClick={handlePhoto} color="orange">
+						Save Photo
+					</UIButton>
+				)}
+				<UIButton fluid={!uploadMode ? true : false} onClick={() => setUploadMode(!uploadMode)}>
+					{!uploadMode ? 'New Photo' : 'Cancel'}
+				</UIButton>
 			</div>
-			<UIButton color="red" onClick={handleRemovePhoto}>
-				Remove Photo
-			</UIButton>
-			<UIButton onClick={handleSavePhoto}>Save Photo</UIButton>
 		</div>
 	);
 };

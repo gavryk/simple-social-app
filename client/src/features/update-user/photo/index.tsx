@@ -1,10 +1,10 @@
 import { UIButton, UIDropzone, UITypography } from '@/components';
 import { useUploadUserPhoto } from '@/hooks';
 import { authSelector } from '@/store/slices/auth/selector';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
-import { useUpdateUserPhotoMutation } from '@/store/api/users.api';
+import { useUpdateUserMutation } from '@/store/api/users.api';
 
 export const UpdateUserPhoto: React.FC = () => {
 	const { user } = useSelector(authSelector);
@@ -18,11 +18,12 @@ export const UpdateUserPhoto: React.FC = () => {
 		avatarLoaded,
 		setAvatar,
 	} = useUploadUserPhoto();
-	const [updateUserPhoto] = useUpdateUserPhotoMutation();
+	const [updateUser] = useUpdateUserMutation();
 	const [uploadMode, setUploadMode] = useState(false);
 
 	const handlePhoto = async () => {
-		await updateUserPhoto({ id: user?._id, picturePath: avatar })
+		const userData = { ...user, picturePath: avatar };
+		await updateUser({ id: user?._id, ...userData })
 			.unwrap()
 			.then((data) => {
 				setFile({ file: null, imagePreviewUrl: '' });

@@ -4,7 +4,7 @@ import {
 	getUserFriends,
 	updateFriends,
 	getAllUsers,
-	updatePhoto,
+	updateUser,
 } from '../controllers/UserController.js';
 import { verifyToken } from '../middleware/index.js';
 
@@ -17,6 +17,6 @@ router.get('/', verifyToken, getAllUsers);
 
 //Update
 router.patch('/:id/:friendId', verifyToken, updateFriends);
-router.patch('/:id', verifyToken, updatePhoto);
+router.patch('/:id', verifyToken, updateUser);
 
 export default router;

@@ -80,14 +80,23 @@ export const updateFriends = async (req, res) => {
 	}
 };
 
-export const updatePhoto = async (req, res) => {
+export const updateUser = async (req, res) => {
 	try {
 		const { id } = req.params;
-		const { picturePath } = req.body;
-		const user = await User.findById(id);
-		user.picturePath = picturePath || '';
-		await user.save();
-		res.status(200).json(user);
+		const { _id, ...userData } = req.body;
+		await User.updateOne(
+			{ _id: id },
+			{
+				firstName: userData.firstName,
+				lastName: userData.lastName,
+				picturePath: userData.picturePath,
+				friends: userData.friends,
+				social: userData.social,
+				location: userData.location,
+				occupation: userData.occupation,
+			},
+		);
+		res.status(200).json({ success: true });
 	} catch (err) {
 		res.status(404).json({ message: err.message });
 	}

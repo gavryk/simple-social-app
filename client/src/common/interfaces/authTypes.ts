@@ -31,3 +31,6 @@ export interface IRegisterFormTypes
 export interface IAuthSliceTypes {
 	user: IAuthTypes | null;
 }
+
+export interface IUpdateUserProps
+	extends Pick<IRegisterTypes, 'firstName' | 'lastName' | 'email' | 'location' | 'occupation'> {}

@@ -33,6 +33,7 @@ export const useUploadUserPhoto = () => {
 	return {
 		uploadLoading,
 		removeLoading,
+		removeImageAPI,
 		avatar,
 		file,
 		setFile,

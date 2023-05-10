@@ -90,6 +90,7 @@ export const updateUser = async (req, res) => {
 				firstName: userData.firstName,
 				lastName: userData.lastName,
 				picturePath: userData.picturePath,
+				email: userData.email,
 				friends: userData.friends,
 				social: userData.social,
 				location: userData.location,

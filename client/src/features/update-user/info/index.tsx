@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import styles from './styles.module.scss';
 import { UIButton, UIGrid, UIInput, UITypography } from '@/components';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
 import { useForm } from 'react-hook-form';
-import { IRegisterFormTypes, IUpdateUserProps } from '@/common';
-import clsx from 'clsx';
+import { IUpdateUserProps } from '@/common';
+import { useUpdateUserMutation } from '@/store/api/users.api';
+import styles from './styles.module.scss';
 
 export const UpdateUserInfo: React.FC = () => {
 	const { user } = useSelector(authSelector);
 	const [editMode, setEditMode] = useState<boolean>(false);
+	const [updateUser] = useUpdateUserMutation();
 
 	const {
 		register,
@@ -28,7 +29,11 @@ export const UpdateUserInfo: React.FC = () => {
 	});
 
 	const onSubmit = async (data: IUpdateUserProps) => {
-		console.log(data);
+		await updateUser({ id: user?._id, ...data })
+			.unwrap()
+			.then(() => {
+				setEditMode(false);
+			});
 	};
 
 	return (
@@ -55,7 +60,7 @@ export const UpdateUserInfo: React.FC = () => {
 						<h4>{user?.location}</h4>
 					</div>
 					<div className={styles.infoField}>
-						<span>Position:</span>
+						<span>Job/Position:</span>
 						<h4>{user?.occupation}</h4>
 					</div>
 				</UIGrid>
@@ -86,8 +91,8 @@ export const UpdateUserInfo: React.FC = () => {
 						<UIInput
 							type="text"
 							id="userOccupationField"
-							placeholder="Occupation"
-							{...register('occupation', { required: 'Please enter your occupation.' })}
+							placeholder="Job/Position"
+							{...register('occupation', { required: 'Please enter your Job/Position.' })}
 							error={errors.occupation && errors.occupation.message}
 						/>
 						<UIInput
@@ -98,14 +103,19 @@ export const UpdateUserInfo: React.FC = () => {
 							error={errors.email && errors.email.message}
 						/>
 					</UIGrid>
-					<UIButton fluid type="submit">
-						Update
-					</UIButton>
+					<div className={styles.buttons}>
+						<UIButton type="submit">Update</UIButton>
+						<UIButton color="red" onClick={() => setEditMode(false)}>
+							Cancel
+						</UIButton>
+					</div>
 				</form>
 			)}
-			<div className={styles.buttons}>
-				<UIButton onClick={() => setEditMode(!editMode)}>{!editMode ? 'Edit' : 'Cancel'}</UIButton>
-			</div>
+			{!editMode && (
+				<div className={styles.buttons}>
+					<UIButton onClick={() => setEditMode(true)}>Edit</UIButton>
+				</div>
+			)}
 		</div>
 	);
 };

@@ -50,39 +50,40 @@ export const UpdateUserSC: React.FC = () => {
 						type="text"
 						id="userTwitter"
 						placeholder="Twitter"
-						disabled
+						disabled={editMode ? false : true}
 						{...register('Twitter')}
 					/>
 					<UIInput
 						type="text"
 						id="userFacebook"
 						placeholder="Facebook"
-						disabled
+						disabled={editMode ? false : true}
 						{...register('Facebook', { required: false })}
 					/>
 					<UIInput
 						type="text"
 						id="userGithub"
 						placeholder="Github"
-						disabled
+						disabled={editMode ? false : true}
 						{...register('Github', { required: false })}
 					/>
 					<UIInput
 						type="text"
 						id="userLinkedin"
 						placeholder="Linkedin"
-						disabled
+						disabled={editMode ? false : true}
 						{...register('Linkedin', { required: false })}
 					/>
 					<UIInput
 						type="text"
 						id="emailInstagram"
 						placeholder="Instagram"
-						disabled
+						disabled={editMode ? false : true}
 						{...register('Instagram', { required: false })}
 					/>
 				</UIGrid>
 				<div className={styles.buttons}>
+					<UIButton onClick={() => setEditMode(!editMode)}>{editMode ? 'Cancel' : 'Edit'}</UIButton>
 					<UIButton type="submit">Update</UIButton>
 				</div>
 			</form>

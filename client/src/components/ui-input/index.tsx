@@ -18,6 +18,7 @@ interface InputProps {
 	onInput?: React.FormEventHandler<HTMLInputElement>;
 	onClick?: React.MouseEventHandler<HTMLInputElement>;
 	checked?: boolean;
+	disabled?: boolean;
 }
 
 export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
@@ -36,6 +37,7 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 			onClick,
 			error,
 			checked,
+			disabled,
 		},
 		ref,
 	) => {
@@ -58,6 +60,7 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 					className={clsx(styles.input, { [styles.error]: error })}
 					ref={ref}
 					checked={checked}
+					disabled={disabled}
 				/>
 				{label && (type === 'radio' || type === 'checkbox') && (
 					<UILabel htmlFor={id ? id : ''}>{label}</UILabel>

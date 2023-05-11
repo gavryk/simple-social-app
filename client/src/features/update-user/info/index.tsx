@@ -39,7 +39,7 @@ export const UpdateUserInfo: React.FC = () => {
 	return (
 		<div className={styles.root}>
 			<UITypography variant="h3" fontWeight="medium">
-				User Information
+				Your Information
 			</UITypography>
 			{!editMode ? (
 				<UIGrid columns={2} gridGap={3}>

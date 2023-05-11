@@ -1,0 +1,10 @@
+.root {
+	position: relative;
+}
+
+.someRow {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	grid-gap: 15px;
+}

@@ -42,7 +42,7 @@ export const UpdateUserPhoto: React.FC = () => {
 	return (
 		<div className={styles.root}>
 			<UITypography variant="h3" fontWeight="medium">
-				User Photo
+				Your Photo
 			</UITypography>
 			{!uploadLoading || !removeLoading ? (
 				<>

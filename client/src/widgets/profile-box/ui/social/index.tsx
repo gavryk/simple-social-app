@@ -1,8 +1,7 @@
 import React from 'react';
 import { IAuthTypes } from '../../../../common';
 import styles from './styles.module.scss';
-import { useSocialIcons } from './model';
-import { UITypography } from '../../../../components';
+import { useSocialIcons } from '@/hooks/useSocialIcon';
 
 type ProfileSocialProps = Pick<IAuthTypes, 'social'>;
 

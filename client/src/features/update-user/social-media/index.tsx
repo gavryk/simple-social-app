@@ -1,14 +1,17 @@
-import { UIButton, UIGrid, UIInput, UITypography } from '@/components';
+import { UIButton, UIGrid, UIInput, UILoader, UITypography } from '@/components';
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
 import { useSocialIcons } from '@/hooks/useSocialIcon';
 import { useForm } from 'react-hook-form';
+import { useUpdateUserMutation } from '@/store/api/users.api';
+import clsx from 'clsx';
 
 export const UpdateUserSC: React.FC = () => {
 	const { user } = useSelector(authSelector);
 	const [editMode, setEditMode] = useState<boolean>(false);
+	const [updateUser, { isLoading }] = useUpdateUserMutation();
 
 	const socialMedia: { [name: string]: string } = {
 		Twitter: '',
@@ -17,7 +20,6 @@ export const UpdateUserSC: React.FC = () => {
 		Linkedin: '',
 		Instagram: '',
 	};
-
 	user?.social?.forEach((item) => {
 		const { name, link } = item;
 		if (name in socialMedia) {
@@ -36,7 +38,14 @@ export const UpdateUserSC: React.FC = () => {
 	});
 
 	const onSubmit = async (data: any) => {
-		console.log(data);
+		const newData = Object.keys(data)
+			.filter((key) => data[key] !== '')
+			.map((key) => ({ name: key, link: data[key] }));
+		await updateUser({ id: user?._id, social: newData })
+			.unwrap()
+			.then(() => {
+				setEditMode(false);
+			});
 	};
 
 	return (
@@ -44,7 +53,10 @@ export const UpdateUserSC: React.FC = () => {
 			<UITypography variant="h3" fontWeight="medium">
 				Your Social Media
 			</UITypography>
-			<form onSubmit={handleSubmit(onSubmit)}>
+			{isLoading && <UILoader />}
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className={clsx(styles.form, { [styles.loading]: isLoading })}>
 				<UIGrid columns={1} gridGap={3}>
 					<UIInput
 						type="text"
@@ -84,7 +96,9 @@ export const UpdateUserSC: React.FC = () => {
 				</UIGrid>
 				<div className={styles.buttons}>
 					<UIButton onClick={() => setEditMode(!editMode)}>{editMode ? 'Cancel' : 'Edit'}</UIButton>
-					<UIButton type="submit">Update</UIButton>
+					<UIButton color="orange" type="submit">
+						Update
+					</UIButton>
 				</div>
 			</form>
 		</div>

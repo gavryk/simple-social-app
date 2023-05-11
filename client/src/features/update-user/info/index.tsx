@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { UIButton, UIGrid, UIInput, UITypography } from '@/components';
+import { UIButton, UIGrid, UIInput, UILoader, UITypography } from '@/components';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
 import { useForm } from 'react-hook-form';
 import { IUpdateUserProps } from '@/common';
 import { useUpdateUserMutation } from '@/store/api/users.api';
 import styles from './styles.module.scss';
+import clsx from 'clsx';
 
 export const UpdateUserInfo: React.FC = () => {
 	const { user } = useSelector(authSelector);
 	const [editMode, setEditMode] = useState<boolean>(false);
-	const [updateUser] = useUpdateUserMutation();
+	const [updateUser, { isLoading }] = useUpdateUserMutation();
 
 	const {
 		register,
@@ -41,6 +42,7 @@ export const UpdateUserInfo: React.FC = () => {
 			<UITypography variant="h3" fontWeight="medium">
 				Your Information
 			</UITypography>
+			{isLoading && <UILoader />}
 			{!editMode ? (
 				<UIGrid columns={2} gridGap={3}>
 					<div className={styles.infoField}>
@@ -65,7 +67,9 @@ export const UpdateUserInfo: React.FC = () => {
 					</div>
 				</UIGrid>
 			) : (
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<form
+					onSubmit={handleSubmit(onSubmit)}
+					className={clsx(styles.form, { [styles.loading]: isLoading })}>
 					<UIGrid columns={2} gridGap={3}>
 						<UIInput
 							type="text"

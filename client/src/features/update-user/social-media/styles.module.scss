@@ -1,5 +1,13 @@
 .root {
 	position: relative;
+	min-height: 400px;
+}
+
+.form {
+	transition: all 0.2s ease-in-out;
+	&.loading {
+		opacity: 0;
+	}
 }
 
 .someRow {
@@ -7,4 +15,12 @@
 	grid-template-columns: auto 1fr;
 	align-items: center;
 	grid-gap: 15px;
+}
+
+.buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	flex-direction: row;
 }

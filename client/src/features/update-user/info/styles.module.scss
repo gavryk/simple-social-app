@@ -1,6 +1,14 @@
 .root {
 	position: relative;
 }
+
+.form {
+	transition: all 0.2s ease-in-out;
+	&.loading {
+		opacity: 0;
+	}
+}
+
 .buttons {
 	display: flex;
 	align-items: center;

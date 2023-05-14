@@ -1,6 +1,6 @@
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineSearch, AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import clsx from 'clsx';
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, useState } from 'react';
 import { UILabel } from '../ui-label';
 import styles from './styles.module.scss';
 
@@ -41,6 +41,12 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 		},
 		ref,
 	) => {
+		const [visiblePass, setVisiblePass] = useState(false);
+
+		const handleVisiblePass = () => {
+			setVisiblePass(!visiblePass);
+		};
+
 		return (
 			<div className={clsx(styles.UIInput, styles[type])}>
 				{label && type !== 'radio' && type !== 'checkbox' && (
@@ -48,7 +54,7 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 				)}
 				<input
 					id={id}
-					type={type}
+					type={type === 'password' ? (!visiblePass ? 'password' : 'text') : type}
 					onBlur={onBlur}
 					name={name}
 					required={required}
@@ -66,6 +72,12 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 					<UILabel htmlFor={id ? id : ''}>{label}</UILabel>
 				)}
 				{type === 'search' && <AiOutlineSearch size="20" />}
+				{type === 'password' &&
+					(visiblePass ? (
+						<AiFillEye size="20" cursor="pointer" onClick={handleVisiblePass} />
+					) : (
+						<AiFillEyeInvisible size="20" cursor="pointer" onClick={handleVisiblePass} />
+					))}
 				{error && <span className={styles.errorTxt}>{error}</span>}
 			</div>
 		);

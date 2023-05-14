@@ -2,9 +2,10 @@
 	position: relative;
 	svg {
 		position: absolute;
-		left: 10px;
-		top: 10px;
-		opacity: 0.3;
+		right: 10px;
+		top: 50%;
+		opacity: 0.6;
+		transform: translateY(calc(-50% - var(--base--spaces--2)));
 	}
 	.input {
 		border: 1px solid var(--base--color--border);

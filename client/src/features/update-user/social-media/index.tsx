@@ -58,41 +58,61 @@ export const UpdateUserSC: React.FC = () => {
 				onSubmit={handleSubmit(onSubmit)}
 				className={clsx(styles.form, { [styles.loading]: isLoading })}>
 				<UIGrid columns={1} gridGap={3}>
-					<UIInput
-						type="text"
-						id="userTwitter"
-						placeholder="Twitter"
-						disabled={editMode ? false : true}
-						{...register('Twitter')}
-					/>
-					<UIInput
-						type="text"
-						id="userFacebook"
-						placeholder="Facebook"
-						disabled={editMode ? false : true}
-						{...register('Facebook', { required: false })}
-					/>
-					<UIInput
-						type="text"
-						id="userGithub"
-						placeholder="Github"
-						disabled={editMode ? false : true}
-						{...register('Github', { required: false })}
-					/>
-					<UIInput
-						type="text"
-						id="userLinkedin"
-						placeholder="Linkedin"
-						disabled={editMode ? false : true}
-						{...register('Linkedin', { required: false })}
-					/>
-					<UIInput
-						type="text"
-						id="emailInstagram"
-						placeholder="Instagram"
-						disabled={editMode ? false : true}
-						{...register('Instagram', { required: false })}
-					/>
+					<div className={styles.someRow}>
+						{useSocialIcons('Twitter', '25px')}
+						<UIInput
+							type="text"
+							id="userTwitter"
+							placeholder="Twitter"
+							bottomSpaceOff
+							disabled={editMode ? false : true}
+							{...register('Twitter')}
+						/>
+					</div>
+					<div className={styles.someRow}>
+						{useSocialIcons('Facebook', '25px')}
+						<UIInput
+							type="text"
+							id="userFacebook"
+							placeholder="Facebook"
+							bottomSpaceOff
+							disabled={editMode ? false : true}
+							{...register('Facebook', { required: false })}
+						/>
+					</div>
+					<div className={styles.someRow}>
+						{useSocialIcons('Github', '25px')}
+						<UIInput
+							type="text"
+							id="userGithub"
+							placeholder="Github"
+							bottomSpaceOff
+							disabled={editMode ? false : true}
+							{...register('Github', { required: false })}
+						/>
+					</div>
+					<div className={styles.someRow}>
+						{useSocialIcons('Linkedin', '25px')}
+						<UIInput
+							type="text"
+							id="userLinkedin"
+							placeholder="Linkedin"
+							bottomSpaceOff
+							disabled={editMode ? false : true}
+							{...register('Linkedin', { required: false })}
+						/>
+					</div>
+					<div className={styles.someRow}>
+						{useSocialIcons('Instagram', '25px')}
+						<UIInput
+							type="text"
+							id="emailInstagram"
+							placeholder="Instagram"
+							bottomSpaceOff
+							disabled={editMode ? false : true}
+							{...register('Instagram', { required: false })}
+						/>
+					</div>
 				</UIGrid>
 				<div className={styles.buttons}>
 					<UIButton onClick={() => setEditMode(!editMode)}>{editMode ? 'Cancel' : 'Edit'}</UIButton>

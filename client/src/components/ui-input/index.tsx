@@ -19,6 +19,7 @@ interface InputProps {
 	onClick?: React.MouseEventHandler<HTMLInputElement>;
 	checked?: boolean;
 	disabled?: boolean;
+	bottomSpaceOff?: boolean;
 }
 
 export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
@@ -38,6 +39,7 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 			error,
 			checked,
 			disabled,
+			bottomSpaceOff,
 		},
 		ref,
 	) => {
@@ -63,7 +65,10 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 					placeholder={placeholder}
 					onClick={onClick}
 					value={value}
-					className={clsx(styles.input, { [styles.error]: error })}
+					className={clsx(styles.input, {
+						[styles.error]: error,
+						[styles.bottomSpaceOff]: bottomSpaceOff,
+					})}
 					ref={ref}
 					checked={checked}
 					disabled={disabled}

@@ -7,6 +7,7 @@
 		opacity: 0.6;
 		transform: translateY(calc(-50% - var(--base--spaces--2)));
 	}
+
 	.input {
 		border: 1px solid var(--base--color--border);
 		background-color: transparent;
@@ -20,6 +21,9 @@
 		transition: all 0.2s ease-in-out;
 		margin-bottom: var(--base--spaces--4);
 		color: var(--base--color--text);
+		&:disabled {
+			border: none;
+		}
 		&:focus {
 			border: 1px solid var(--base--color--main);
 		}
@@ -52,6 +56,9 @@
 						transparent 100%
 					);
 			}
+		}
+		&.bottomSpaceOff {
+			margin-bottom: 0;
 		}
 	}
 

@@ -31,14 +31,10 @@ export const ProfileBox: React.FC<UserBox> = ({ user }) => {
 					/>
 				)}
 			</div>
-			{admin?._id === user?._id && (
-				<div className={styles.profileRow}>
-					{user && (
-						<ProfileViews viewedProfile={user.viewedProfile} impressions={user.impressions} />
-					)}
-				</div>
-			)}
-			<ProfileSocial social={user?.social} />
+			<div className={styles.profileRow}>
+				{user && <ProfileViews viewedProfile={user.viewedProfile} impressions={user.impressions} />}
+			</div>
+			{user?.social && user?.social?.length > 0 && <ProfileSocial social={user?.social} />}
 		</UIBox>
 	);
 };

@@ -18,7 +18,19 @@ export const usersApi = api.injectEndpoints({
 			}),
 			invalidatesTags: ['Auth', 'Users'],
 		}),
+		updateFriends: builder.mutation({
+			query: ({ id, friendId }) => ({
+				url: `/users/${id}/${friendId}`,
+				method: 'PATCH',
+			}),
+			invalidatesTags: ['Auth', 'Users'],
+		}),
 	}),
 });
 
-export const { useGetAllUserQuery, useGetUserQuery, useUpdateUserMutation } = usersApi;
+export const {
+	useGetAllUserQuery,
+	useGetUserQuery,
+	useUpdateUserMutation,
+	useUpdateFriendsMutation,
+} = usersApi;

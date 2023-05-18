@@ -12,6 +12,7 @@ interface ButtonProps {
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	disabled?: boolean;
+	centered?: boolean;
 }
 
 export const UIButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -26,6 +27,7 @@ export const UIButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			onClick,
 			fluid,
 			disabled,
+			centered,
 		},
 		ref,
 	) => {
@@ -45,6 +47,7 @@ export const UIButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					[styles.blue]: color === 'blue',
 					[styles.active]: active,
 					[styles.fluid]: fluid,
+					[styles.centered]: centered,
 				})}>
 				{children}
 			</button>

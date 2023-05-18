@@ -48,7 +48,6 @@ export const UIUserCard: React.FC<IAuthTypes> = ({
 					onClick={toggleUpdateFriends}>
 					{!isFriend ? 'Follow' : 'Unfollow'}
 				</UIButton>
-				<span>{isFriend}</span>
 			</div>
 		</UIBox>
 	);

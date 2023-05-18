@@ -1,4 +1,4 @@
-import { UILoader } from '@/components';
+import { UIGrid, UILoader } from '@/components';
 import { useGetUserQuery } from '@/store/api/users.api';
 import { ProfileBox } from '@/widgets';
 import React from 'react';
@@ -11,8 +11,8 @@ export const Profile: React.FC = () => {
 	if (isLoading) return <UILoader />;
 
 	return (
-		<div>
+		<UIGrid columns={2} centerBig="sm" gridGap={4}>
 			<ProfileBox user={data} />
-		</div>
+		</UIGrid>
 	);
 };

@@ -8,7 +8,7 @@ export const Home: React.FC = () => {
 	const { user } = useSelector(authSelector);
 
 	return (
-		<UIGrid columns={3} centerBig={true} gridGap={4}>
+		<UIGrid columns={3} centerBig="md" gridGap={4}>
 			<div className="col">
 				<ProfileBox user={user} />
 			</div>

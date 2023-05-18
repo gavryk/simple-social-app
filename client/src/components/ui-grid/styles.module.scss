@@ -18,8 +18,26 @@
 
 .gridColumns2 {
 	grid-template-columns: repeat(2, 1fr);
-	&.centerBig {
+	&.centerBigSm {
+		grid-template-columns: 35% 1fr;
+		@media screen and (max-width: 1480px) {
+			grid-template-columns: 30% 1fr;
+		}
+		@media screen and (max-width: 768px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+	&.centerBigMd {
 		grid-template-columns: 25% 1fr;
+		@media screen and (max-width: 1480px) {
+			grid-template-columns: 35% 1fr;
+		}
+		@media screen and (max-width: 768px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+	&.centerBigLg {
+		grid-template-columns: 20% 1fr;
 		@media screen and (max-width: 1480px) {
 			grid-template-columns: 35% 1fr;
 		}
@@ -31,10 +49,34 @@
 
 .gridColumns3 {
 	grid-template-columns: repeat(3, 1fr);
-	&.centerBig {
+	&.centerBigSm {
+		grid-template-columns: 35% 1fr 35%;
+		@media screen and (max-width: 1480px) {
+			grid-template-columns: 25% 1fr 25%;
+		}
+		@media screen and (max-width: 1024px) {
+			grid-template-columns: 40% 1fr;
+		}
+		@media screen and (max-width: 768px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+	&.centerBigMd {
 		grid-template-columns: 25% 1fr 25%;
 		@media screen and (max-width: 1480px) {
 			grid-template-columns: 35% 1fr 35%;
+		}
+		@media screen and (max-width: 1024px) {
+			grid-template-columns: 40% 1fr;
+		}
+		@media screen and (max-width: 768px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+	&.centerBigLg {
+		grid-template-columns: 20% 1fr 20%;
+		@media screen and (max-width: 1480px) {
+			grid-template-columns: 30% 1fr 30%;
 		}
 		@media screen and (max-width: 1024px) {
 			grid-template-columns: 40% 1fr;

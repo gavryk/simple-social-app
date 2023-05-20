@@ -57,12 +57,12 @@ export const updateFriends = async (req, res) => {
 		const user = await User.findById(id);
 		const friend = await User.findById(friendId);
 
-		const isFriend = user.friends.some((friendObj) => friendObj._id.equals(friend._id));
+		const isFriend = user.following.some((friendObj) => friendObj._id.equals(friend._id));
 
 		if (isFriend) {
-			await user.updateOne({ $pull: { friends: friend } });
+			await user.updateOne({ $pull: { following: friend } });
 		} else {
-			await user.updateOne({ $push: { friends: friend } });
+			await user.updateOne({ $push: { following: friend } });
 		}
 
 		res.status(200).json('Ok');
@@ -82,7 +82,8 @@ export const updateUser = async (req, res) => {
 				lastName: userData.lastName,
 				picturePath: userData.picturePath,
 				email: userData.email,
-				friends: userData.friends,
+				following: userData.following,
+				followers: userData.followers,
 				social: userData.social,
 				location: userData.location,
 				occupation: userData.occupation,

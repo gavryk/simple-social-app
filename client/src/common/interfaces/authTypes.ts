@@ -4,7 +4,8 @@ export interface IRegisterTypes {
 	email: string;
 	password: string;
 	picturePath: string;
-	friends: any[];
+	followers: any[];
+	following: any[];
 	location: string;
 	occupation: string;
 	viewedProfile?: number;
@@ -26,7 +27,7 @@ export interface IAuthTypes extends Omit<IRegisterTypes, 'password'> {
 	_id: string;
 }
 export interface IRegisterFormTypes
-	extends Omit<IRegisterTypes, 'friends' | 'viewedProfile' | 'impressions'> {}
+	extends Omit<IRegisterTypes, 'following' | 'followers' | 'viewedProfile' | 'impressions'> {}
 
 export interface IAuthSliceTypes {
 	user: IAuthTypes | null;

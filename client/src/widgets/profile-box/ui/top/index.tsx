@@ -8,14 +8,16 @@ interface ProfileTopType {
 	admin: boolean;
 	photo?: string;
 	name: string;
-	friendsCount?: number;
+	followingCount?: number;
+	followersCount?: number;
 }
 
 export const ProfileBoxTop: React.FC<ProfileTopType> = ({
 	admin,
 	photo,
 	name,
-	friendsCount = 0,
+	followingCount = 0,
+	followersCount = 0,
 }) => {
 	return (
 		<div className={styles.rootTop}>
@@ -23,7 +25,8 @@ export const ProfileBoxTop: React.FC<ProfileTopType> = ({
 				<UIAvatar src={photo} alt={name} />
 				<div className={styles.userName}>
 					<span className={styles.name}>{name}</span>
-					<span className={styles.friends}>{friendsCount} Friends</span>
+					<span className={styles.friends}>{followingCount} Following</span>
+					<span className={styles.friends}>{followersCount} Followers</span>
 				</div>
 			</div>
 			{admin && (

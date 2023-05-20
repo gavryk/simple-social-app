@@ -19,7 +19,8 @@ export const ProfileBox: React.FC<UserBox> = ({ user }) => {
 					admin={admin?._id === user?._id}
 					photo={user?.picturePath}
 					name={`${user?.firstName} ${user?.lastName}`}
-					friendsCount={user?.friends.length}
+					followersCount={user?.followers.length}
+					followingCount={user?.following.length}
 				/>
 			</div>
 			<div className={styles.profileRow}>

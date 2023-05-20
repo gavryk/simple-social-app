@@ -19,7 +19,7 @@ export const UIUserCard: React.FC<IAuthTypes> = ({
 	location,
 }) => {
 	const { user } = useSelector(authSelector);
-	const isFriend = user?.following.find((friend) => friend._id === _id);
+	const isFriend = user?.following.find((friend) => friend === _id);
 	const [updateFriends] = useUpdateFriendsMutation();
 
 	const toggleUpdateFriends = async () => {

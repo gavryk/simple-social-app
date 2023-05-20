@@ -39,7 +39,7 @@ export const getUserFriends = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const user = await User.findById(id);
-		const friends = await Promise.all(user.friends.map((id) => User.findById(id)));
+		const friends = await Promise.all(user.followers.map((id) => User.findById(id)));
 		const formattedFriends = friends.map(
 			({ _id, firstName, lastName, occupation, location, picturePath }) => {
 				return { _id, firstName, lastName, occupation, location, picturePath };
@@ -60,9 +60,11 @@ export const updateFriends = async (req, res) => {
 		const isFriend = user.following.some((friendObj) => friendObj._id.equals(friend._id));
 
 		if (isFriend) {
-			await user.updateOne({ $pull: { following: friend } });
+			await user.updateOne({ $pull: { following: friend._id } });
+			await friend.updateOne({ $pull: { followers: user._id } });
 		} else {
-			await user.updateOne({ $push: { following: friend } });
+			await user.updateOne({ $push: { following: friend._id } });
+			await friend.updateOne({ $push: { followers: user._id } });
 		}
 
 		res.status(200).json('Ok');

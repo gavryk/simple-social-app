@@ -3,7 +3,11 @@ import { UIBox, UIGrid, UILoader, UIUserCard } from '@/components';
 import { useGetAllUserQuery } from '@/store/api/users.api';
 import { IAuthTypes } from '@/common';
 
-export const Users: React.FC = () => {
+type UserPropsType = {
+	webSocket: any;
+};
+
+export const Users: React.FC<UserPropsType> = ({ webSocket }) => {
 	const { data, isLoading, isError } = useGetAllUserQuery();
 
 	if (isLoading) return <UILoader />;
@@ -12,7 +16,7 @@ export const Users: React.FC = () => {
 	return (
 		<UIGrid columns={4} gridGap={4}>
 			{data?.map((user: IAuthTypes) => (
-				<UIUserCard {...user} key={user._id} />
+				<UIUserCard {...user} key={user._id} webSocket={webSocket} />
 			))}
 		</UIGrid>
 	);

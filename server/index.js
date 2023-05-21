@@ -13,6 +13,7 @@ import morgan from 'morgan';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
+import { createServer } from 'http';
 import { socketConnect } from './controllers/SocketController.js';
 
 /* App Config */
@@ -80,7 +81,8 @@ mongoose
 	})
 	.catch((err) => console.log(`${err} did not connect!`));
 
-const server = app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+const server = createServer(app);
+server.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
 //WebSocket
 socketConnect(server);

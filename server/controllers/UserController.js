@@ -1,5 +1,4 @@
 import User from '../models/User.js';
-import { notifyUpdate } from '../controllers/SocketController.js';
 
 export const getAllUsers = async (req, res) => {
 	try {
@@ -67,8 +66,6 @@ export const updateFriends = async (req, res) => {
 			await user.updateOne({ $push: { following: friend._id } });
 			await friend.updateOne({ $push: { followers: user._id } });
 		}
-
-		notifyUpdate(user._id, friend._id);
 
 		res.status(200).json('Ok');
 	} catch (err) {

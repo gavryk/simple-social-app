@@ -13,9 +13,7 @@ import morgan from 'morgan';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
-import { register } from './controllers/AuthController.js';
-import { createPost } from './controllers/PostsController.js';
-import { handleValidationErrors, verifyToken } from './middleware/index.js';
+import { socketConnect } from './controllers/SocketController.js';
 
 /* App Config */
 const __filename = fileURLToPath(import.meta.url);
@@ -78,6 +76,11 @@ const PORT = process.env.PORT || 4040;
 mongoose
 	.connect(process.env.MONGO_DB)
 	.then(() => {
-		app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+		console.log('DB Ok');
 	})
 	.catch((err) => console.log(`${err} did not connect!`));
+
+const server = app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+//WebSocket
+socketConnect(server);

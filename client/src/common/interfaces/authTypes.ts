@@ -31,7 +31,6 @@ export interface IRegisterFormTypes
 
 export interface IAuthSliceTypes {
 	user: IAuthTypes | null;
-	webSocket: any | null;
 }
 
 export interface IUpdateUserProps

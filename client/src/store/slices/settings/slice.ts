@@ -25,7 +25,6 @@ const initialState: SettingsSliceTypes = {
 		},
 	],
 	mobileMenuActive: false,
-	notification: [],
 };
 
 export const settingsSlice = createSlice({
@@ -40,9 +39,6 @@ export const settingsSlice = createSlice({
 		setMenuActive: (state, action) => {
 			state.mobileMenuActive = action.payload;
 		},
-		setNotification: (state, action) => {
-			state.notification = [...state.notification, action.payload];
-		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(authSlice.actions.setAuth, (state, action) => {
@@ -52,5 +48,5 @@ export const settingsSlice = createSlice({
 	},
 });
 
-export const { setMode, setMenuActive, setNotification } = settingsSlice.actions;
+export const { setMode, setMenuActive } = settingsSlice.actions;
 export default settingsSlice.reducer;

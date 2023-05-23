@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IAuthSliceTypes } from '../../../common';
 
 const initialState: IAuthSliceTypes = {
 	user: null,
+	webSocket: null,
 };
 
 export const authSlice = createSlice({
@@ -15,9 +16,12 @@ export const authSlice = createSlice({
 		setLogout: (state) => {
 			state.user = null;
 		},
+		setSocket: (state, action: PayloadAction<any>) => {
+			state.webSocket = action.payload;
+		},
 	},
 });
 
-export const { setAuth, setLogout } = authSlice.actions;
+export const { setAuth, setLogout, setSocket } = authSlice.actions;
 
 export default authSlice.reducer;

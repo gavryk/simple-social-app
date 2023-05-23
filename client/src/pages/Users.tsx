@@ -1,29 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { UIGrid, UILoader, UIUserCard } from '@/components';
 import { useGetAllUserQuery } from '@/store/api/users.api';
 import { IAuthTypes } from '@/common';
-import { useAppDispatch } from '@/store/store';
-import { setNotification } from '@/store/slices/settings/slice';
+import { useSocket } from '@/context';
 
-type UserPropsType = {
-	webSocket: any;
-};
-
-export const Users: React.FC<UserPropsType> = ({ webSocket }) => {
-	const dispatch = useAppDispatch();
+export const Users: React.FC = () => {
 	const { data, isLoading, isError } = useGetAllUserQuery();
-
-	useEffect(() => {
-		const handleGetNotification = (data: any) => {
-			dispatch(setNotification(data));
-		};
-
-		webSocket?.on('getNotification', handleGetNotification);
-
-		return () => {
-			webSocket?.off('getNotification', handleGetNotification);
-		};
-	}, [webSocket, dispatch]);
+	const { socket } = useSocket();
 
 	const handleSocketMessage = ({
 		senderName,
@@ -34,7 +17,7 @@ export const Users: React.FC<UserPropsType> = ({ webSocket }) => {
 		receiverName: string;
 		type: string;
 	}) => {
-		webSocket?.emit('sendNotification', {
+		socket?.emit('sendNotification', {
 			senderName,
 			receiverName,
 			type,

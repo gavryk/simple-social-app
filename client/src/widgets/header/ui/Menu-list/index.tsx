@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 import { useSelector } from 'react-redux';
 import { settingsSelector } from '../../../../store/slices/settings/selector';
 import clsx from 'clsx';
+import { useSocket } from '@/context';
 
 interface MenuList {
 	menu: MenuItem[];
@@ -19,11 +20,13 @@ export const MenuList: React.FC<MenuList> = ({ menu, mobile = false }) => {
 	const dispatch = useAppDispatch();
 	const [userLogOut] = useUserLogOutMutation();
 	const { mobileMenuActive } = useSelector(settingsSelector);
+	const { socket } = useSocket();
 
 	const logOut = async () => {
 		if (window.confirm('Are you sure you want to log out?')) {
 			await userLogOut();
 			dispatch(setLogout());
+			socket?.emit('disconnect');
 		}
 	};
 

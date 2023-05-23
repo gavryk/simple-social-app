@@ -37,6 +37,7 @@ export const socketConnect = (server) => {
 
 		socket.on('disconnect', () => {
 			removeUser(socket.id);
+			console.log(`User ${socket.id} disconnected`);
 		});
 	});
 };

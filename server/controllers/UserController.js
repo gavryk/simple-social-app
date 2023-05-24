@@ -62,9 +62,15 @@ export const updateFriends = async (req, res) => {
 		if (isFriend) {
 			await user.updateOne({ $pull: { following: friend._id } });
 			await friend.updateOne({ $pull: { followers: user._id } });
+			await friend.updateOne({
+				$push: { notifications: `User ${user.firstName} ${user.lastName} unfollow you!` },
+			});
 		} else {
 			await user.updateOne({ $push: { following: friend._id } });
 			await friend.updateOne({ $push: { followers: user._id } });
+			await friend.updateOne({
+				$push: { notifications: `User ${user.firstName} ${user.lastName} follow you!` },
+			});
 		}
 
 		res.status(200).json('Ok');

@@ -37,6 +37,10 @@ const UserShema = new mongoose.Schema(
 			type: Array,
 			default: [],
 		},
+		notifications: {
+			type: Array,
+			default: [],
+		},
 		social: [
 			{
 				name: {

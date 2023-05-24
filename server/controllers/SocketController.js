@@ -25,19 +25,21 @@ export const socketConnect = (server) => {
 	io.on('connection', async (socket) => {
 		socket.on('newUser', (username) => {
 			addNewUser(username, socket.id);
+			socket.join(socket.id);
 		});
 
-		socket.on('sendNotification', ({ senderName, receiverName, type }) => {
-			const receiver = getUser(receiverName);
-			io.to(receiver.socketId).emit('getNotification', {
-				senderName,
-				type,
-			});
+		socket.on('sendNotification', ({ sender, receiver, type }) => {
+			const recUser = getUser(receiver.name);
+			if (recUser) {
+				socket.to(recUser.socketId).emit('getNotification', {
+					sender,
+					type,
+				});
+			}
 		});
 
 		socket.on('disconnect', () => {
 			removeUser(socket.id);
-			console.log(`User ${socket.id} disconnected`);
 		});
 	});
 };

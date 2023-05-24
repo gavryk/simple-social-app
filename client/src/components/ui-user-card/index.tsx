@@ -30,8 +30,8 @@ export const UIUserCard: React.FC<CardPropTypes> = ({
 	const toggleUpdateFriends = async () => {
 		await updateFriends({ id: user?._id, friendId: _id }).then(() => {
 			handleSocketMessage({
-				receiverName: `${firstName} ${lastName}`,
-				senderName: `${user?.firstName} ${user?.lastName}`,
+				receiver: { id: _id, name: `${firstName} ${lastName}` },
+				sender: { id: user?._id, name: `${user?.firstName} ${user?.lastName}` },
 				type: !isFriend ? 'follow' : 'unfollow',
 			});
 		});

@@ -4,22 +4,20 @@ import { useGetAllUserQuery } from '@/store/api/users.api';
 import { IAuthTypes } from '@/common';
 import { useSocket } from '@/context';
 
+interface SocketMsgType {
+	sender: any;
+	receiver: any;
+	type: string;
+}
+
 export const Users: React.FC = () => {
 	const { data, isLoading, isError } = useGetAllUserQuery();
 	const { socket } = useSocket();
 
-	const handleSocketMessage = ({
-		senderName,
-		receiverName,
-		type,
-	}: {
-		senderName: string;
-		receiverName: string;
-		type: string;
-	}) => {
+	const handleSocketMessage = ({ sender, receiver, type }: SocketMsgType) => {
 		socket?.emit('sendNotification', {
-			senderName,
-			receiverName,
+			sender,
+			receiver,
 			type,
 		});
 	};

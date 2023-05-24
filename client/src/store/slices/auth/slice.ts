@@ -15,9 +15,20 @@ export const authSlice = createSlice({
 		setLogout: (state) => {
 			state.user = null;
 		},
+		setNotification: (state, action) => {
+			if (state.user) {
+				state.user?.notifications?.push(action.payload);
+			}
+			// if (state.user) {
+			// 	state.user = {
+			// 		...state.user,
+			// 		notifications: [...(state.user.notifications || []), action.payload],
+			// 	};
+			// }
+		},
 	},
 });
 
-export const { setAuth, setLogout } = authSlice.actions;
+export const { setAuth, setLogout, setNotification } = authSlice.actions;
 
 export default authSlice.reducer;

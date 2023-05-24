@@ -4,15 +4,22 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from '../../widgets';
 import { useEffect } from 'react';
 import { useSocket } from '@/context';
+import { useAppDispatch } from '@/store/store';
+import { setNotification } from '@/store/slices/auth/slice';
 
 export const MainLayout: React.FC = () => {
+	const dispatch = useAppDispatch();
 	const location = useLocation();
 	const isProfilePage = location.pathname.includes('/profile/');
 	const { socket } = useSocket();
 
 	useEffect(() => {
 		const handleGetNotification = (data: any) => {
-			console.log(data);
+			dispatch(
+				setNotification(
+					`User ${data.sender.name} ${data.type === 'follow' ? 'follow' : 'unfollow'} you!`,
+				),
+			);
 		};
 
 		socket?.on('getNotification', handleGetNotification);

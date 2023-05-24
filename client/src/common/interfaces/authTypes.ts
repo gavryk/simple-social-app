@@ -11,6 +11,7 @@ export interface IRegisterTypes {
 	viewedProfile?: number;
 	impressions?: number;
 	social?: SocialMedia[];
+	notifications?: string[];
 }
 
 export type SocialMedia = {

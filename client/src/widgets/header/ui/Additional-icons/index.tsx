@@ -3,9 +3,9 @@ import { MdLightMode, MdNightlight, MdNotifications } from 'react-icons/md';
 import { HiUsers } from 'react-icons/hi';
 import styles from './styles.module.scss';
 import { useSelector } from 'react-redux';
-import { settingsSelector } from '../../../../store/slices/settings/selector';
-import { useAppDispatch } from '../../../../store/store';
-import { setMode } from '../../../../store/slices/settings/slice';
+import { settingsSelector } from '@/store/slices/settings/selector';
+import { useAppDispatch } from '@/store/store';
+import { setMode } from '@/store/slices/settings/slice';
 import { Link } from 'react-router-dom';
 import { authSelector } from '@/store/slices/auth/selector';
 

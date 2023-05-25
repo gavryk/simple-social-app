@@ -1,0 +1,34 @@
+.paginatorWrapper {
+	padding: 40px 0 20px;
+	ul {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		flex-direction: row;
+		grid-gap: 5px;
+		.pageItem {
+			cursor: pointer;
+			width: 25px;
+			height: 25px;
+			border-radius: var(--base--border-radius-circle);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			flex-direction: row;
+			transition: all 0.2s ease-in-out;
+			span {
+				font-size: var(--base--font--size-sm);
+				transition: all 0.2s ease-in-out;
+			}
+			&.currentPage,
+			&:hover {
+				background-color: var(--base--color--main);
+				span {
+					color: var(--base--color--white);
+				}
+			}
+		}
+	}
+}

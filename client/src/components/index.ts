@@ -11,3 +11,5 @@ export * from './ui-icon';
 export * from './ui-box';
 export * from './ui-avatar';
 export * from './ui-user-card';
+export * from './ui-tabs';
+export * from './ui-pagination';

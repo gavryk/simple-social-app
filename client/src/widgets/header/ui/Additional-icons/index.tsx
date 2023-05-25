@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdLightMode, MdNightlight, MdNotifications } from 'react-icons/md';
 import { HiUsers } from 'react-icons/hi';
 import styles from './styles.module.scss';
@@ -8,12 +8,14 @@ import { useAppDispatch } from '@/store/store';
 import { setMode } from '@/store/slices/settings/slice';
 import { Link } from 'react-router-dom';
 import { authSelector } from '@/store/slices/auth/selector';
+import { Notifications } from '../Notification';
 
 export const AdditionalIcons: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { mode } = useSelector(settingsSelector);
 	const { user } = useSelector(authSelector);
 	const notiCount = user?.notifications?.length !== undefined ? user?.notifications?.length : 0;
+	const [visibleNotification, setVisibleNotification] = useState(false);
 
 	const handleMode = () => {
 		dispatch(setMode());
@@ -31,10 +33,11 @@ export const AdditionalIcons: React.FC = () => {
 			<div className={styles.icon} onClick={handleMode}>
 				{mode === 'light' ? <MdLightMode size="20" /> : <MdNightlight size="20" />}
 			</div>
-			<div className={styles.icon}>
+			<div className={styles.icon} onClick={() => setVisibleNotification(!visibleNotification)}>
 				{notiCount > 0 && <span className={styles.notificationCount}>{notiCount}</span>}
 				<MdNotifications size="20" />
 			</div>
+			{visibleNotification && <Notifications list={user?.notifications} />}
 		</div>
 	);
 };

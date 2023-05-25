@@ -1,0 +1,14 @@
+.root {
+	position: absolute;
+	bottom: -100%;
+	transform: translateY(75%);
+	height: auto;
+	right: 0;
+	width: 220px;
+	background-color: var(--base--color--white);
+	padding: var(--base--spaces--4);
+	&.hasItems {
+		height: 150px;
+		bottom: -170px;
+	}
+}

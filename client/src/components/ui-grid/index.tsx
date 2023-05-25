@@ -14,7 +14,7 @@ export const UIGrid = ({
 	children,
 	columns,
 	gridGap,
-	centerBig = 'lg',
+	centerBig,
 	alignItem = 'stretch',
 }: GridProps) => {
 	const gridWrapperClasses = useMemo(() => {

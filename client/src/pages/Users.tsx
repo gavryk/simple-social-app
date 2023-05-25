@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UIGrid, UILoader, UIPagination, UIUserCard } from '@/components';
 import { useGetAllUserQuery } from '@/store/api/users.api';
 import { IAuthTypes } from '@/common';
@@ -11,7 +11,8 @@ interface SocketMsgType {
 }
 
 export const Users: React.FC = () => {
-	const { data, isLoading, isError } = useGetAllUserQuery();
+	const [page, setPage] = useState(0);
+	const { data, isLoading, isError } = useGetAllUserQuery(page);
 	const { socket } = useSocket();
 
 	const handleSocketMessage = ({ sender, receiver, type }: SocketMsgType) => {
@@ -23,8 +24,8 @@ export const Users: React.FC = () => {
 	};
 
 	const changePage = (num: number) => {
+		setPage(num);
 		window.scrollTo(0, 0);
-		console.log(num);
 	};
 
 	if (isLoading) return <UILoader />;
@@ -33,11 +34,11 @@ export const Users: React.FC = () => {
 	return (
 		<>
 			<UIGrid columns={4} gridGap={4}>
-				{data?.map((user: IAuthTypes) => (
+				{data?.users.map((user: IAuthTypes) => (
 					<UIUserCard {...user} key={user._id} handleSocketMessage={handleSocketMessage} />
 				))}
 			</UIGrid>
-			<UIPagination page={1} totalPages={10} onChangedPage={changePage} />
+			<UIPagination page={page + 1} totalPages={data?.totalPage} onChangedPage={changePage} />
 		</>
 	);
 };

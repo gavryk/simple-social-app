@@ -2,7 +2,13 @@ import User from '../models/User.js';
 
 export const getAllUsers = async (req, res) => {
 	try {
-		const users = await User.find({ _id: { $ne: req.user.id } });
+		const LIMIT = 8;
+		const { page = 0 } = req.query;
+		const users = await User.find({ _id: { $ne: req.user.id } }, null, {
+			skip: parseInt(page) * LIMIT,
+			limit: LIMIT,
+		});
+		const totalUsersCount = await User.countDocuments({ _id: { $ne: req.user.id } });
 		if (!users || users.length === 0) {
 			return res.status(404).json({
 				message: 'No users found!',
@@ -13,7 +19,7 @@ export const getAllUsers = async (req, res) => {
 			return data;
 		});
 
-		res.status(200).json(userData);
+		res.status(200).json({ users: userData, totalPage: Math.ceil(totalUsersCount / LIMIT) });
 	} catch (err) {
 		res.status(404).json({ message: err.message });
 	}

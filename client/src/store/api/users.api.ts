@@ -1,10 +1,10 @@
-import { IAuthTypes } from '../../common';
+import { UserApiTypes } from '@/common/interfaces/usersApiTypes';
 import { api } from './api';
 
 export const usersApi = api.injectEndpoints({
 	endpoints: (builder) => ({
-		getAllUser: builder.query<IAuthTypes[], void>({
-			query: () => `/users`,
+		getAllUser: builder.query<UserApiTypes, number>({
+			query: (page) => `/users?page=${page}`,
 			providesTags: ['Users'],
 		}),
 		getUser: builder.query({

@@ -3,13 +3,13 @@ import styles from './styles.module.scss';
 
 interface PaginationPropTypes {
 	page: number;
-	totalPages: number;
+	totalPages?: number;
 	onChangedPage: (page: number) => void;
 }
 
 export const UIPagination: React.FC<PaginationPropTypes> = ({
 	page,
-	totalPages,
+	totalPages = 0,
 	onChangedPage,
 }) => {
 	const [portionNumber, setPortionNumber] = useState(1);
@@ -37,12 +37,12 @@ export const UIPagination: React.FC<PaginationPropTypes> = ({
 				)}
 				{pages
 					.filter((p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
-					.map((p) => {
+					.map((p, index) => {
 						return (
 							<li
 								key={p}
 								onClick={(e) => {
-									onChangedPage(p);
+									onChangedPage(index);
 								}}
 								className={`page-item ${styles.pageItem} ${page === p ? styles.currentPage : ''}`}>
 								<span className={`${page === p ? 'text-white' : ''} page-link`}>{p}</span>

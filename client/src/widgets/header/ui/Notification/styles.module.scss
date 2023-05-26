@@ -1,14 +1,30 @@
 .root {
 	position: absolute;
 	bottom: -100%;
-	transform: translateY(75%);
 	height: auto;
-	right: 0;
-	width: 220px;
-	background-color: var(--base--color--white);
-	padding: var(--base--spaces--4);
+	right: -120px;
+	width: 250px;
+	background-color: var(--base--color--second-main-bg);
+	padding: var(--base--spaces--2) 0 0;
+	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.02);
+	z-index: 5;
+	border-radius: 0 0 15px 15px;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	overflow: hidden;
 	&.hasItems {
 		height: 150px;
 		bottom: -170px;
+	}
+	ul {
+		overflow-y: auto;
+		li {
+			padding: var(--base--spaces--3) var(--base--spaces--4);
+			font-size: var(--base--font--size);
+			border-bottom: 1px solid var(--base--color--white-5);
+			&:last-child {
+				border-bottom: none;
+			}
+		}
 	}
 }

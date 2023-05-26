@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { useSocket } from '@/context';
 import { useAppDispatch } from '@/store/store';
 import { setNotification } from '@/store/slices/auth/slice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const MainLayout: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -20,6 +22,27 @@ export const MainLayout: React.FC = () => {
 					`User ${data.sender.name} ${data.type === 'follow' ? 'follow' : 'unfollow'} you!`,
 				),
 			);
+			if (data.type === 'follow') {
+				toast.success(`User ${data.sender.name} follow you!`, {
+					position: 'bottom-right',
+					autoClose: 3000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					theme: 'dark',
+				});
+			} else if (data.type === 'unfollow') {
+				toast.warn(`User ${data.sender.name} unfollow you!`, {
+					position: 'bottom-right',
+					autoClose: 3000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					theme: 'dark',
+				});
+			}
 		};
 
 		socket?.on('getNotification', handleGetNotification);
@@ -33,6 +56,7 @@ export const MainLayout: React.FC = () => {
 		<div className={clsx(styles.layout)}>
 			<Header />
 			<div className={clsx({ container: isProfilePage, 'container-md': !isProfilePage }, 'space')}>
+				<ToastContainer />
 				<Outlet />
 			</div>
 		</div>

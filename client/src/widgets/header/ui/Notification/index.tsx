@@ -13,7 +13,7 @@ interface NotificationProps {
 export const Notifications = React.forwardRef<HTMLDivElement, NotificationProps>(
 	({ list = [] }, ref) => {
 		const { user } = useSelector(authSelector);
-		const [updateUser, { isLoading }] = useUpdateUserMutation();
+		const [updateUser] = useUpdateUserMutation();
 
 		const clearNotification = async () => {
 			await updateUser({ id: user?._id, notifications: [] });

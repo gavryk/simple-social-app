@@ -101,7 +101,7 @@ export const updateUser = async (req, res) => {
 				social: userData.social,
 				location: userData.location,
 				occupation: userData.occupation,
-				notification: userData.notifications,
+				notifications: userData.notifications,
 			},
 		);
 		res.status(200).json({ success: true });

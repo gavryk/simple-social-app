@@ -16,6 +16,9 @@
 		height: 150px;
 		bottom: -170px;
 	}
+	&.noItems {
+		bottom: -70px;
+	}
 	ul {
 		overflow-y: auto;
 		li {
@@ -26,5 +29,11 @@
 				border-bottom: none;
 			}
 		}
+	}
+}
+.empty {
+	span {
+		display: block;
+		padding: var(--base--spaces--3) var(--base--spaces--4);
 	}
 }

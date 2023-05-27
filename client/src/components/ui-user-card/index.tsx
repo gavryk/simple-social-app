@@ -43,22 +43,24 @@ export const UIUserCard: React.FC<CardPropTypes> = ({
 				<Link to={`/profile/${_id}`} className={styles.thumbnail}>
 					<UIAvatar src={picturePath} alt={`${firstName}_${lastName}`} />
 				</Link>
-				<UITypography variant="h5" textAlign="center" bottomSpace="xsm" fontWeight="bold">
-					{firstName} {lastName}
-				</UITypography>
-				<UITypography variant="span" textAlign="center" bottomSpace="xsm">
-					{occupation}
-				</UITypography>
-				<UITypography variant="span" textAlign="center" bottomSpace="xsm">
-					{location}
-				</UITypography>
-				<UIButton
-					size="sm"
-					centered
-					color={`${isFriend ? 'orange' : 'green'}`}
-					onClick={toggleUpdateFriends}>
-					{!isFriend ? 'Follow' : 'Unfollow'}
-				</UIButton>
+				<div className={styles.info}>
+					<UITypography variant="h5" textAlign="center" bottomSpace="xsm" fontWeight="bold">
+						{firstName} {lastName}
+					</UITypography>
+					<UITypography variant="span" textAlign="center" bottomSpace="xsm">
+						{occupation}
+					</UITypography>
+					<UITypography variant="span" textAlign="center" bottomSpace="xsm">
+						{location}
+					</UITypography>
+					<UIButton
+						size="sm"
+						centered
+						color={`${isFriend ? 'orange' : 'green'}`}
+						onClick={toggleUpdateFriends}>
+						{!isFriend ? 'Follow' : 'Unfollow'}
+					</UIButton>
+				</div>
 			</div>
 		</UIBox>
 	);

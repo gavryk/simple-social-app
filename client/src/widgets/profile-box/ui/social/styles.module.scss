@@ -1,13 +1,48 @@
 .root {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	display: flex;
+	justify-content: center;
 	grid-gap: var(--base--spaces--3);
-	.socialRow {
-		display: grid;
-		grid-template-columns: 20px 1fr;
+	.socialIcon {
+		font-size: var(--base--font--size-sm);
+		transition: all 0.2s ease-in-out;
+		width: 35px;
+		height: 35px;
+		display: flex;
 		align-items: center;
-		grid-gap: var(--base--spaces--1);
-		font-size: var(--base--font--size-md);
-		transition: all 0.4s ease-in-out;
+		justify-content: center;
+		flex-wrap: wrap;
+		flex-direction: row;
+		background-color: var(--base--color--main-bg);
+		border-radius: var(--base--border-radius-circle);
+		&.facebook {
+			&:hover {
+				color: var(--base--color--white);
+				background-color: var(--base--color--facebook);
+			}
+		}
+		&.twitter {
+			&:hover {
+				color: var(--base--color--white);
+				background-color: var(--base--color--twitter);
+			}
+		}
+		&.github {
+			&:hover {
+				color: var(--base--color--white);
+				background-color: var(--base--color--github);
+			}
+		}
+		&.instagram {
+			&:hover {
+				color: var(--base--color--white);
+				background-color: var(--base--color--instagram);
+			}
+		}
+		&.linkedin {
+			&:hover {
+				color: var(--base--color--white);
+				background-color: var(--base--color--linkedin);
+			}
+		}
 	}
 }

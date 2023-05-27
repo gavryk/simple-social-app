@@ -8,6 +8,7 @@ import { useAppDispatch } from '@/store/store';
 import { setNotification } from '@/store/slices/auth/slice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { showFollowNotification, showUnfollowNotification } from '@/hooks';
 
 export const MainLayout: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -23,25 +24,9 @@ export const MainLayout: React.FC = () => {
 				),
 			);
 			if (data.type === 'follow') {
-				toast.success(`User ${data.sender.name} follow you!`, {
-					position: 'bottom-right',
-					autoClose: 3000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					theme: 'dark',
-				});
+				showFollowNotification(data.sender.name);
 			} else if (data.type === 'unfollow') {
-				toast.warn(`User ${data.sender.name} unfollow you!`, {
-					position: 'bottom-right',
-					autoClose: 3000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					theme: 'dark',
-				});
+				showUnfollowNotification(data.sender.name);
 			}
 		};
 

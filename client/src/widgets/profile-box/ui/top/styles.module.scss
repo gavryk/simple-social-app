@@ -11,9 +11,23 @@
 		align-items: center;
 		grid-gap: var(--base--spaces--4);
 		.userName {
+			display: grid;
+			grid-template-columns: repeat(2, auto);
+			row-gap: 3px;
+			column-gap: 15px;
 			span {
 				display: block;
 				font-size: var(--base--font--size);
+				&.name {
+					grid-column-start: 1;
+					grid-column-end: -1;
+				}
+				&.friends {
+					cursor: pointer;
+					&:hover {
+						color: var(--base--color--main);
+					}
+				}
 			}
 		}
 	}

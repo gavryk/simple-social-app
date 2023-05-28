@@ -25,6 +25,7 @@ const initialState: SettingsSliceTypes = {
 		},
 	],
 	mobileMenuActive: false,
+	friendsWidget: null,
 };
 
 export const settingsSlice = createSlice({
@@ -39,6 +40,9 @@ export const settingsSlice = createSlice({
 		setMenuActive: (state, action) => {
 			state.mobileMenuActive = action.payload;
 		},
+		setFriendsWidget: (state, action) => {
+			state.friendsWidget = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(authSlice.actions.setAuth, (state, action) => {
@@ -48,5 +52,5 @@ export const settingsSlice = createSlice({
 	},
 });
 
-export const { setMode, setMenuActive } = settingsSlice.actions;
+export const { setMode, setMenuActive, setFriendsWidget } = settingsSlice.actions;
 export default settingsSlice.reducer;

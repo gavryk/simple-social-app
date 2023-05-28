@@ -1,5 +1,9 @@
 import React from 'react';
 
-export const FriendRow: React.FC = () => {
-	return <div>FriendRow</div>;
+interface FriendProp {
+	id: string;
+}
+
+export const FriendRow: React.FC<FriendProp> = ({ id }) => {
+	return <div>{id}</div>;
 };

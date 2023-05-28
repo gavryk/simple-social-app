@@ -1,7 +1,8 @@
 import { UIBox, UITypography } from '@/components';
 import { settingsSelector } from '@/store/slices/settings/selector';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { FriendRow } from './ui';
 
 interface FriendsBoxProps {
 	userId?: string;
@@ -9,6 +10,10 @@ interface FriendsBoxProps {
 
 export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 	const { friendsWidget } = useSelector(settingsSelector);
+	const [friendsList, setFriendsList] = useState(['']);
+
+	useEffect(() => {}, [friendsWidget]);
+
 	return (
 		<>
 			{friendsWidget && (
@@ -16,6 +21,9 @@ export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 					<UITypography variant="h5" textAlign="center">
 						{friendsWidget}
 					</UITypography>
+					{friendsList.map((friend) => (
+						<FriendRow id={friend} />
+					))}
 				</UIBox>
 			)}
 		</>

@@ -2,9 +2,10 @@ import React from 'react';
 import { UIBox } from '@/components/ui-box';
 import { IAuthTypes } from '@/common';
 import styles from './styles.module.scss';
-import { ProfileBoxTop, ProfileInfo, ProfileSocial, ProfileViews } from './ui';
+import { ProfileBoxTop, ProfileInfo, ProfileViews } from './ui';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
+import { UISocialMedia } from '@/components';
 
 interface UserBox {
 	user: IAuthTypes | null;
@@ -35,7 +36,7 @@ export const ProfileBox: React.FC<UserBox> = ({ user }) => {
 			<div className={styles.profileRow}>
 				{user && <ProfileViews viewedProfile={user.viewedProfile} impressions={user.impressions} />}
 			</div>
-			{user?.social && user?.social?.length > 0 && <ProfileSocial social={user?.social} />}
+			{user?.social && user?.social?.length > 0 && <UISocialMedia social={user?.social} />}
 		</UIBox>
 	);
 };

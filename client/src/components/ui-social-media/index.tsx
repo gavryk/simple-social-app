@@ -1,12 +1,12 @@
 import React from 'react';
-import { IAuthTypes } from '../../../../common';
+import { IAuthTypes } from '@/common';
 import styles from './styles.module.scss';
 import { useSocialIcons } from '@/hooks/useSocialIcon';
 import clsx from 'clsx';
 
-type ProfileSocialProps = Pick<IAuthTypes, 'social'>;
+type SocialPropsTypes = Pick<IAuthTypes, 'social'>;
 
-export const ProfileSocial: React.FC<ProfileSocialProps> = ({ social }) => {
+export const UISocialMedia: React.FC<SocialPropsTypes> = ({ social }) => {
 	return (
 		<div className={styles.root}>
 			{social?.map((item, index) => {

@@ -53,13 +53,15 @@ export const UIUserCard: React.FC<CardPropTypes> = ({
 					<UITypography variant="span" textAlign="center" bottomSpace="xsm">
 						{location}
 					</UITypography>
-					<UIButton
-						size="sm"
-						centered
-						color={`${isFriend ? 'orange' : 'green'}`}
-						onClick={toggleUpdateFriends}>
-						{!isFriend ? 'Follow' : 'Unfollow'}
-					</UIButton>
+					<div className={styles.button}>
+						<UIButton
+							size="sm"
+							centered
+							color={`${isFriend ? 'orange' : 'green'}`}
+							onClick={toggleUpdateFriends}>
+							{!isFriend ? 'Follow' : 'Unfollow'}
+						</UIButton>
+					</div>
 				</div>
 			</div>
 		</UIBox>

@@ -13,7 +13,13 @@
 		flex-wrap: wrap;
 		flex-direction: row;
 		background-color: var(--base--color--main-bg);
-		border-radius: var(--base--border-radius-circle);
+		border-radius: var(--base--border-radius-1);
+		overflow: hidden;
+		&:hover {
+			svg {
+				animation: slide-in-top 0.3s both;
+			}
+		}
 		&.facebook {
 			&:hover {
 				color: var(--base--color--white);
@@ -44,5 +50,17 @@
 				background-color: var(--base--color--linkedin);
 			}
 		}
+	}
+}
+
+@keyframes slide-in-top {
+	0% {
+		transform: translateY(-50px);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateY(0);
+		opacity: 1;
 	}
 }

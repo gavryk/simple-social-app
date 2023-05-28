@@ -1,4 +1,4 @@
-import { UIBox, UITypography } from '@/components';
+import { UIBox, UILoader, UITypography } from '@/components';
 import { settingsSelector } from '@/store/slices/settings/selector';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -12,8 +12,12 @@ interface FriendsBoxProps {
 export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 	const { friendsWidget } = useSelector(settingsSelector);
 	const [friendsList, setFriendsList] = useState<any[]>([]);
-	const { data: followersData, isLoading: followersLoading } = useGetFollowersQuery(userId);
-	const { data: followingData, isLoading: followingLoading } = useGetFollowingQuery(userId);
+	const { data: followersData, isLoading: followersLoading } = useGetFollowersQuery(userId, {
+		skip: friendsWidget !== 'Followers',
+	});
+	const { data: followingData, isLoading: followingLoading } = useGetFollowingQuery(userId, {
+		skip: friendsWidget !== 'Following',
+	});
 
 	useEffect(() => {
 		if (friendsWidget === 'Followers' && followersData) {
@@ -27,12 +31,18 @@ export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 		<>
 			{friendsWidget && (
 				<UIBox>
-					<UITypography variant="h5" textAlign="center" bottomSpace="xsm">
-						{friendsWidget}
-					</UITypography>
-					{friendsList.map((friend) => (
-						<FriendRow {...friend} setup={{ userId, friendsWidget }} />
-					))}
+					{!followersLoading && !followingLoading ? (
+						<>
+							<UITypography variant="h5" textAlign="center" bottomSpace="xsm">
+								{friendsWidget}
+							</UITypography>
+							{friendsList.map((friend) => (
+								<FriendRow key={friend._id} {...friend} setup={{ userId, friendsWidget }} />
+							))}
+						</>
+					) : (
+						<UILoader />
+					)}
 				</UIBox>
 			)}
 		</>

@@ -1,10 +1,23 @@
 .card {
 	position: relative;
 	text-align: center;
+	overflow: hidden;
+	&:hover {
+		.button {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
 }
 
 .thumbnail {
 	display: block;
 	max-width: 180px;
 	margin: 0 auto var(--base--spaces--4);
+	transition: all 0.2s ease-in-out;
+}
+
+.button {
+	transform: translateY(200%);
+	transition: transform 0.2s ease, opacity 0.2s ease;
 }

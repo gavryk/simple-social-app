@@ -10,6 +10,12 @@ export const usersApi = api.injectEndpoints({
 		getUser: builder.query({
 			query: (id) => `/users/${id}`,
 		}),
+		getFollowers: builder.query({
+			query: (id) => `/users/${id}/followers`,
+		}),
+		getFollowing: builder.query({
+			query: (id) => `/users/${id}/following`,
+		}),
 		updateUser: builder.mutation({
 			query: ({ id, ...body }) => ({
 				url: `/users/${id}`,
@@ -31,6 +37,8 @@ export const usersApi = api.injectEndpoints({
 export const {
 	useGetAllUserQuery,
 	useGetUserQuery,
+	useGetFollowingQuery,
+	useGetFollowersQuery,
 	useUpdateUserMutation,
 	useUpdateFriendsMutation,
 } = usersApi;

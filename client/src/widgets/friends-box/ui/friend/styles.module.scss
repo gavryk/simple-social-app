@@ -1,0 +1,14 @@
+.root {
+	margin-bottom: var(--base--spaces--4);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	flex-direction: row;
+	.left {
+		display: grid;
+		grid-template-columns: 40px auto;
+		align-items: center;
+		grid-gap: var(--base--spaces--3);
+	}
+}

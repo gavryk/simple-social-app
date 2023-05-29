@@ -5,7 +5,6 @@ import { UIAvatar } from '@/components';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
 import { useSocket } from '@/context';
-import { SocketMsgType } from '@/common/interfaces/socketTypes';
 import { useUpdateFriendsMutation } from '@/store/api/users.api';
 import { FriendProp } from '@/common/interfaces/friendsTypes';
 import { Link } from 'react-router-dom';
@@ -16,17 +15,9 @@ export const FriendRow: React.FC<FriendProp> = ({ _id, firstName, lastName, pict
 	const isFollow = user?.following.some((u) => u === _id);
 	const { socket } = useSocket();
 
-	const handleSocketMessage = ({ sender, receiver, type }: SocketMsgType) => {
-		socket?.emit('sendNotification', {
-			sender,
-			receiver,
-			type,
-		});
-	};
-
 	const toggleUpdateFriends = async () => {
 		await updateFriends({ id: user?._id, friendId: _id }).then(() => {
-			handleSocketMessage({
+			socket?.emit('sendNotification', {
 				receiver: { id: _id, name: `${firstName} ${lastName}` },
 				sender: { id: user?._id, name: `${user?.firstName} ${user?.lastName}` },
 				type: !isFollow ? 'follow' : 'unfollow',

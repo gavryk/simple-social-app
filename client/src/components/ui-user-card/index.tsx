@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
 import { useUpdateFriendsMutation } from '@/store/api/users.api';
 import { UIButton } from '../ui-button';
-
 interface CardPropTypes extends IAuthTypes {
 	handleSocketMessage: any;
 }

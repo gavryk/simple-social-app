@@ -1,10 +1,16 @@
 .root {
-	margin-bottom: var(--base--spaces--4);
+	margin-bottom: var(--base--spaces--2);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
 	flex-direction: row;
+	transition: all 0.2s ease-in-out;
+	padding: var(--base--spaces--1);
+	border-radius: var(--base--border-radius-3);
+	&:hover {
+		background-color: var(--base--color--main-bg);
+	}
 	.left {
 		display: grid;
 		grid-template-columns: 40px auto;

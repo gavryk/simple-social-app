@@ -8,6 +8,7 @@ import { useSocket } from '@/context';
 import { SocketMsgType } from '@/common/interfaces/socketTypes';
 import { useUpdateFriendsMutation } from '@/store/api/users.api';
 import { FriendProp } from '@/common/interfaces/friendsTypes';
+import { Link } from 'react-router-dom';
 
 export const FriendRow: React.FC<FriendProp> = ({ _id, firstName, lastName, picturePath }) => {
 	const { user } = useSelector(authSelector);
@@ -35,14 +36,14 @@ export const FriendRow: React.FC<FriendProp> = ({ _id, firstName, lastName, pict
 
 	return (
 		<div className={styles.root}>
-			<div className={styles.left}>
+			<Link to={`/profile/${_id}`} className={styles.left}>
 				<UIAvatar src={picturePath} alt={`${firstName}_${lastName}`} />
 				<div className={styles.info}>
 					<span className={styles.name}>
 						{firstName} {lastName}
 					</span>
 				</div>
-			</div>
+			</Link>
 			<div className={styles.right}>
 				<div className={styles.icon} onClick={toggleUpdateFriends}>
 					{isFollow ? <BiUserMinus size="18" /> : <BiUserPlus size="18" />}

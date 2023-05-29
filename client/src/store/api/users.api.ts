@@ -12,9 +12,11 @@ export const usersApi = api.injectEndpoints({
 		}),
 		getFollowers: builder.query({
 			query: (id) => `/users/${id}/followers`,
+			providesTags: ['Friends'],
 		}),
 		getFollowing: builder.query({
 			query: (id) => `/users/${id}/following`,
+			providesTags: ['Friends'],
 		}),
 		updateUser: builder.mutation({
 			query: ({ id, ...body }) => ({
@@ -29,7 +31,7 @@ export const usersApi = api.injectEndpoints({
 				url: `/users/${id}/${friendId}`,
 				method: 'PATCH',
 			}),
-			invalidatesTags: ['Auth', 'Users'],
+			invalidatesTags: ['Auth', 'Users', 'Friends'],
 		}),
 	}),
 });

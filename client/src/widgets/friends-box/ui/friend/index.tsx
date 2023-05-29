@@ -4,15 +4,34 @@ import { BiUserMinus, BiUserPlus } from 'react-icons/bi';
 import { UIAvatar } from '@/components';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
-interface FriendProp {
-	firstName: string;
-	lastName: string;
-	picturePath: string;
-	setup?: { userId: string; friendsWidget: string | null };
-}
+import { useSocket } from '@/context';
+import { SocketMsgType } from '@/common/interfaces/socketTypes';
+import { useUpdateFriendsMutation } from '@/store/api/users.api';
+import { FriendProp } from '@/common/interfaces/friendsTypes';
 
-export const FriendRow: React.FC<FriendProp> = ({ firstName, lastName, picturePath, setup }) => {
+export const FriendRow: React.FC<FriendProp> = ({ _id, firstName, lastName, picturePath }) => {
 	const { user } = useSelector(authSelector);
+	const [updateFriends] = useUpdateFriendsMutation();
+	const isFollow = user?.following.some((u) => u === _id);
+	const { socket } = useSocket();
+
+	const handleSocketMessage = ({ sender, receiver, type }: SocketMsgType) => {
+		socket?.emit('sendNotification', {
+			sender,
+			receiver,
+			type,
+		});
+	};
+
+	const toggleUpdateFriends = async () => {
+		await updateFriends({ id: user?._id, friendId: _id }).then(() => {
+			handleSocketMessage({
+				receiver: { id: _id, name: `${firstName} ${lastName}` },
+				sender: { id: user?._id, name: `${user?.firstName} ${user?.lastName}` },
+				type: !isFollow ? 'follow' : 'unfollow',
+			});
+		});
+	};
 
 	return (
 		<div className={styles.root}>
@@ -24,15 +43,11 @@ export const FriendRow: React.FC<FriendProp> = ({ firstName, lastName, picturePa
 					</span>
 				</div>
 			</div>
-			{user?._id === setup?.userId && (
-				<div className={styles.right}>
-					{setup?.friendsWidget === 'Followers' ? (
-						<BiUserPlus size="20" />
-					) : (
-						<BiUserMinus size="20" />
-					)}
+			<div className={styles.right}>
+				<div className={styles.icon} onClick={toggleUpdateFriends}>
+					{isFollow ? <BiUserMinus size="18" /> : <BiUserPlus size="18" />}
 				</div>
-			)}
+			</div>
 		</div>
 	);
 };

@@ -11,4 +11,20 @@
 		align-items: center;
 		grid-gap: var(--base--spaces--3);
 	}
+	.right {
+		.icon {
+			width: 30px;
+			height: 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			flex-direction: row;
+			background-color: var(--base--color--main-bg);
+			border-radius: var(--base--border-radius-circle);
+			svg {
+				cursor: pointer;
+			}
+		}
+	}
 }

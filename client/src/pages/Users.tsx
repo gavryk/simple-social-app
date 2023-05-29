@@ -3,12 +3,7 @@ import { UIGrid, UILoader, UIPagination, UIUserCard } from '@/components';
 import { useGetAllUserQuery } from '@/store/api/users.api';
 import { IAuthTypes } from '@/common';
 import { useSocket } from '@/context';
-
-interface SocketMsgType {
-	sender: any;
-	receiver: any;
-	type: string;
-}
+import { SocketMsgType } from '@/common/interfaces/socketTypes';
 
 export const Users: React.FC = () => {
 	const [page, setPage] = useState(0);

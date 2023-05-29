@@ -37,7 +37,7 @@ export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 								{friendsWidget}
 							</UITypography>
 							{friendsList.map((friend) => (
-								<FriendRow key={friend._id} {...friend} setup={{ userId, friendsWidget }} />
+								<FriendRow key={friend._id} {...friend} />
 							))}
 						</>
 					) : (

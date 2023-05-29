@@ -7,7 +7,6 @@ import { UITypography } from '../ui-typography';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
-import { useUpdateFriendsMutation } from '@/store/api/users.api';
 import { UIButton } from '../ui-button';
 interface CardPropTypes extends IAuthTypes {
 	handleSocketMessage: any;
@@ -24,15 +23,12 @@ export const UIUserCard: React.FC<CardPropTypes> = ({
 }) => {
 	const { user } = useSelector(authSelector);
 	const isFriend = user?.following.find((friend) => friend === _id);
-	const [updateFriends] = useUpdateFriendsMutation();
 
-	const toggleUpdateFriends = async () => {
-		await updateFriends({ id: user?._id, friendId: _id }).then(() => {
-			handleSocketMessage({
-				receiver: { id: _id, name: `${firstName} ${lastName}` },
-				sender: { id: user?._id, name: `${user?.firstName} ${user?.lastName}` },
-				type: !isFriend ? 'follow' : 'unfollow',
-			});
+	const updFriends = () => {
+		handleSocketMessage({
+			sender: user,
+			receiver: { _id, firstName, lastName },
+			isFollow: isFriend ? true : false,
 		});
 	};
 
@@ -57,7 +53,7 @@ export const UIUserCard: React.FC<CardPropTypes> = ({
 							size="sm"
 							centered
 							color={`${isFriend ? 'orange' : 'green'}`}
-							onClick={toggleUpdateFriends}>
+							onClick={updFriends}>
 							{!isFriend ? 'Follow' : 'Unfollow'}
 						</UIButton>
 					</div>

@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { UIGrid, UILoader, UIPagination, UIUserCard } from '@/components';
 import { useGetAllUserQuery } from '@/store/api/users.api';
-import { IAuthTypes } from '@/common';
+import { IAuthTypes, updateFriendsSocket } from '@/common';
 import { useSocket } from '@/context';
-import { SocketMsgType } from '@/common/interfaces/socketTypes';
 
 export const Users: React.FC = () => {
 	const [page, setPage] = useState(0);
 	const { data, isLoading, isError } = useGetAllUserQuery(page);
-	const { socket } = useSocket();
+	const { toggleUpdateFriends } = useSocket();
 
-	const handleSocketMessage = ({ sender, receiver, type }: SocketMsgType) => {
-		socket?.emit('sendNotification', {
-			sender,
-			receiver,
-			type,
-		});
+	const handleUpdateFriends = ({ sender, receiver, isFollow }: updateFriendsSocket) => {
+		toggleUpdateFriends({ sender, receiver, isFollow });
 	};
 
 	const changePage = (num: number) => {
@@ -30,7 +25,7 @@ export const Users: React.FC = () => {
 		<>
 			<UIGrid columns={4} gridGap={4}>
 				{data?.users.map((user: IAuthTypes) => (
-					<UIUserCard {...user} key={user._id} handleSocketMessage={handleSocketMessage} />
+					<UIUserCard {...user} key={user._id} handleSocketMessage={handleUpdateFriends} />
 				))}
 			</UIGrid>
 			<UIPagination page={page + 1} totalPages={data?.totalPage} onChangedPage={changePage} />

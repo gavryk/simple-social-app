@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FriendRow } from './ui';
 import { useGetFollowersQuery, useGetFollowingQuery } from '@/store/api/users.api';
+import styles from './styles.module.scss';
 
 interface FriendsBoxProps {
 	userId?: string;
@@ -36,9 +37,11 @@ export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 							<UITypography variant="h5" textAlign="center" bottomSpace="xsm">
 								{friendsWidget}
 							</UITypography>
-							{friendsList.map((friend) => (
-								<FriendRow key={friend._id} {...friend} />
-							))}
+							<div className={styles.list}>
+								{friendsList.map((friend) => (
+									<FriendRow key={friend._id} {...friend} />
+								))}
+							</div>
 						</>
 					) : (
 						<UILoader />

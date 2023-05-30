@@ -3,6 +3,7 @@ export interface SettingsSliceTypes {
 	menu: MenuItem[];
 	mobileMenuActive: boolean;
 	friendsWidget: 'Followers' | 'Following' | null;
+	visibleNotification: boolean;
 }
 
 export type MenuItem = {

@@ -1,17 +1,22 @@
 import clsx from 'clsx';
 import styles from './styles.module.scss';
 import { Outlet, useLocation } from 'react-router-dom';
-import { Header } from '../../widgets';
+import { Header, Notifications } from '../../widgets';
 import { useEffect } from 'react';
 import { useSocket } from '@/context';
 import { useAppDispatch } from '@/store/store';
 import { setNotification } from '@/store/slices/auth/slice';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { showFollowNotification, showUnfollowNotification } from '@/hooks';
+import { useSelector } from 'react-redux';
+import { authSelector } from '@/store/slices/auth/selector';
+import { settingsSelector } from '@/store/slices/settings/selector';
 
 export const MainLayout: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const { user } = useSelector(authSelector);
+	const { visibleNotification } = useSelector(settingsSelector);
 	const location = useLocation();
 	const isProfilePage = location.pathname.includes('/profile/');
 	const { socket } = useSocket();
@@ -38,9 +43,10 @@ export const MainLayout: React.FC = () => {
 	}, [socket]);
 
 	return (
-		<div className={clsx(styles.layout)}>
+		<div className={clsx(styles.layout, { [styles.notificationActive]: visibleNotification })}>
 			<Header />
 			<div className={clsx({ container: isProfilePage, 'container-md': !isProfilePage }, 'space')}>
+				<Notifications list={user?.notifications} />
 				<ToastContainer />
 				<Outlet />
 			</div>

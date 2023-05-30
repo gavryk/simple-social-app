@@ -4,4 +4,23 @@
 	min-height: 100vh;
 	display: grid;
 	grid-template-rows: auto 1fr;
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.7);
+		z-index: 90;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease-in-out;
+	}
+	&.notificationActive {
+		&:after {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
 }

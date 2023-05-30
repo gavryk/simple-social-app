@@ -26,6 +26,7 @@ const initialState: SettingsSliceTypes = {
 	],
 	mobileMenuActive: false,
 	friendsWidget: null,
+	visibleNotification: false,
 };
 
 export const settingsSlice = createSlice({
@@ -43,6 +44,9 @@ export const settingsSlice = createSlice({
 		setFriendsWidget: (state, action) => {
 			state.friendsWidget = action.payload;
 		},
+		setVisibleNotification: (state, action) => {
+			state.visibleNotification = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(authSlice.actions.setAuth, (state, action) => {
@@ -52,5 +56,6 @@ export const settingsSlice = createSlice({
 	},
 });
 
-export const { setMode, setMenuActive, setFriendsWidget } = settingsSlice.actions;
+export const { setMode, setMenuActive, setFriendsWidget, setVisibleNotification } =
+	settingsSlice.actions;
 export default settingsSlice.reducer;

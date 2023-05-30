@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import React from 'react';
 import styles from './styles.module.scss';
-import { Logo, UIBurger } from '../../components';
+import { Logo, UIBurger } from '@/components';
 import { useSelector } from 'react-redux';
-import { authSelector } from '../../store/slices/auth/selector';
+import { authSelector } from '@/store/slices/auth/selector';
 import { AdditionalIcons, AuthInfo, MenuList } from './ui';
-import useMediaQuery from '../../hooks/useMediaQuery';
-import { settingsSelector } from '../../store/slices/settings/selector';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import { settingsSelector } from '@/store/slices/settings/selector';
 
 export const Header: React.FC = () => {
 	const { user } = useSelector(authSelector);

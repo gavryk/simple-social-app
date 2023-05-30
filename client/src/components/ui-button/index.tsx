@@ -20,7 +20,7 @@ export const UIButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 		{
 			children,
 			active,
-			color = 'green',
+			color = 'main',
 			size = 'md',
 			variants = 'contained',
 			type = 'button',

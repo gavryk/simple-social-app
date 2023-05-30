@@ -5,6 +5,9 @@ import { UIButton } from '@/components';
 import { useUpdateUserMutation } from '@/store/api/users.api';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
+import { settingsSelector } from '@/store/slices/settings/selector';
+import { useAppDispatch } from '@/store/store';
+import { setVisibleNotification } from '@/store/slices/settings/slice';
 
 interface NotificationProps {
 	list?: string[];
@@ -12,8 +15,14 @@ interface NotificationProps {
 
 export const Notifications = React.forwardRef<HTMLDivElement, NotificationProps>(
 	({ list = [] }, ref) => {
+		const dispatch = useAppDispatch();
 		const { user } = useSelector(authSelector);
+		const { visibleNotification } = useSelector(settingsSelector);
 		const [updateUser] = useUpdateUserMutation();
+
+		const closeNotification = () => {
+			dispatch(setVisibleNotification(false));
+		};
 
 		const clearNotification = async () => {
 			await updateUser({ id: user?._id, notifications: [] });
@@ -23,8 +32,7 @@ export const Notifications = React.forwardRef<HTMLDivElement, NotificationProps>
 			<div
 				ref={ref}
 				className={clsx(styles.root, {
-					[styles.hasItems]: list.length > 0,
-					[styles.noItems]: list.length === 0,
+					[styles.active]: visibleNotification,
 				})}>
 				{list.length > 0 ? (
 					<ul>
@@ -37,11 +45,16 @@ export const Notifications = React.forwardRef<HTMLDivElement, NotificationProps>
 						<span>No Notifications</span>
 					</div>
 				)}
-				{list.length > 0 && (
-					<UIButton fluid color="green" size="xs" onClick={clearNotification}>
-						Clear
+				<div className={styles.buttons}>
+					{list.length > 0 && (
+						<UIButton fluid size="xs" onClick={clearNotification}>
+							Clear
+						</UIButton>
+					)}
+					<UIButton fluid size="xs" color="orange" onClick={closeNotification}>
+						Close
 					</UIButton>
-				)}
+				</div>
 			</div>
 		);
 	},

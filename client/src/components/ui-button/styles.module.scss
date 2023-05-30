@@ -85,6 +85,22 @@
 	}
 }
 
+.contained.main {
+	background-color: var(--base--color--main);
+	color: var(--base--color--white);
+	a,
+	span {
+		color: var(--base--color--white);
+	}
+	&:hover,
+	&.active {
+		background-color: var(--base--color--main-2);
+	}
+	&:disabled {
+		background-color: var(--base--color--main);
+	}
+}
+
 .contained.orange {
 	background-color: var(--base--color--orange);
 	color: var(--base--color--white);
@@ -209,6 +225,24 @@
 	&:hover,
 	&.active {
 		background-color: var(--base--color--teal);
+		color: var(--base--color--white);
+		a {
+			color: var(--base--color--white);
+		}
+	}
+}
+
+.outlined.main {
+	border: 1px solid var(--base--color--main);
+	background-color: transparent;
+	color: var(--base--color--main);
+	a,
+	span {
+		color: var(--base--color--main);
+	}
+	&:hover,
+	&.active {
+		background-color: var(--base--color--main);
 		color: var(--base--color--white);
 		a {
 			color: var(--base--color--white);

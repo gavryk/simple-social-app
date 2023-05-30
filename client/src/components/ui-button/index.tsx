@@ -7,7 +7,7 @@ interface ButtonProps {
 	active?: boolean;
 	fluid?: boolean;
 	size?: 'xs' | 'sm' | 'md' | 'lg';
-	color?: 'orange' | 'black' | 'red' | 'green' | 'purple' | 'bordo' | 'blue';
+	color?: 'orange' | 'black' | 'red' | 'green' | 'purple' | 'bordo' | 'blue' | 'main';
 	variants?: 'contained' | 'outlined' | 'text';
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -45,6 +45,7 @@ export const UIButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					[styles.bordo]: color === 'bordo',
 					[styles.purple]: color === 'purple',
 					[styles.blue]: color === 'blue',
+					[styles.main]: color === 'main',
 					[styles.active]: active,
 					[styles.fluid]: fluid,
 					[styles.centered]: centered,

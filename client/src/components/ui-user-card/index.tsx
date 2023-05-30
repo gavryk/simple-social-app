@@ -52,7 +52,7 @@ export const UIUserCard: React.FC<CardPropTypes> = ({
 						<UIButton
 							size="sm"
 							centered
-							color={`${isFriend ? 'orange' : 'green'}`}
+							color={`${isFriend ? 'orange' : 'main'}`}
 							onClick={updFriends}>
 							{!isFriend ? 'Follow' : 'Unfollow'}
 						</UIButton>

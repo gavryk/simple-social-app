@@ -1,6 +1,6 @@
 import { UIBox, UILoader, UITypography } from '@/components';
 import { settingsSelector } from '@/store/slices/settings/selector';
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { FriendRow } from './ui';
 import { useGetFollowersQuery, useGetFollowingQuery } from '@/store/api/users.api';
@@ -12,7 +12,6 @@ interface FriendsBoxProps {
 
 export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 	const { friendsWidget } = useSelector(settingsSelector);
-	const [friendsList, setFriendsList] = useState<any[]>([]);
 	const { data: followersData, isLoading: followersLoading } = useGetFollowersQuery(userId, {
 		skip: friendsWidget !== 'Followers',
 	});
@@ -20,12 +19,13 @@ export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 		skip: friendsWidget !== 'Following',
 	});
 
-	useEffect(() => {
+	const friendsList = useMemo(() => {
 		if (friendsWidget === 'Followers' && followersData) {
-			setFriendsList(followersData);
+			return followersData;
 		} else if (friendsWidget === 'Following' && followingData) {
-			setFriendsList(followingData);
+			return followingData;
 		}
+		return [];
 	}, [friendsWidget, followersData, followingData]);
 
 	return (
@@ -38,7 +38,7 @@ export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 								{friendsWidget}
 							</UITypography>
 							<div className={styles.list}>
-								{friendsList.map((friend) => (
+								{friendsList.map((friend: any) => (
 									<FriendRow key={friend._id} {...friend} />
 								))}
 							</div>

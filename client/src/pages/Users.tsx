@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { UIGrid, UILoader, UIPagination, UIUserCard } from '@/components';
 import { useGetAllUserQuery } from '@/store/api/users.api';
 import { IAuthTypes, updateFriendsSocket } from '@/common';
@@ -9,9 +9,12 @@ export const Users: React.FC = () => {
 	const { data, isLoading, isError } = useGetAllUserQuery(page);
 	const { toggleUpdateFriends } = useSocket();
 
-	const handleUpdateFriends = ({ sender, receiver, isFollow }: updateFriendsSocket) => {
-		toggleUpdateFriends({ sender, receiver, isFollow });
-	};
+	const handleUpdateFriends = useCallback(
+		({ sender, receiver, isFollow }: updateFriendsSocket) => {
+			toggleUpdateFriends({ sender, receiver, isFollow });
+		},
+		[toggleUpdateFriends],
+	);
 
 	const changePage = (num: number) => {
 		setPage(num);

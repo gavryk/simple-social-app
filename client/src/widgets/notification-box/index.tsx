@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import styles from './styles.module.scss';
 import clsx from 'clsx';
 import { UIButton } from '@/components';
@@ -21,6 +21,11 @@ export const Notifications: React.FC<NotificationProps> = ({ list = [] }) => {
 	const { visibleNotification } = useSelector(settingsSelector);
 	const [updateUser] = useUpdateUserMutation();
 
+	const memoList = useMemo(
+		() => list.map((item, index) => <li key={`${item}_${index}`}>{item}</li>),
+		[list],
+	);
+
 	useClickOutside(notiRef, () => {
 		dispatch(setVisibleNotification(false));
 	});
@@ -40,11 +45,7 @@ export const Notifications: React.FC<NotificationProps> = ({ list = [] }) => {
 				[styles.active]: visibleNotification,
 			})}>
 			{list.length > 0 ? (
-				<ul>
-					{list.map((item, index) => (
-						<li key={`${item}_${index}`}>{item}</li>
-					))}
-				</ul>
+				<ul>{memoList}</ul>
 			) : (
 				<div className={styles.empty}>
 					<span>No Notifications</span>

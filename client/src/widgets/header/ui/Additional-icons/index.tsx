@@ -5,11 +5,11 @@ import styles from './styles.module.scss';
 import { useSelector } from 'react-redux';
 import { settingsSelector } from '@/store/slices/settings/selector';
 import { useAppDispatch } from '@/store/store';
-import { setMode, setVisibleNotification } from '@/store/slices/settings/slice';
 import { Link } from 'react-router-dom';
 import { authSelector } from '@/store/slices/auth/selector';
+import { setMode, setVisibleNotification } from '@/store/slices/settings/slice';
 
-export const AdditionalIcons: React.FC = () => {
+export const AdditionalIcons: React.FC = React.memo(() => {
 	const dispatch = useAppDispatch();
 	const { mode, visibleNotification } = useSelector(settingsSelector);
 	const { user } = useSelector(authSelector);
@@ -41,4 +41,4 @@ export const AdditionalIcons: React.FC = () => {
 			</div>
 		</div>
 	);
-};
+});

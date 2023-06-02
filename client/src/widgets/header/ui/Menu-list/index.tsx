@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { MenuItem } from '../../../../common';
 import { Link } from 'react-router-dom';
 import { UIIcon } from '../../../../components';
@@ -16,19 +16,19 @@ interface MenuList {
 	mobile?: boolean;
 }
 
-export const MenuList: React.FC<MenuList> = ({ menu, mobile = false }) => {
+export const MenuList: React.FC<MenuList> = React.memo(({ menu, mobile = false }) => {
 	const dispatch = useAppDispatch();
 	const [userLogOut] = useUserLogOutMutation();
 	const { mobileMenuActive } = useSelector(settingsSelector);
 	const { socket } = useSocket();
 
-	const logOut = async () => {
+	const logOut = useCallback(async () => {
 		if (window.confirm('Are you sure you want to log out?')) {
 			await userLogOut();
 			dispatch(setLogout());
 			socket?.emit('disconnect');
 		}
-	};
+	}, [userLogOut, dispatch, socket]);
 
 	if (!mobile) {
 		return (
@@ -74,4 +74,4 @@ export const MenuList: React.FC<MenuList> = ({ menu, mobile = false }) => {
 			</ul>
 		);
 	}
-};
+});

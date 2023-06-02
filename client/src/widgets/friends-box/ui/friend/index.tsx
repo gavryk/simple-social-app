@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './styles.module.scss';
 import { BiUserMinus, BiUserPlus } from 'react-icons/bi';
 import { UIAvatar } from '@/components';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export const FriendRow: React.FC<FriendProp> = ({ _id, firstName, lastName, picturePath }) => {
 	const { user } = useSelector(authSelector);
-	const isFollow = user?.following.some((u) => u === _id);
+	const isFollow = useMemo(() => user?.following.some((u) => u === _id), [user, _id]);
 	const { toggleUpdateFriends } = useSocket();
 
 	const handleUpdateFriends = () => {

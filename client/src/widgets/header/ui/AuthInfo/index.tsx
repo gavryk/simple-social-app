@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { IAuthTypes } from '@/common';
 import clsx from 'clsx';
@@ -18,9 +18,9 @@ export const AuthInfo: React.FC<AuthInfoProp> = React.memo(({ user }) => {
 	const authRef = useRef<HTMLDivElement>(null);
 	const [visibleSetting, setVisibleSetting] = useState(false);
 
-	const handleClickOutside = () => {
+	const handleClickOutside = useCallback(() => {
 		setVisibleSetting(false);
-	};
+	}, []);
 
 	useClickOutside(authRef, handleClickOutside);
 

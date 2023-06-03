@@ -1,6 +1,6 @@
 import { UIBox, UILoader, UITypography } from '@/components';
 import { settingsSelector } from '@/store/slices/settings/selector';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FriendRow } from './ui';
 import { useGetFollowersQuery, useGetFollowingQuery } from '@/store/api/users.api';
@@ -45,7 +45,7 @@ export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 								</div>
 							) : (
 								<UITypography variant="body" textAlign="left" bottomSpace="xsm">
-									Friends List is Empty
+									{friendsWidget} List is Empty.
 								</UITypography>
 							)}
 						</>

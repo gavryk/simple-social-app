@@ -37,11 +37,17 @@ export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
 							<UITypography variant="h5" textAlign="center" bottomSpace="xsm">
 								{friendsWidget}
 							</UITypography>
-							<div className={styles.list}>
-								{friendsList.map((friend: any) => (
-									<FriendRow key={friend._id} {...friend} />
-								))}
-							</div>
+							{friendsList.length > 0 ? (
+								<div className={styles.list}>
+									{friendsList.map((friend: any) => (
+										<FriendRow key={friend._id} {...friend} />
+									))}
+								</div>
+							) : (
+								<UITypography variant="body" textAlign="left" bottomSpace="xsm">
+									Friends List is Empty
+								</UITypography>
+							)}
 						</>
 					) : (
 						<UILoader />

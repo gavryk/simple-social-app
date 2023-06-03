@@ -1,6 +1,6 @@
 import { UIGrid, UILoader } from '@/components';
 import { useGetUserQuery } from '@/store/api/users.api';
-import { ProfileBox } from '@/widgets';
+import { FriendsBox, ProfileBox } from '@/widgets';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -12,7 +12,10 @@ export const Profile: React.FC = () => {
 
 	return (
 		<UIGrid columns={2} centerBig="sm" gridGap={4}>
-			<ProfileBox user={data} />
+			<div className="col">
+				<ProfileBox user={data} />
+				<FriendsBox userId={userId} />
+			</div>
 		</UIGrid>
 	);
 };

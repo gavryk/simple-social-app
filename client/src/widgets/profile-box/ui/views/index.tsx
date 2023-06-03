@@ -8,20 +8,12 @@ export const ProfileViews: React.FC<ProfileViewsProps> = ({ viewedProfile, impre
 	return (
 		<div className={styles.root}>
 			<div className={styles.row}>
-				{viewedProfile && (
-					<>
-						<span>Viewed your profile</span>
-						<span>{viewedProfile}</span>
-					</>
-				)}
+				<span>Viewed your profile</span>
+				<span>{viewedProfile}</span>
 			</div>
 			<div className={styles.row}>
-				{impressions && (
-					<>
-						<span>Impressions of your Posts</span>
-						<span>{impressions}</span>
-					</>
-				)}
+				<span>Impressions of your Posts</span>
+				<span>{impressions}</span>
 			</div>
 		</div>
 	);

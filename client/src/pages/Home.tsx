@@ -8,11 +8,7 @@ import { NewsBox } from '@/widgets/news-box';
 
 export const Home: React.FC = () => {
 	const { user } = useSelector(authSelector);
-	const { data, error, isLoading } = useGetWorldNewsQuery(`/top-headlines?country=us`);
-
-	// useEffect(() => {
-	// 	console.log(data);
-	// }, [data]);
+	const { data, error, isLoading } = useGetWorldNewsQuery(`/top-headlines?country=us&pageSize=10`);
 
 	return (
 		<UIGrid columns={3} centerBig="md" gridGap={4}>
@@ -20,6 +16,7 @@ export const Home: React.FC = () => {
 				<ProfileBox user={user} />
 				<FriendsBox userId={user?._id} />
 			</div>
+			<div className="col"></div>
 			{data && (
 				<div className="col">
 					<NewsBox articles={data.articles} />

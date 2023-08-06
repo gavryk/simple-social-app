@@ -1,6 +1,7 @@
 import { INews } from '@/common/interfaces/newsTypes';
 import React from 'react';
 import styles from './styles.module.scss';
+import { UIBox, UINewsCard } from '@/components';
 
 interface NewsBosProp {
 	articles: INews[];
@@ -10,13 +11,10 @@ export const NewsBox: React.FC<NewsBosProp> = ({ articles }) => {
 	console.log(articles);
 
 	return (
-		<div className={styles.root}>
+		<UIBox>
 			{articles.map((article: INews) => (
-				<div className="article" key={article.url}>
-					<img src={article.urlToImage} alt="" />
-					<span>{article.title}</span>
-				</div>
+				<UINewsCard {...article} key={article.url} />
 			))}
-		</div>
+		</UIBox>
 	);
 };

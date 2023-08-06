@@ -14,3 +14,4 @@ export * from './ui-user-card';
 export * from './ui-tabs';
 export * from './ui-pagination';
 export * from './ui-social-media';
+export * from './ui-news-card';

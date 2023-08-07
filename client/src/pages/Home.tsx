@@ -6,7 +6,7 @@ import { authSelector } from '@/store/slices/auth/selector';
 import { useGetWorldNewsQuery } from '@/store/api/news.api';
 import { NewsBox } from '@/widgets/news-box';
 import { useGetGeoLocationQuery } from '@/store/api/geo.api';
-import { AddPostBox } from '@/widgets/add-post-box';
+import { AddPostBox } from '@/features/add-post-box';
 
 export const Home: React.FC = () => {
 	const { user } = useSelector(authSelector);

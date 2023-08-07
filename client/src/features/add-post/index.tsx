@@ -3,11 +3,11 @@ import { UIAvatar, UIBox, UIInput } from '@/components';
 import styles from './styles.module.scss';
 import { IAuthTypes } from '@/common/interfaces';
 
-interface AddPostBoxProps {
+interface AddPostProps {
 	user: IAuthTypes | null;
 }
 
-export const AddPostBox: React.FC<AddPostBoxProps> = ({ user }) => {
+export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 	return (
 		<UIBox>
 			<div className={styles.root}>

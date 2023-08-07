@@ -14,7 +14,11 @@ export const UINewsCard: React.FC<INews> = ({ urlToImage, title, publishedAt, ur
 	return (
 		<a href={url} target="_blank" className={styles.article}>
 			<div className={styles.thumbnail}>
-				<img src={urlToImage ? urlToImage : imgHolder} alt={title} />
+				<img
+					src={urlToImage ? urlToImage : imgHolder}
+					onError={(e) => (e.currentTarget.src = imgHolder)}
+					alt={title}
+				/>
 				<div className={styles.date}>{formattedDate}</div>
 			</div>
 			<div className={styles.title}>

@@ -25,8 +25,8 @@ export const createPost = async (req, res) => {
 	}
 };
 
-/*Get Feed Posts*/
-export const getFeedPosts = async (req, res) => {
+/*Get All Posts*/
+export const getAllPosts = async (req, res) => {
 	try {
 		const post = await Post.find();
 		res.status(200).json(post);

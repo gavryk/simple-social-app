@@ -1,8 +1,4 @@
-export interface PostApiTypes {
-	posts: IPost[];
-}
-
-export type IPost = {
+export interface IPost {
 	_id: string;
 	userId: string;
 	firstName: string;
@@ -13,4 +9,4 @@ export type IPost = {
 	userPicturePath: string;
 	likes: any;
 	comments: string[];
-};
+}

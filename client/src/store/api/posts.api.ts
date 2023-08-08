@@ -1,4 +1,4 @@
-import { IPost } from '@/common/interfaces/postsApiTypes';
+import { IPost } from '@/common/interfaces/postsTypes';
 import { api } from './api';
 
 export const postsApi = api.injectEndpoints({

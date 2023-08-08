@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { UIGrid, UILoader } from '@/components';
-import { FriendsBox, ProfileBox } from '@/widgets';
+import { UIGrid, UILoader, UIPostCard } from '@/components';
+import { FriendsBox, PostsList, ProfileBox } from '@/widgets';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/store/slices/auth/selector';
 import { useGetWorldNewsQuery } from '@/store/api/news.api';
@@ -8,7 +8,6 @@ import { NewsBox } from '@/widgets/news-box';
 import { useGetGeoLocationQuery } from '@/store/api/geo.api';
 import { AddPost } from '@/features/add-post';
 import { useGetAllPostsQuery } from '@/store/api/posts.api';
-import { PostsBox } from '@/widgets/posts-box';
 
 export const Home: React.FC = () => {
 	const { user } = useSelector(authSelector);
@@ -26,7 +25,7 @@ export const Home: React.FC = () => {
 			</div>
 			<div className="col">
 				<AddPost user={user} />
-				{postsLoading ? <UILoader /> : postsData !== undefined && <PostsBox posts={postsData} />}
+				{postsLoading ? <UILoader /> : postsData && <PostsList posts={postsData} />}
 			</div>
 			<div className="col">{isLoading ? <UILoader /> : <NewsBox articles={data.articles} />}</div>
 		</UIGrid>

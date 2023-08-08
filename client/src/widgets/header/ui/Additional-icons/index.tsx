@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { MdLightMode, MdNightlight, MdNotifications } from 'react-icons/md';
 import { HiUsers } from 'react-icons/hi';
 import styles from './styles.module.scss';
@@ -15,13 +15,13 @@ export const AdditionalIcons: React.FC = React.memo(() => {
 	const { user } = useSelector(authSelector);
 	const notiCount = user?.notifications?.length !== undefined ? user?.notifications?.length : 0;
 
-	const handleNotification = () => {
+	const handleNotification = useCallback(() => {
 		dispatch(setVisibleNotification(!visibleNotification));
-	};
+	}, [dispatch]);
 
-	const handleMode = () => {
+	const handleMode = useCallback(() => {
 		dispatch(setMode());
-	};
+	}, [dispatch]);
 
 	useEffect(() => {
 		document.documentElement.setAttribute('data-theme', mode);

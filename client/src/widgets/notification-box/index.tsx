@@ -4,9 +4,7 @@ import clsx from 'clsx';
 import { UIButton } from '@/components';
 import { useUpdateUserMutation } from '@/store/api/users.api';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/store/slices/auth/selector';
-import { settingsSelector } from '@/store/slices/settings/selector';
-import { useAppDispatch } from '@/store/store';
+import { RootState, useAppDispatch } from '@/store/store';
 import { setVisibleNotification } from '@/store/slices/settings/slice';
 import useClickOutside from '@/hooks/useClickOutside';
 
@@ -17,8 +15,8 @@ interface NotificationProps {
 export const Notifications: React.FC<NotificationProps> = ({ list = [] }) => {
 	const dispatch = useAppDispatch();
 	const notiRef = useRef<HTMLDivElement>(null);
-	const { user } = useSelector(authSelector);
-	const { visibleNotification } = useSelector(settingsSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
+	const visibleNotification = useSelector((state: RootState) => state.settings.visibleNotification);
 	const [updateUser] = useUpdateUserMutation();
 
 	const memoList = useMemo(
@@ -43,7 +41,8 @@ export const Notifications: React.FC<NotificationProps> = ({ list = [] }) => {
 			ref={notiRef}
 			className={clsx(styles.root, {
 				[styles.active]: visibleNotification,
-			})}>
+			})}
+		>
 			{list.length > 0 ? (
 				<ul>{memoList}</ul>
 			) : (

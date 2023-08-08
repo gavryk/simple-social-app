@@ -1,17 +1,17 @@
 import { UIBox, UILoader, UITypography } from '@/components';
-import { settingsSelector } from '@/store/slices/settings/selector';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { FriendRow } from './ui';
 import { useGetFollowersQuery, useGetFollowingQuery } from '@/store/api/users.api';
 import styles from './styles.module.scss';
+import { RootState } from '@/store/store';
 
 interface FriendsBoxProps {
 	userId?: string;
 }
 
 export const FriendsBox: React.FC<FriendsBoxProps> = ({ userId }) => {
-	const { friendsWidget } = useSelector(settingsSelector);
+	const friendsWidget = useSelector((state: RootState) => state.settings.friendsWidget);
 	const { data: followersData, isLoading: followersLoading } = useGetFollowersQuery(userId, {
 		skip: friendsWidget !== 'Followers',
 	});

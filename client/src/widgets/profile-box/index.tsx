@@ -4,15 +4,16 @@ import { IAuthTypes } from '@/common';
 import styles from './styles.module.scss';
 import { ProfileBoxTop, ProfileInfo, ProfileViews } from './ui';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/store/slices/auth/selector';
 import { UISocialMedia } from '@/components';
+import { RootState } from '@/store/store';
 
 interface UserBox {
 	user: IAuthTypes | null;
 }
 
 export const ProfileBox: React.FC<UserBox> = ({ user }) => {
-	const { user: admin } = useSelector(authSelector);
+	const admin = useSelector((state: RootState) => state.auth.user);
+
 	return (
 		<UIBox>
 			<div className={styles.profileRow}>

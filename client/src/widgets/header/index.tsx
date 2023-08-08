@@ -3,14 +3,16 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { Logo, UIBurger } from '@/components';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/store/slices/auth/selector';
 import { AdditionalIcons, AuthInfo, MenuList } from './ui';
 import useMediaQuery from '@/hooks/useMediaQuery';
-import { settingsSelector } from '@/store/slices/settings/selector';
+import { RootState } from '@/store/store';
 
-export const Header: React.FC = () => {
-	const { user } = useSelector(authSelector);
-	const { menu } = useSelector(settingsSelector);
+export const Header: React.FC = React.memo(() => {
+	const user = useSelector((state: RootState) => state.auth.user);
+	const menu = useSelector((state: RootState) => state.settings.menu);
+	const mode = useSelector((state: RootState) => state.settings.mode);
+	const visibleNotification = useSelector((state: RootState) => state.settings.visibleNotification);
+	const mobileMenuActive = useSelector((state: RootState) => state.settings.mobileMenuActive);
 	const mobile = useMediaQuery('(max-width: 768px)');
 	return (
 		<header className={clsx(styles.root)}>
@@ -18,12 +20,12 @@ export const Header: React.FC = () => {
 				<Logo link="/" size="lg" />
 				{user && (
 					<>
-						<AdditionalIcons />
+						<AdditionalIcons user={user} mode={mode} visibleNotification={visibleNotification} />
 						{mobile ? <UIBurger /> : <AuthInfo user={user} />}
-						{mobile && <MenuList menu={menu} mobile={true} />}
+						{mobile && <MenuList menu={menu} mobile={true} mobileMenuActive={mobileMenuActive} />}
 					</>
 				)}
 			</div>
 		</header>
 	);
-};
+});

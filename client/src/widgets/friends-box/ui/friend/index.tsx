@@ -3,13 +3,13 @@ import styles from './styles.module.scss';
 import { BiUserMinus, BiUserPlus } from 'react-icons/bi';
 import { UIAvatar } from '@/components';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/store/slices/auth/selector';
 import { useSocket } from '@/context';
 import { FriendProp } from '@/common/interfaces/friendsTypes';
 import { Link } from 'react-router-dom';
+import { RootState } from '@/store/store';
 
 export const FriendRow: React.FC<FriendProp> = ({ _id, firstName, lastName, picturePath }) => {
-	const { user } = useSelector(authSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const isFollow = useMemo(() => user?.following.some((u) => u === _id), [user, _id]);
 	const { toggleUpdateFriends } = useSocket();
 

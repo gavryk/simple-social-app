@@ -72,6 +72,19 @@ body {
 	}
 }
 
+.sticky {
+	position: sticky;
+	@media screen and (max-width: 768px) {
+		position: relative;
+	}
+	&.top {
+		top: 115px;
+		@media screen and (max-width: 768px) {
+			top: 0;
+		}
+	}
+}
+
 h1,
 h2,
 h3,

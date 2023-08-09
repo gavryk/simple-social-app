@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { IAuthTypes } from '../../common';
-import { authSelector } from '../../store/slices/auth/selector';
+import { RootState } from '@/store/store';
 
 export const PrivateRoute: React.FC = () => {
 	const [userState, setUserState] = useState<IAuthTypes>({} as IAuthTypes);
-	const { user } = useSelector(authSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const location = useLocation();
 
 	useEffect(() => {

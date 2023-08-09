@@ -7,19 +7,18 @@ import { Profile } from './pages/Profile';
 import { PrivateRoute } from './features/auth/PrivateRoute';
 import { useGetAuthUserQuery } from './store/api/auth.api';
 import { useEffect } from 'react';
-import { useAppDispatch } from './store/store';
+import { RootState, useAppDispatch } from './store/store';
 import { setAuth } from './store/slices/auth/slice';
 import { UILoader } from './components';
 import { Users } from './pages/Users';
 import { Settings } from './pages/Settings';
 import { useSelector } from 'react-redux';
-import { authSelector } from './store/slices/auth/selector';
 import { useSocket } from './context';
 
 const App = () => {
 	const dispatch = useAppDispatch();
 	const location = useLocation();
-	const { user } = useSelector(authSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const { isLoading, data } = useGetAuthUserQuery();
 	const { socket } = useSocket();
 

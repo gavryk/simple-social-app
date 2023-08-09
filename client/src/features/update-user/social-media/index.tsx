@@ -2,14 +2,14 @@ import { UIButton, UIGrid, UIInput, UILoader, UITypography } from '@/components'
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/store/slices/auth/selector';
 import { useSocialIcons } from '@/hooks/useSocialIcon';
 import { useForm } from 'react-hook-form';
 import { useUpdateUserMutation } from '@/store/api/users.api';
 import clsx from 'clsx';
+import { RootState } from '@/store/store';
 
 export const UpdateUserSC: React.FC = () => {
-	const { user } = useSelector(authSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [updateUser, { isLoading }] = useUpdateUserMutation();
 
@@ -56,7 +56,8 @@ export const UpdateUserSC: React.FC = () => {
 			{isLoading && <UILoader />}
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className={clsx(styles.form, { [styles.loading]: isLoading })}>
+				className={clsx(styles.form, { [styles.loading]: isLoading })}
+			>
 				<UIGrid columns={1} gridGap={3}>
 					<div className={styles.someRow}>
 						{useSocialIcons('Twitter', '25px')}

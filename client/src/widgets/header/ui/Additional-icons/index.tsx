@@ -1,34 +1,30 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { MdLightMode, MdNightlight, MdNotifications } from 'react-icons/md';
 import { HiUsers } from 'react-icons/hi';
 import styles from './styles.module.scss';
-import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '@/store/store';
 import { Link } from 'react-router-dom';
 import { setMode, setVisibleNotification } from '@/store/slices/settings/slice';
 import { IAuthTypes } from '@/common';
+import { useSelector } from 'react-redux';
 
 interface AdditionalIconsProps {
 	user: IAuthTypes | null;
 	mode: 'dark' | 'light';
-	visibleNotification: boolean;
 }
 
-export const AdditionalIcons: React.FC<AdditionalIconsProps> = ({
-	user,
-	mode,
-	visibleNotification,
-}) => {
+export const AdditionalIcons: React.FC<AdditionalIconsProps> = React.memo(({ user, mode }) => {
 	const dispatch = useAppDispatch();
+	const visibleNotification = useSelector((state: RootState) => state.settings.visibleNotification);
 	const notiCount = user?.notifications?.length !== undefined ? user?.notifications?.length : 0;
 
-	const handleNotification = useCallback(() => {
+	const handleNotification = () => {
 		dispatch(setVisibleNotification(!visibleNotification));
-	}, []);
+	};
 
-	const handleMode = useCallback(() => {
+	const handleMode = () => {
 		dispatch(setMode());
-	}, []);
+	};
 
 	useEffect(() => {
 		document.documentElement.setAttribute('data-theme', mode);
@@ -48,4 +44,4 @@ export const AdditionalIcons: React.FC<AdditionalIconsProps> = ({
 			</div>
 		</div>
 	);
-};
+});

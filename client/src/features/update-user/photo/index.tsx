@@ -1,13 +1,13 @@
 import { UIButton, UIDropzone, UILoader, UITypography } from '@/components';
 import { useUploadUserPhoto } from '@/hooks';
-import { authSelector } from '@/store/slices/auth/selector';
 import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 import { useUpdateUserMutation } from '@/store/api/users.api';
+import { RootState } from '@/store/store';
 
 export const UpdateUserPhoto: React.FC = () => {
-	const { user } = useSelector(authSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const {
 		uploadLoading,
 		removeImageAPI,

@@ -4,19 +4,17 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Header, Notifications } from '../../widgets';
 import { useEffect } from 'react';
 import { useSocket } from '@/context';
-import { useAppDispatch } from '@/store/store';
+import { RootState, useAppDispatch } from '@/store/store';
 import { setNotification } from '@/store/slices/auth/slice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { showFollowNotification, showUnfollowNotification } from '@/hooks';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/store/slices/auth/selector';
-import { settingsSelector } from '@/store/slices/settings/selector';
 
 export const MainLayout: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { user } = useSelector(authSelector);
-	const { visibleNotification } = useSelector(settingsSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
+	const visibleNotification = useSelector((state: RootState) => state.settings.visibleNotification);
 	const location = useLocation();
 	const isProfilePage = location.pathname.includes('/profile/');
 	const { socket } = useSocket();

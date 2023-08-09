@@ -6,8 +6,8 @@ import styles from './styles.module.scss';
 import { UITypography } from '../ui-typography';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/store/slices/auth/selector';
 import { UIButton } from '../ui-button';
+import { RootState } from '@/store/store';
 interface CardPropTypes extends IAuthTypes {
 	handleSocketMessage: any;
 }
@@ -21,7 +21,7 @@ export const UIUserCard: React.FC<CardPropTypes> = ({
 	location,
 	handleSocketMessage,
 }) => {
-	const { user } = useSelector(authSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const isFriend = user?.following.find((friend) => friend === _id);
 
 	const updFriends = () => {
@@ -53,7 +53,8 @@ export const UIUserCard: React.FC<CardPropTypes> = ({
 							size="sm"
 							centered
 							color={`${isFriend ? 'orange' : 'main'}`}
-							onClick={updFriends}>
+							onClick={updFriends}
+						>
 							{!isFriend ? 'Follow' : 'Unfollow'}
 						</UIButton>
 					</div>

@@ -9,9 +9,10 @@ import { useGetGeoLocationQuery } from '@/store/api/geo.api';
 import { AddPost } from '@/features/add-post';
 import { useGetAllPostsQuery } from '@/store/api/posts.api';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import { RootState } from '@/store/store';
 
 export const Home: React.FC = () => {
-	const { user } = useSelector(authSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const { data: geoData, error: geoErr, isLoading: geoLoad } = useGetGeoLocationQuery('');
 	const { data: postsData, error: postsError, isLoading: postsLoading } = useGetAllPostsQuery();
 	const { data, error, isLoading } = useGetWorldNewsQuery(

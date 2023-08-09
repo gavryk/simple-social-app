@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import { UIIcon } from '../../../../components';
 import { useUserLogOutMutation } from '../../../../store/api/auth.api';
 import { setLogout } from '../../../../store/slices/auth/slice';
-import { RootState, useAppDispatch } from '../../../../store/store';
+import { useAppDispatch } from '../../../../store/store';
 import styles from './styles.module.scss';
-import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { useSocket } from '@/context';
 

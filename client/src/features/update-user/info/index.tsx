@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { UIButton, UIGrid, UIInput, UILoader, UITypography } from '@/components';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/store/slices/auth/selector';
 import { useForm } from 'react-hook-form';
 import { IUpdateUserProps } from '@/common';
 import { useUpdateUserMutation } from '@/store/api/users.api';
 import styles from './styles.module.scss';
 import clsx from 'clsx';
+import { RootState } from '@/store/store';
 
 export const UpdateUserInfo: React.FC = () => {
-	const { user } = useSelector(authSelector);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [updateUser, { isLoading }] = useUpdateUserMutation();
 
@@ -69,7 +69,8 @@ export const UpdateUserInfo: React.FC = () => {
 			) : (
 				<form
 					onSubmit={handleSubmit(onSubmit)}
-					className={clsx(styles.form, { [styles.loading]: isLoading })}>
+					className={clsx(styles.form, { [styles.loading]: isLoading })}
+				>
 					<UIGrid columns={2} gridGap={3}>
 						<UIInput
 							type="text"

@@ -12,7 +12,14 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 		<UIBox>
 			<div className={styles.root}>
 				<UIAvatar src={user?.picturePath} alt={user?.email} />
-				<UIInput placeholder="What's on your mind..." type="text" bottomSpaceOff required />
+				<UIInput
+					placeholder="What's on your mind..."
+					type="text"
+					bottomSpaceOff
+					rounded
+					bg
+					required
+				/>
 			</div>
 		</UIBox>
 	);

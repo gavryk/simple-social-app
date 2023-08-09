@@ -20,6 +20,8 @@ interface InputProps {
 	checked?: boolean;
 	disabled?: boolean;
 	bottomSpaceOff?: boolean;
+	rounded?: boolean;
+	bg?: boolean;
 }
 
 export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
@@ -40,6 +42,8 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 			checked,
 			disabled,
 			bottomSpaceOff,
+			rounded,
+			bg,
 		},
 		ref,
 	) => {
@@ -68,6 +72,8 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 					className={clsx(styles.input, {
 						[styles.error]: error,
 						[styles.bottomSpaceOff]: bottomSpaceOff,
+						[styles.rounded]: rounded,
+						[styles.bg]: bg,
 					})}
 					ref={ref}
 					checked={checked}

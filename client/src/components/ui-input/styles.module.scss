@@ -60,6 +60,13 @@
 		&.bottomSpaceOff {
 			margin-bottom: 0;
 		}
+		&.rounded {
+			border-radius: 15px;
+		}
+		&.bg {
+			border: 1px solid transparent;
+			background-color: var(--base--color--main-bg);
+		}
 	}
 
 	&.radio {

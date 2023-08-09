@@ -58,4 +58,25 @@
 			object-fit: cover;
 		}
 	}
+	.meta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		flex-direction: row;
+		margin: var(--base--spaces--4) 0 0;
+		.left {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			flex-wrap: wrap;
+			flex-direction: row;
+			grid-gap: var(--base--spaces--4);
+		}
+		> div {
+			span {
+				font-size: var(--base--font--size-md);
+			}
+		}
+	}
 }

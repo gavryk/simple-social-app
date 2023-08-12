@@ -1,12 +1,16 @@
 import { UIGrid, UILoader, UITypography } from '@/components';
+import { AddPost } from '@/features/add-post';
 import { useGetUserPostsQuery } from '@/store/api/posts.api';
 import { useGetUserQuery } from '@/store/api/users.api';
+import { RootState } from '@/store/store';
 import { FriendsBox, PostsList, ProfileBox } from '@/widgets';
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export const Profile: React.FC = () => {
 	const { userId } = useParams();
+	const admin = useSelector((state: RootState) => state.auth.user);
 	const { data, isLoading, isError, refetch } = useGetUserQuery(userId);
 	const {
 		data: postsData,
@@ -33,6 +37,7 @@ export const Profile: React.FC = () => {
 				</div>
 			) : (
 				<div className="col">
+					{userId === admin?._id && <AddPost user={admin} />}
 					<UITypography variant="h4" textAlign="center">
 						{`${data.firstName} ${data.lastName} has not published any posts yet!`}
 					</UITypography>

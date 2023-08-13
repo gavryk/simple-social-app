@@ -38,7 +38,9 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 						required
 					/>
 				</form>
-				<UIDropzone setImage={setUserImage} imageLoad={pictureLoaded} file={file} fullWidth />
+				<div className={styles.uploadPicture}>
+					<UIDropzone setImage={setUserImage} imageLoad={pictureLoaded} file={file} fullWidth />
+				</div>
 			</div>
 		</UIBox>
 	);

@@ -42,13 +42,14 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad, file, 
 	if (!imageLoad) return <UILoader position="relative" />;
 
 	return (
-		<section
+		<div
 			className={clsx(styles.root, {
 				[styles.fullWidth]: fullWidth,
 				[styles.active]: file.file,
 				[styles.acceptDrop]: isDragAccept,
 				[styles.rejectDrop]: isDragReject,
-			})}>
+			})}
+		>
 			{file.file === null && (
 				<div {...getRootProps({ className: styles.dropzone })}>
 					<input {...getInputProps()} />
@@ -70,6 +71,6 @@ export const UIDropzone: React.FC<DropZoneType> = ({ setImage, imageLoad, file, 
 					</div>
 				)}
 			</div>
-		</section>
+		</div>
 	);
 };

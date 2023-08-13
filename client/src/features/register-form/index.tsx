@@ -6,14 +6,14 @@ import { IRegisterFormTypes } from '../../common';
 import { useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import clsx from 'clsx';
-import { useUploadUserPhoto } from '@/hooks';
+import { useUploadPhoto } from '@/hooks';
 
 export const RegisterForm: React.FC = () => {
 	const navigate = useNavigate();
 	const [registerUser, { isLoading: registerLoading }] = useRegisterUserMutation();
 	const [errorSubmit, setErrorSubmit] = useState<string | null>(null);
-	const { uploadLoading, removeLoading, avatar, file, setFile, setUserImage, avatarLoaded } =
-		useUploadUserPhoto();
+	const { uploadLoading, removeLoading, picture, file, setFile, setUserImage, pictureLoaded } =
+		useUploadPhoto();
 
 	const {
 		register,
@@ -23,7 +23,7 @@ export const RegisterForm: React.FC = () => {
 	} = useForm<IRegisterFormTypes>();
 
 	const onSubmit = async (data: IRegisterFormTypes) => {
-		await registerUser({ ...data, picturePath: avatar })
+		await registerUser({ ...data, picturePath: picture })
 			.unwrap()
 			.then((data) => {
 				reset({
@@ -50,7 +50,7 @@ export const RegisterForm: React.FC = () => {
 			</UITypography>
 			{!registerLoading ? (
 				<>
-					<UIDropzone setImage={setUserImage} imageLoad={avatarLoaded} file={file} fullWidth />
+					<UIDropzone setImage={setUserImage} imageLoad={pictureLoaded} file={file} fullWidth />
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className={clsx(styles.fieldsWrapper, styles.cols2)}>
 							<UIInput

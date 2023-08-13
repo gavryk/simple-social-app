@@ -1,25 +1,44 @@
 import React from 'react';
-import { UIAvatar, UIBox, UIInput } from '@/components';
+import { UIAvatar, UIBox, UIDropzone, UIInput } from '@/components';
 import styles from './styles.module.scss';
-import { IAuthTypes } from '@/common/interfaces';
+import { IAuthTypes, IPost } from '@/common/interfaces';
+import { useForm } from 'react-hook-form';
+import { useUploadPhoto } from '@/hooks';
 
 interface AddPostProps {
 	user: IAuthTypes | null;
 }
 
 export const AddPost: React.FC<AddPostProps> = ({ user }) => {
+	const { uploadLoading, removeLoading, picture, file, setFile, setUserImage, pictureLoaded } =
+		useUploadPhoto();
+
+	const {
+		register,
+		reset,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<IPost>();
+
+	const onSubmit = async (data: IPost) => {
+		console.log(data);
+	};
+
 	return (
 		<UIBox>
 			<div className={styles.root}>
 				<UIAvatar src={user?.picturePath} alt={user?.email} />
-				<UIInput
-					placeholder="What's on your mind..."
-					type="text"
-					bottomSpaceOff
-					rounded
-					bg
-					required
-				/>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<UIInput
+						placeholder="What's on your mind..."
+						type="text"
+						bottomSpaceOff
+						rounded
+						bg
+						required
+					/>
+				</form>
+				<UIDropzone setImage={setUserImage} imageLoad={pictureLoaded} file={file} fullWidth />
 			</div>
 		</UIBox>
 	);

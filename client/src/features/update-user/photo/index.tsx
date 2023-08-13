@@ -1,10 +1,11 @@
 import { UIButton, UIDropzone, UILoader, UITypography } from '@/components';
-import { useUploadUserPhoto } from '@/hooks';
+
 import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 import { useUpdateUserMutation } from '@/store/api/users.api';
 import { RootState } from '@/store/store';
+import { useUploadPhoto } from '@/hooks';
 
 export const UpdateUserPhoto: React.FC = () => {
 	const user = useSelector((state: RootState) => state.auth.user);
@@ -12,18 +13,18 @@ export const UpdateUserPhoto: React.FC = () => {
 		uploadLoading,
 		removeImageAPI,
 		removeLoading,
-		avatar,
+		picture,
 		file,
 		setFile,
 		setUserImage,
-		avatarLoaded,
-	} = useUploadUserPhoto();
+		pictureLoaded,
+	} = useUploadPhoto();
 	const [updateUser] = useUpdateUserMutation();
 	const [uploadMode, setUploadMode] = useState(false);
 
 	const handlePhoto = useCallback(
 		async (type?: 'remove' | 'update') => {
-			const userData = { ...user, picturePath: avatar };
+			const userData = { ...user, picturePath: picture };
 			if (type === 'remove' && user) {
 				if (window.confirm('Are you sure you want to delete the photo?')) {
 					const fileUrl = user.picturePath.replace('/uploads/', '');
@@ -39,7 +40,7 @@ export const UpdateUserPhoto: React.FC = () => {
 					});
 			}
 		},
-		[user],
+		[user, picture],
 	);
 
 	return (
@@ -59,7 +60,7 @@ export const UpdateUserPhoto: React.FC = () => {
 					)}
 					{uploadMode && (
 						<div className={styles.uploadZone}>
-							<UIDropzone setImage={setUserImage} imageLoad={avatarLoaded} file={file} fullWidth />
+							<UIDropzone setImage={setUserImage} imageLoad={pictureLoaded} file={file} fullWidth />
 						</div>
 					)}
 					<div className={styles.buttonsWrapper}>

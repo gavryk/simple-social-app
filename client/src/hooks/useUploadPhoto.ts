@@ -1,32 +1,36 @@
 import { ImageUpload } from '@/common';
 import { useRemoveImageAPIMutation, useUploadImageAPIMutation } from '@/store/api/upload.api';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export const useUploadUserPhoto = () => {
+export const useUploadPhoto = () => {
 	const [uploadImageAPI, { isLoading: uploadLoading }] = useUploadImageAPIMutation();
 	const [removeImageAPI, { isLoading: removeLoading }] = useRemoveImageAPIMutation();
-	const [avatar, setAvatar] = useState('');
-	const [avatarLoaded, setAvatarLoaded] = useState(true);
+	const [picture, setPicture] = useState<string>('');
+	const [pictureLoaded, setPictureLoaded] = useState(true);
 	const [file, setFile] = useState<ImageUpload>({ file: null, imagePreviewUrl: '' });
 
 	const setUserImage = async (imageFile: ImageUpload) => {
 		setFile(imageFile);
-		setAvatarLoaded(false);
+		setPictureLoaded(false);
 		if (imageFile.file) {
 			try {
 				const res = await uploadImageAPI(imageFile.file).unwrap();
-				setAvatar(res.url);
-				setAvatarLoaded(true);
+				setPicture(res.url);
+				setPictureLoaded(true);
 			} catch (err) {
 				console.log(err);
-				setAvatarLoaded(true);
+				setPictureLoaded(true);
 			}
 		} else {
-			setAvatar('');
-			const fileUrl = avatar.replace('/uploads/', '');
-			await removeImageAPI(fileUrl).then(() => {
-				setAvatarLoaded(true);
-			});
+			if (picture !== '') {
+				const fileUrl = picture.replace('/uploads/', '');
+				await removeImageAPI(fileUrl).then(() => {
+					setPicture('');
+					setPictureLoaded(true);
+				});
+			} else {
+				setPictureLoaded(true);
+			}
 		}
 	};
 
@@ -34,11 +38,11 @@ export const useUploadUserPhoto = () => {
 		uploadLoading,
 		removeLoading,
 		removeImageAPI,
-		avatar,
+		picture,
 		file,
 		setFile,
 		setUserImage,
-		avatarLoaded,
-		setAvatar,
+		pictureLoaded,
+		setPicture,
 	};
 };

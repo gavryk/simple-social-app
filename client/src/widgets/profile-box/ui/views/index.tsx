@@ -8,11 +8,11 @@ export const ProfileViews: React.FC<ProfileViewsProps> = ({ viewedProfile, impre
 	return (
 		<div className={styles.root}>
 			<div className={styles.row}>
-				<span>Viewed your profile</span>
+				<span>Viewed profile</span>
 				<span>{viewedProfile}</span>
 			</div>
 			<div className={styles.row}>
-				<span>Impressions of your Posts</span>
+				<span>Impressions of Posts</span>
 				<span>{impressions}</span>
 			</div>
 		</div>

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UIAvatar, UIBox, UIDropzone, UIInput } from '@/components';
 import styles from './styles.module.scss';
 import { IAuthTypes, IPost } from '@/common/interfaces';
 import { useForm } from 'react-hook-form';
 import { useUploadPhoto } from '@/hooks';
+import { BiImage } from 'react-icons/bi';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import clsx from 'clsx';
 
 interface AddPostProps {
 	user: IAuthTypes | null;
@@ -12,6 +15,7 @@ interface AddPostProps {
 export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 	const { uploadLoading, removeLoading, picture, file, setFile, setUserImage, pictureLoaded } =
 		useUploadPhoto();
+	const [showOptions, setShowOptions] = useState<string>('');
 
 	const {
 		register,
@@ -20,9 +24,7 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 		formState: { errors },
 	} = useForm<IPost>();
 
-	const onSubmit = async (data: IPost) => {
-		console.log(data);
-	};
+	const onSubmit = async (data: IPost) => {};
 
 	return (
 		<UIBox>
@@ -38,8 +40,33 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 						required
 					/>
 				</form>
-				<div className={styles.uploadPicture}>
-					<UIDropzone setImage={setUserImage} imageLoad={pictureLoaded} file={file} fullWidth />
+				<div className={styles.options}>
+					<div className={styles.optionsItems}>
+						{showOptions && (
+							<div className={clsx(styles.optionsItem)}>
+								<UIDropzone
+									setImage={setUserImage}
+									imageLoad={pictureLoaded}
+									file={file}
+									fullWidth
+								/>
+							</div>
+						)}
+					</div>
+					<div className={styles.handleButtons}>
+						<div
+							className={clsx(styles.imageHandle, styles.handleBtn)}
+							onClick={() => setShowOptions('image')}
+						>
+							<BiImage size="20" />
+							<span>Image</span>
+						</div>
+						{showOptions !== '' && (
+							<div className={clsx(styles.handleClose)} onClick={() => setShowOptions('')}>
+								<AiFillCloseCircle size="20" />
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 		</UIBox>

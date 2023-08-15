@@ -39,7 +39,7 @@ export const AuthInfo: React.FC<AuthInfoProp> = React.memo(({ user }) => {
 			{!visibleSetting ? <AiFillCaretDown size="12" /> : <AiFillCaretUp size="12" />}
 			{menu && (
 				<ul className={clsx(styles.settingList, { [styles.active]: visibleSetting })}>
-					<MenuList menu={menu} />
+					<MenuList menu={menu} mobileMenuActive={visibleSetting} />
 				</ul>
 			)}
 		</div>

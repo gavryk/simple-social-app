@@ -2,9 +2,43 @@
 	display: grid;
 	grid-template-columns: 50px 1fr;
 	align-items: center;
-	grid-gap: 15px;
-	.uploadPicture {
+	grid-gap: var(--base--spaces--4);
+	.options {
 		grid-column-start: 1;
 		grid-column-end: -1;
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-gap: var(--base--spaces--4);
+		.optionsItems {
+			position: relative;
+		}
+		.handleButtons {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			flex-direction: row;
+			grid-gap: var(--base--spaces--5);
+			.handleBtn {
+				display: grid;
+				grid-template-columns: 20px 1fr;
+				align-items: center;
+				grid-gap: var(--base--spaces--3);
+				cursor: pointer;
+				> * {
+					transition: all 0.2s ease-in-out;
+				}
+				&:hover {
+					> * {
+						color: var(--base--color--main);
+					}
+				}
+			}
+			.handleClose {
+				justify-self: flex-end;
+				color: var(--base--color--main);
+				cursor: pointer;
+			}
+		}
 	}
 }

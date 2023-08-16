@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { UIAvatar, UIBox, UIButton, UIDropzone, UIInput } from '@/components';
 import styles from './styles.module.scss';
 import { IAuthTypes, IPost } from '@/common/interfaces';
@@ -17,8 +17,16 @@ interface AddPostProps {
 
 export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 	const admin = useSelector((state: RootState) => state.auth.user);
-	const { uploadLoading, removeLoading, picture, file, setFile, setUserImage, pictureLoaded } =
-		useUploadPhoto();
+	const {
+		uploadLoading,
+		removeLoading,
+		picture,
+		setPicture,
+		file,
+		setFile,
+		setUserImage,
+		pictureLoaded,
+	} = useUploadPhoto();
 	const [showOptions, setShowOptions] = useState<string>('');
 	const [addPost] = useAddPostMutation();
 
@@ -31,21 +39,25 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 	} = useForm<IPost>();
 	const inputValue = watch('description', '');
 
-	const onSubmit = async (data: any) => {
-		await addPost({ ...data, userId: admin?._id, picturePath: picture.replace('/uploads', '') })
-			.unwrap()
-			.then((data) => {
-				reset({
-					description: '',
-					location: '',
+	const onSubmit = useCallback(
+		async (data: any) => {
+			await addPost({ ...data, userId: admin?._id, picturePath: picture.replace('/uploads', '') })
+				.unwrap()
+				.then((data) => {
+					reset({
+						description: '',
+						location: '',
+					});
+					setFile({ file: null, imagePreviewUrl: '' });
+					setShowOptions('');
+					setPicture('');
+				})
+				.catch((err) => {
+					console.log(err.data.message || err.data[0].msg);
 				});
-				setFile({ file: null, imagePreviewUrl: '' });
-				setShowOptions('');
-			})
-			.catch((err) => {
-				console.log(err.data.message || err.data[0].msg);
-			});
-	};
+		},
+		[picture],
+	);
 
 	return (
 		<UIBox>

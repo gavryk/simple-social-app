@@ -26,17 +26,21 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 		register,
 		reset,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm<IPost>();
+	const inputValue = watch('description', '');
 
 	const onSubmit = async (data: any) => {
-		await addPost({ ...data, userId: admin?._id, picturePath: picture })
+		await addPost({ ...data, userId: admin?._id, picturePath: picture.replace('/uploads', '') })
 			.unwrap()
 			.then((data) => {
 				reset({
 					description: '',
+					location: '',
 				});
 				setFile({ file: null, imagePreviewUrl: '' });
+				setShowOptions('');
 			})
 			.catch((err) => {
 				console.log(err.data.message || err.data[0].msg);
@@ -48,17 +52,33 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 			<div className={styles.root}>
 				<UIAvatar src={user?.picturePath} alt={user?.email} />
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<UIInput
-						placeholder="What's on your mind..."
-						type="text"
-						bottomSpaceOff
-						rounded
-						required
-						borderOff
-						{...register('description', { required: 'Please enter post text.' })}
-						error={errors.description && errors.description.message}
-					/>
-					<UIButton type="submit">Add Post</UIButton>
+					<div className={styles.addText}>
+						<UIInput
+							placeholder="What's on your mind..."
+							type="text"
+							bottomSpaceOff
+							rounded
+							required
+							borderOff
+							{...register('description', { required: 'Please enter post text.' })}
+							error={errors.description && errors.description.message}
+						/>
+						<UIButton type="submit" disabled={uploadLoading || removeLoading || !inputValue}>
+							Add Post
+						</UIButton>
+					</div>
+					{showOptions !== '' && (
+						<UIInput
+							placeholder="Location"
+							type="text"
+							bottomSpaceOff
+							rounded
+							borderOff
+							bg
+							{...register('location', { required: 'Please enter location.' })}
+							error={errors.location && errors.location.message}
+						/>
+					)}
 				</form>
 				<div className={styles.options}>
 					<div className={styles.optionsItems}>

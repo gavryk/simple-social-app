@@ -22,6 +22,7 @@ interface InputProps {
 	bottomSpaceOff?: boolean;
 	rounded?: boolean;
 	bg?: boolean;
+	borderOff?: boolean;
 }
 
 export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
@@ -44,6 +45,7 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 			bottomSpaceOff,
 			rounded,
 			bg,
+			borderOff,
 		},
 		ref,
 	) => {
@@ -74,6 +76,7 @@ export const UIInput = React.forwardRef<HTMLInputElement, InputProps>(
 						[styles.bottomSpaceOff]: bottomSpaceOff,
 						[styles.rounded]: rounded,
 						[styles.bg]: bg,
+						[styles.borderOff]: borderOff,
 					})}
 					ref={ref}
 					checked={checked}

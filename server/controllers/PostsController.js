@@ -6,6 +6,7 @@ export const createPost = async (req, res) => {
 	try {
 		const { userId, description, picturePath } = req.body;
 		const user = await User.findById(userId);
+		console.log(user.picturePath);
 		const newPost = new Post({
 			userId,
 			firstName: user.firstName,
@@ -28,8 +29,8 @@ export const createPost = async (req, res) => {
 /*Get All Posts*/
 export const getAllPosts = async (req, res) => {
 	try {
-		const post = await Post.find();
-		res.status(200).json(post);
+		const posts = await Post.find().sort({ createdAt: -1 });
+		res.status(200).json(posts);
 	} catch (err) {
 		res.status(404).json({ message: err.message });
 	}

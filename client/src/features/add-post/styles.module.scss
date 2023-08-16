@@ -2,13 +2,22 @@
 	display: grid;
 	grid-template-columns: 50px 1fr;
 	align-items: center;
-	grid-gap: var(--base--spaces--4);
+	column-gap: var(--base--spaces--4);
+	row-gap: var(--base--spaces--2);
+	form {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-gap: 15px;
+		background-color: var(--base--color--main-bg);
+		border-radius: var(--base--border-radius-4);
+		overflow: hidden;
+	}
 	.options {
 		grid-column-start: 1;
 		grid-column-end: -1;
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
-		grid-gap: var(--base--spaces--4);
+		grid-gap: var(--base--spaces--2);
 		.optionsItems {
 			position: relative;
 		}

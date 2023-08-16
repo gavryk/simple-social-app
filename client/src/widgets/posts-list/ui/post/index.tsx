@@ -36,7 +36,7 @@ export const PostCard: React.FC<IPost> = ({
 			<div className={styles.post}>
 				<div className={styles.author}>
 					<Link to={`/profile/${userId}`} className={styles.left}>
-						<UIAvatar src={`/uploads/${userPicturePath}`} alt={`${firstName}_${lastName}`} />
+						<UIAvatar src={`${userPicturePath}`} alt={`${firstName}_${lastName}`} />
 						<div className={styles.info}>
 							<span className={styles.name}>
 								{firstName} {lastName}
@@ -53,14 +53,12 @@ export const PostCard: React.FC<IPost> = ({
 				<div className={styles.description}>
 					<p>{description}</p>
 				</div>
-				<div className={styles.thumbnail}>
-					<img
-						src={
-							picturePath ? `${import.meta.env.VITE_BASE_URL}/uploads/${picturePath}` : imgHolder
-						}
-						alt=""
-					/>
-				</div>
+				{picturePath && (
+					<div className={styles.thumbnail}>
+						<img src={`${import.meta.env.VITE_BASE_URL}/uploads/${picturePath}`} alt="" />
+					</div>
+				)}
+
 				<div className={styles.meta}>
 					<div className={styles.left}>
 						<span>

@@ -11,7 +11,16 @@ export const postsApi = api.injectEndpoints({
 			query: (id) => `posts/${id}/posts`,
 			providesTags: ['Posts'],
 		}),
+		addPost: builder.mutation({
+			query: (post) => ({
+				body: post,
+				url: '/posts',
+				method: 'POST',
+				credentials: 'include',
+			}),
+			invalidatesTags: () => ['Posts', 'Users'],
+		}),
 	}),
 });
 
-export const { useGetAllPostsQuery, useGetUserPostsQuery } = postsApi;
+export const { useGetAllPostsQuery, useGetUserPostsQuery, useAddPostMutation } = postsApi;

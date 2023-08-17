@@ -1,8 +1,8 @@
 import { IPost } from '@/common/interfaces/postsTypes';
 import React, { useMemo } from 'react';
 import { UIBox } from '@/components/ui-box';
-import imgHolder from '@/assets/img/noimg.png';
 import { UIAvatar } from '@/components/ui-avatar';
+import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
@@ -10,8 +10,10 @@ import { useSocket } from '@/context';
 import { BiUserMinus, BiUserPlus } from 'react-icons/bi';
 import { FaHeart, FaComments, FaShareAlt } from 'react-icons/fa';
 import styles from './styles.module.scss';
+import { useRemovePostMutation } from '@/store/api/posts.api';
 
 export const PostCard: React.FC<IPost> = ({
+	_id,
 	userPicturePath,
 	userId,
 	lastName,
@@ -25,10 +27,19 @@ export const PostCard: React.FC<IPost> = ({
 	const admin = useSelector((state: RootState) => state.auth.user);
 	const isFollow = useMemo(() => admin?.following.some((u) => u === userId), [admin, userId]);
 	const { toggleUpdateFriends } = useSocket();
+	const [removePost, { isLoading: removeLoading }] = useRemovePostMutation();
 
 	const handleUpdateFriends = () => {
 		const receiver = { _id: userId, firstName, lastName };
 		toggleUpdateFriends({ sender: admin, receiver, isFollow });
+	};
+
+	const handleRemovePost = async () => {
+		try {
+			await removePost(_id);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
@@ -44,11 +55,21 @@ export const PostCard: React.FC<IPost> = ({
 							<span className={styles.location}>{location}</span>
 						</div>
 					</Link>
-					<div className={styles.right}>
-						<div className={styles.icon} onClick={handleUpdateFriends}>
-							{isFollow ? <BiUserMinus size="18" /> : <BiUserPlus size="18" />}
+					{admin?._id !== userId ? (
+						<div className={styles.right}>
+							<div className={styles.icon} onClick={handleUpdateFriends}>
+								{isFollow ? <BiUserMinus size="18" /> : <BiUserPlus size="18" />}
+							</div>
 						</div>
-					</div>
+					) : (
+						<button
+							className={styles.removeBtn}
+							onClick={handleRemovePost}
+							disabled={removeLoading}
+						>
+							<FaTrash size="18" />
+						</button>
+					)}
 				</div>
 				<div className={styles.description}>
 					<p>{description}</p>

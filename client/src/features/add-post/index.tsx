@@ -5,7 +5,6 @@ import { IAuthTypes, IPost } from '@/common/interfaces';
 import { useForm } from 'react-hook-form';
 import { useUploadPhoto } from '@/hooks';
 import { BiImage } from 'react-icons/bi';
-import { AiFillCloseCircle } from 'react-icons/ai';
 import clsx from 'clsx';
 import { useAddPostMutation } from '@/store/api/posts.api';
 import { useSelector } from 'react-redux';
@@ -43,7 +42,11 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 
 	const onSubmit = useCallback(
 		async (data: any) => {
-			await addPost({ ...data, userId: admin?._id, picturePath: picture.replace('/uploads', '') })
+			await addPost({
+				...data,
+				userId: admin?._id,
+				picturePath: picture !== '' ? picture.replace('/uploads', '') : '',
+			})
 				.unwrap()
 				.then((data) => {
 					reset({
@@ -58,7 +61,7 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 					console.log(err.data.message || err.data[0].msg);
 				});
 		},
-		[picture],
+		[picture, inputValue],
 	);
 
 	return (

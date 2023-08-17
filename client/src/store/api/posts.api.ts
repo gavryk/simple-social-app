@@ -20,7 +20,20 @@ export const postsApi = api.injectEndpoints({
 			}),
 			invalidatesTags: () => ['Posts', 'Users'],
 		}),
+		removePost: builder.mutation({
+			query: (id) => ({
+				body: '',
+				url: `/posts/${id}`,
+				method: 'delete',
+			}),
+			invalidatesTags: () => ['Posts', 'Users'],
+		}),
 	}),
 });
 
-export const { useGetAllPostsQuery, useGetUserPostsQuery, useAddPostMutation } = postsApi;
+export const {
+	useGetAllPostsQuery,
+	useGetUserPostsQuery,
+	useAddPostMutation,
+	useRemovePostMutation,
+} = postsApi;

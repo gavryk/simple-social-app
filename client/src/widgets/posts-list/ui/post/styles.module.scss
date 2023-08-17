@@ -1,4 +1,5 @@
 .post {
+	position: relative;
 	.author {
 		margin-bottom: var(--base--spaces--2);
 		display: flex;
@@ -77,6 +78,20 @@
 			span {
 				font-size: var(--base--font--size-md);
 			}
+		}
+	}
+	.removeBtn {
+		background-color: transparent;
+		outline: none;
+		border: none;
+		opacity: 0;
+		color: var(--base--color--main);
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
+	}
+	&:hover {
+		.removeBtn {
+			opacity: 1;
 		}
 	}
 }

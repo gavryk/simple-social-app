@@ -26,6 +26,19 @@ export const createPost = async (req, res) => {
 	}
 };
 
+export const removePost = async (req, res) => {
+	const postId = req.params.id;
+	try {
+		const deletedPost = await Post.findByIdAndDelete({ _id: postId });
+		if (!deletedPost) {
+			return res.status(404).json({ message: 'Post not found!' });
+		}
+		res.status(200).json({ message: 'Post deleted!' });
+	} catch (err) {
+		res.status(409).json({ message: err.message });
+	}
+};
+
 /*Get All Posts*/
 export const getAllPosts = async (req, res) => {
 	try {

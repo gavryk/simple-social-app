@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import { useAddPostMutation } from '@/store/api/posts.api';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 interface AddPostProps {
 	user: IAuthTypes | null;
@@ -27,8 +28,9 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 		setUserImage,
 		pictureLoaded,
 	} = useUploadPhoto();
-	const [showOptions, setShowOptions] = useState<string>('');
+	const [showOptions, setShowOptions] = useState<boolean>(false);
 	const [addPost] = useAddPostMutation();
+	const mobile = useMediaQuery('(max-width: 576px)');
 
 	const {
 		register,
@@ -49,7 +51,7 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 						location: '',
 					});
 					setFile({ file: null, imagePreviewUrl: '' });
-					setShowOptions('');
+					setShowOptions(false);
 					setPicture('');
 				})
 				.catch((err) => {
@@ -62,7 +64,7 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 	return (
 		<UIBox>
 			<div className={styles.root}>
-				<UIAvatar src={user?.picturePath} alt={user?.email} />
+				{!mobile && <UIAvatar src={user?.picturePath} alt={user?.email} />}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles.addText}>
 						<UIInput
@@ -79,7 +81,7 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 							Add Post
 						</UIButton>
 					</div>
-					{showOptions !== '' && (
+					{showOptions && (
 						<UIInput
 							placeholder="Location"
 							type="text"
@@ -108,16 +110,11 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 					<div className={styles.handleButtons}>
 						<div
 							className={clsx(styles.imageHandle, styles.handleBtn)}
-							onClick={() => setShowOptions('image')}
+							onClick={() => setShowOptions(!showOptions)}
 						>
 							<BiImage size="20" />
-							<span>Image</span>
+							<span>{!showOptions ? 'Add Image' : 'Hide Dropzone'}</span>
 						</div>
-						{showOptions !== '' && (
-							<div className={clsx(styles.handleClose)} onClick={() => setShowOptions('')}>
-								<AiFillCloseCircle size="20" />
-							</div>
-						)}
 					</div>
 				</div>
 			</div>

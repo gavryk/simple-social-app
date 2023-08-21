@@ -28,6 +28,14 @@ export const postsApi = api.injectEndpoints({
 			}),
 			invalidatesTags: () => ['Posts', 'Users'],
 		}),
+		likePost: builder.mutation({
+			query: (post) => ({
+				url: `/posts/${post.id}/like`,
+				method: 'PATCH',
+				body: post,
+			}),
+			invalidatesTags: () => ['Posts', 'Users'],
+		}),
 	}),
 });
 
@@ -36,4 +44,5 @@ export const {
 	useGetUserPostsQuery,
 	useAddPostMutation,
 	useRemovePostMutation,
+	useLikePostMutation,
 } = postsApi;

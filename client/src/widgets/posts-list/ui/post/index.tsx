@@ -10,7 +10,8 @@ import { useSocket } from '@/context';
 import { BiUserMinus, BiUserPlus } from 'react-icons/bi';
 import { FaHeart, FaComments, FaShareAlt } from 'react-icons/fa';
 import styles from './styles.module.scss';
-import { useRemovePostMutation } from '@/store/api/posts.api';
+import { useLikePostMutation, useRemovePostMutation } from '@/store/api/posts.api';
+import clsx from 'clsx';
 
 export const PostCard: React.FC<IPost> = ({
 	_id,
@@ -28,6 +29,8 @@ export const PostCard: React.FC<IPost> = ({
 	const isFollow = useMemo(() => admin?.following.some((u) => u === userId), [admin, userId]);
 	const { toggleUpdateFriends } = useSocket();
 	const [removePost, { isLoading: removeLoading }] = useRemovePostMutation();
+	const [likePost] = useLikePostMutation();
+	const isLiked = admin && Boolean(likes[admin._id]);
 
 	const handleUpdateFriends = () => {
 		const receiver = { _id: userId, firstName, lastName };
@@ -36,7 +39,17 @@ export const PostCard: React.FC<IPost> = ({
 
 	const handleRemovePost = async () => {
 		try {
-			await removePost(_id);
+			const adminId = admin?._id;
+			await removePost({ _id, adminId });
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const handleLikePost = async () => {
+		try {
+			const adminId = admin?._id;
+			await likePost({ id: _id, userId: adminId });
 		} catch (err) {
 			console.log(err);
 		}
@@ -82,7 +95,7 @@ export const PostCard: React.FC<IPost> = ({
 
 				<div className={styles.meta}>
 					<div className={styles.left}>
-						<span>
+						<span className={clsx({ [styles.active]: isLiked })} onClick={handleLikePost}>
 							<FaHeart /> {Object.values(likes).filter((like) => like).length}
 						</span>
 						<span>

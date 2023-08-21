@@ -6,7 +6,6 @@ export const createPost = async (req, res) => {
 	try {
 		const { userId, description, picturePath, location } = req.body;
 		const user = await User.findById(userId);
-		console.log(user.picturePath);
 		const newPost = new Post({
 			userId,
 			firstName: user.firstName,
@@ -63,10 +62,9 @@ export const getUserPosts = async (req, res) => {
 export const likePost = async (req, res) => {
 	try {
 		const { id } = req.params;
-		const { userId } = req.boyd;
+		const { userId } = req.body;
 		const post = await Post.findById(id);
 		const isLiked = post.likes.get(userId);
-
 		if (isLiked) {
 			post.likes.delete(userId);
 		} else {

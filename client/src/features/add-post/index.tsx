@@ -66,7 +66,7 @@ export const AddPost: React.FC<AddPostProps> = ({ user }) => {
 
 	return (
 		<UIBox>
-			<div className={styles.root}>
+			<div className={clsx(styles.root)}>
 				{!mobile && <UIAvatar src={user?.picturePath} alt={user?.email} />}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles.addText}>

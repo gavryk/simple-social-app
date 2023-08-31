@@ -98,7 +98,6 @@ export const updateFriends = async (req, res) => {
 				$push: { notifications: `User ${user.firstName} ${user.lastName} follow you!` },
 			});
 		}
-
 		res.status(200).json('Ok');
 	} catch (err) {
 		res.status(404).json({ message: err.message });

@@ -15,7 +15,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
 	const [updateFriends] = useUpdateFriendsMutation();
 
 	const toggleUpdateFriends = async ({ sender, receiver, isFollow }: updateFriendsSocket) => {
-		await updateFriends({ id: sender?._id, friendId: receiver._id }).then(() => {
+		await updateFriends({ id: sender._id, friendId: receiver._id }).then(() => {
 			socket?.emit('sendNotification', {
 				receiver: { id: receiver._id, name: `${receiver.firstName} ${receiver.lastName}` },
 				sender: { id: sender?._id, name: `${sender?.firstName} ${sender?.lastName}` },

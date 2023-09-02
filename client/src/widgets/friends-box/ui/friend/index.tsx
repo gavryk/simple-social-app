@@ -28,11 +28,13 @@ export const FriendRow: React.FC<FriendProp> = ({ _id, firstName, lastName, pict
 					</span>
 				</div>
 			</Link>
-			<div className={styles.right}>
-				<div className={styles.icon} onClick={handleUpdateFriends}>
-					{isFollow ? <BiUserMinus size="18" /> : <BiUserPlus size="18" />}
+			{user?._id !== _id && (
+				<div className={styles.right}>
+					<div className={styles.icon} onClick={handleUpdateFriends}>
+						{isFollow ? <BiUserMinus size="18" /> : <BiUserPlus size="18" />}
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };
